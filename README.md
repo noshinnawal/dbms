@@ -1,4 +1,4 @@
-# Stitch Student Management System
+# Student Management System
 
 [![Database](https://img.shields.io/badge/Database-MySQL-blue.svg)](https://www.mysql.com/)
 [![Language](https://img.shields.io/badge/Language-PHP-777bb4.svg)](https://www.php.net/)
