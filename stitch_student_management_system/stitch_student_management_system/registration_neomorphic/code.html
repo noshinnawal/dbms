@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Academia SMS - Registration</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Lexend:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<style>
+        body { font-family: 'Lexend', sans-serif; }
+        .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
+    </style>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "surface-bright": "#f5faff",
+                        "surface-container-highest": "#dbe4eb",
+                        "secondary-container": "#feb4b1",
+                        "primary-fixed": "#bcebee",
+                        "tertiary-fixed-dim": "#e1bfb4",
+                        "primary-fixed-dim": "#a1cfd2",
+                        "on-tertiary-container": "#84685e",
+                        "primary": "#396568",
+                        "surface": "#f5faff",
+                        "secondary-fixed-dim": "#feb4b1",
+                        "secondary": "#884e4d",
+                        "on-secondary-container": "#7a4342",
+                        "on-surface-variant": "#404849",
+                        "inverse-on-surface": "#e9f2f9",
+                        "tertiary-container": "#ffefea",
+                        "surface-variant": "#dbe4eb",
+                        "surface-container-high": "#e0e9f0",
+                        "on-secondary": "#ffffff",
+                        "background": "#f5faff",
+                        "tertiary-fixed": "#ffdbcf",
+                        "on-tertiary-fixed-variant": "#594139",
+                        "on-primary-container": "#497578",
+                        "error-container": "#ffdad6",
+                        "on-tertiary": "#ffffff",
+                        "on-error": "#ffffff",
+                        "surface-dim": "#d2dbe2",
+                        "surface-container": "#e6eff6",
+                        "on-surface": "#141d22",
+                        "on-error-container": "#93000a",
+                        "tertiary": "#73584f",
+                        "surface-container-lowest": "#ffffff",
+                        "outline": "#707979",
+                        "outline-variant": "#c0c8c8",
+                        "surface-container-low": "#ecf5fc",
+                        "inverse-surface": "#293237",
+                        "on-secondary-fixed": "#360d0e",
+                        "surface-tint": "#396568",
+                        "inverse-primary": "#a1cfd2",
+                        "primary-container": "#ccfbfe",
+                        "on-secondary-fixed-variant": "#6c3737",
+                        "on-primary-fixed-variant": "#1f4d50",
+                        "on-primary-fixed": "#002022",
+                        "error": "#ba1a1a",
+                        "secondary-fixed": "#ffdad8",
+                        "on-background": "#141d22",
+                        "on-tertiary-fixed": "#2a1710",
+                        "on-primary": "#ffffff"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "boxShadow": {
+                        'neu-flat': '10px 10px 20px #d2dbe2, -10px -10px 20px #ffffff',
+                        'neu-pressed': 'inset 6px 6px 12px #d2dbe2, inset -6px -6px 12px #ffffff',
+                        'neu-sm': '4px 4px 8px #d2dbe2, -4px -4px 8px #ffffff',
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-surface text-on-surface min-h-screen flex items-center justify-center p-4 md:p-8">
+<!-- Registration Container (Raised Card) -->
+<main class="w-full max-w-4xl bg-surface rounded-[1.5rem] shadow-neu-flat p-8 md:p-12 flex flex-col gap-12 relative overflow-hidden">
+<!-- Header -->
+<header class="text-center space-y-2">
+<h1 class="text-3xl font-bold text-primary tracking-tight">New Registration</h1>
+<p class="text-on-surface-variant font-medium">Complete the form to enroll in Academic Management</p>
+</header>
+<!-- Progress Indicator (Neomorphic) -->
+<nav aria-label="Progress" class="mb-4">
+<ol class="flex items-center justify-between w-full max-w-2xl mx-auto relative" role="list">
+<!-- Background track (Sunken) -->
+<div class="absolute top-1/2 left-0 w-full h-2 -translate-y-1/2 bg-surface shadow-neu-pressed rounded-full z-0"></div>
+<!-- Active Track -->
+<div class="absolute top-1/2 left-0 w-1/3 h-2 -translate-y-1/2 bg-primary-container shadow-neu-flat rounded-full z-10"></div>
+<!-- Step 1: Personal Info (Active/Completed) -->
+<li class="relative z-20 flex flex-col items-center gap-3">
+<div class="w-12 h-12 rounded-full bg-surface shadow-neu-pressed flex items-center justify-center">
+<div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center text-on-primary shadow-neu-flat">
+<span class="material-symbols-outlined text-sm font-bold">check</span>
+</div>
+</div>
+<span class="text-sm font-semibold text-primary">Personal Info</span>
+</li>
+<!-- Step 2: Academic Data (Current) -->
+<li class="relative z-20 flex flex-col items-center gap-3">
+<div class="w-12 h-12 rounded-full bg-surface shadow-neu-flat flex items-center justify-center ring-4 ring-surface ring-offset-2 ring-offset-primary-container">
+<span class="material-symbols-outlined text-primary">school</span>
+</div>
+<span class="text-sm font-semibold text-primary">Academic Data</span>
+</li>
+<!-- Step 3: Documentation (Pending) -->
+<li class="relative z-20 flex flex-col items-center gap-3">
+<div class="w-12 h-12 rounded-full bg-surface shadow-neu-flat flex items-center justify-center text-outline-variant">
+<span class="material-symbols-outlined">folder_open</span>
+</div>
+<span class="text-sm font-medium text-on-surface-variant">Documentation</span>
+</li>
+<!-- Step 4: Confirmation (Pending) -->
+<li class="relative z-20 flex flex-col items-center gap-3">
+<div class="w-12 h-12 rounded-full bg-surface shadow-neu-flat flex items-center justify-center text-outline-variant">
+<span class="material-symbols-outlined">verified</span>
+</div>
+<span class="text-sm font-medium text-on-surface-variant">Confirmation</span>
+</li>
+</ol>
+</nav>
+<!-- Form Area (Step 2: Academic Data) -->
+<form class="flex flex-col gap-8 w-full max-w-2xl mx-auto">
+<fieldset class="grid grid-cols-1 md:grid-cols-2 gap-8">
+<legend class="sr-only">Academic Information</legend>
+<!-- Input: Previous Institution (Sunken) -->
+<div class="flex flex-col gap-2">
+<label class="text-sm font-medium text-on-surface-variant pl-4" for="prev-institution">Previous Institution</label>
+<div class="relative">
+<span class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-outline">account_balance</span>
+<input class="w-full h-14 pl-12 pr-4 bg-surface shadow-neu-pressed rounded-xl border-none focus:ring-2 focus:ring-primary focus:outline-none text-on-surface placeholder:text-outline-variant transition-all" id="prev-institution" name="prev-institution" placeholder="e.g. Springfield High" type="text"/>
+</div>
+</div>
+<!-- Input: Intended Major (Sunken) -->
+<div class="flex flex-col gap-2">
+<label class="text-sm font-medium text-on-surface-variant pl-4" for="major">Intended Major / Program</label>
+<div class="relative">
+<span class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-outline">book</span>
+<select class="w-full h-14 pl-12 pr-10 bg-surface shadow-neu-pressed rounded-xl border-none focus:ring-2 focus:ring-primary focus:outline-none text-on-surface appearance-none transition-all cursor-pointer" id="major" name="major">
+<option class="text-outline-variant" disabled="" selected="" value="">Select a program...</option>
+<option value="cs">Computer Science</option>
+<option value="arts">Liberal Arts</option>
+<option value="sci">Biological Sciences</option>
+</select>
+<span class="material-symbols-outlined absolute right-4 top-1/2 -translate-y-1/2 text-outline pointer-events-none">expand_more</span>
+</div>
+</div>
+<!-- Input: GPA (Sunken) -->
+<div class="flex flex-col gap-2">
+<label class="text-sm font-medium text-on-surface-variant pl-4" for="gpa">Cumulative GPA</label>
+<div class="relative">
+<span class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-outline">grade</span>
+<input class="w-full h-14 pl-12 pr-4 bg-surface shadow-neu-pressed rounded-xl border-none focus:ring-2 focus:ring-primary focus:outline-none text-on-surface placeholder:text-outline-variant transition-all" id="gpa" max="4.0" min="0" name="gpa" placeholder="0.00" step="0.01" type="number"/>
+</div>
+</div>
+<!-- Input: Enrollment Year (Sunken) -->
+<div class="flex flex-col gap-2">
+<label class="text-sm font-medium text-on-surface-variant pl-4" for="year">Expected Enrollment Term</label>
+<div class="relative flex items-center gap-4 bg-surface shadow-neu-pressed rounded-xl p-2 h-14">
+<label class="flex-1 flex items-center justify-center gap-2 cursor-pointer h-full rounded-lg hover:bg-surface-container-high transition-colors">
+<input class="sr-only peer" name="term" type="radio" value="fall"/>
+<div class="w-4 h-4 rounded-full shadow-neu-pressed peer-checked:shadow-neu-flat peer-checked:bg-primary transition-all flex items-center justify-center">
+<div class="w-1.5 h-1.5 rounded-full bg-surface hidden peer-checked:block"></div>
+</div>
+<span class="text-sm font-medium text-on-surface peer-checked:text-primary">Fall '24</span>
+</label>
+<label class="flex-1 flex items-center justify-center gap-2 cursor-pointer h-full rounded-lg hover:bg-surface-container-high transition-colors">
+<input class="sr-only peer" name="term" type="radio" value="spring"/>
+<div class="w-4 h-4 rounded-full shadow-neu-pressed peer-checked:shadow-neu-flat peer-checked:bg-primary transition-all flex items-center justify-center">
+<div class="w-1.5 h-1.5 rounded-full bg-surface hidden peer-checked:block"></div>
+</div>
+<span class="text-sm font-medium text-on-surface peer-checked:text-primary">Spring '25</span>
+</label>
+</div>
+</div>
+</fieldset>
+<!-- Actions (Raised) -->
+<div class="flex items-center justify-between pt-8 mt-4 border-t-2 border-surface-container-highest border-dashed">
+<button class="px-8 py-4 bg-surface shadow-neu-flat rounded-xl text-on-surface-variant font-medium flex items-center gap-2 hover:shadow-neu-sm hover:scale-[0.98] transition-all active:shadow-neu-pressed" type="button">
+<span class="material-symbols-outlined">arrow_back</span>
+                    Back
+                </button>
+<button class="px-8 py-4 bg-primary text-on-primary shadow-neu-flat rounded-xl font-semibold flex items-center gap-2 hover:opacity-90 hover:scale-[0.98] transition-all active:shadow-neu-pressed" type="button">
+                    Continue
+                    <span class="material-symbols-outlined">arrow_forward</span>
+</button>
+</div>
+</form>
+</main>
+</body></html>

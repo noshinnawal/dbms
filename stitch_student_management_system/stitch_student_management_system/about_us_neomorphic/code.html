@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>About Us - EduTactile</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Lexend:wght@300;400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "surface-bright": "#f5faff",
+                        "surface-container-highest": "#dbe4eb",
+                        "secondary-container": "#feb4b1",
+                        "primary-fixed": "#bcebee",
+                        "tertiary-fixed-dim": "#e1bfb4",
+                        "primary-fixed-dim": "#a1cfd2",
+                        "on-tertiary-container": "#84685e",
+                        "primary": "#396568",
+                        "surface": "#f5faff",
+                        "secondary-fixed-dim": "#feb4b1",
+                        "secondary": "#884e4d",
+                        "on-secondary-container": "#7a4342",
+                        "on-surface-variant": "#404849",
+                        "inverse-on-surface": "#e9f2f9",
+                        "tertiary-container": "#ffefea",
+                        "surface-variant": "#dbe4eb",
+                        "surface-container-high": "#e0e9f0",
+                        "on-secondary": "#ffffff",
+                        "background": "#f5faff",
+                        "tertiary-fixed": "#ffdbcf",
+                        "on-tertiary-fixed-variant": "#594139",
+                        "on-primary-container": "#497578",
+                        "error-container": "#ffdad6",
+                        "on-tertiary": "#ffffff",
+                        "on-error": "#ffffff",
+                        "surface-dim": "#d2dbe2",
+                        "surface-container": "#e6eff6",
+                        "on-surface": "#141d22",
+                        "on-error-container": "#93000a",
+                        "tertiary": "#73584f",
+                        "surface-container-lowest": "#ffffff",
+                        "outline": "#707979",
+                        "outline-variant": "#c0c8c8",
+                        "surface-container-low": "#ecf5fc",
+                        "inverse-surface": "#293237",
+                        "on-secondary-fixed": "#360d0e",
+                        "surface-tint": "#396568",
+                        "inverse-primary": "#a1cfd2",
+                        "primary-container": "#ccfbfe",
+                        "on-secondary-fixed-variant": "#6c3737",
+                        "on-primary-fixed-variant": "#1f4d50",
+                        "on-primary-fixed": "#002022",
+                        "error": "#ba1a1a",
+                        "secondary-fixed": "#ffdad8",
+                        "on-background": "#141d22",
+                        "on-tertiary-fixed": "#2a1710",
+                        "on-primary": "#ffffff"
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.5rem",
+                        "sm": "0.25rem",
+                        "md": "0.75rem",
+                        "lg": "1rem",
+                        "xl": "1.5rem",
+                        "full": "9999px"
+                    },
+                    fontFamily: {
+                        "headline": ["Lexend"],
+                        "display": ["Lexend"],
+                        "body": ["Lexend"],
+                        "label": ["Lexend"]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        body { font-family: 'Lexend', sans-serif; }
+        .material-symbols-outlined { font-variation-settings: 'FILL' 1; }
+    </style>
+</head>
+<body class="bg-surface text-on-surface antialiased min-h-screen flex">
+<!-- SideNavBar -->
+<nav class="bg-[#f5faff] dark:bg-[#141d22] w-72 h-screen m-4 rounded-3xl shadow-[10px_10px_20px_#d2dbe2,-10px_-10px_20px_#ffffff] dark:shadow-[10px_10px_20px_#0a0f12,-10px_-10px_20px_#1e2b32] fixed left-0 top-0 h-[calc(100vh-32px)] flex flex-col p-4 space-y-6 z-50">
+<!-- Header -->
+<div class="flex items-center space-x-4 p-2 mb-4">
+<div class="w-12 h-12 rounded-full shadow-[inset_4px_4px_8px_#d2dbe2,inset_-4px_-4px_8px_#ffffff] flex items-center justify-center bg-[#f5faff]">
+<span class="material-symbols-outlined text-[#396568] text-2xl" data-icon="school">school</span>
+</div>
+<div>
+<h1 class="text-2xl font-bold text-[#396568] dark:text-[#ccfbfe]">EduTactile</h1>
+<p class="font-['Lexend'] text-sm tracking-tight text-[#404849]">Admin Portal</p>
+</div>
+</div>
+<!-- CTA -->
+<button class="w-full py-3 px-4 rounded-2xl shadow-[6px_6px_12px_#d2dbe2,-6px_-6px_12px_#ffffff] text-[#396568] font-bold hover:shadow-[inset_4px_4px_8px_#d2dbe2,inset_-4px_-4px_8px_#ffffff] transition-all duration-200 flex items-center justify-center space-x-2">
+<span class="material-symbols-outlined" data-icon="add">add</span>
+<span>New Registration</span>
+</button>
+<!-- Main Nav Tabs -->
+<div class="flex-1 space-y-2 overflow-y-auto pt-4">
+<!-- Inactive Tabs for About Us page -->
+<a class="flex items-center space-x-4 p-3 text-[#404849] dark:text-[#c0c8c8] hover:shadow-[4px_4px_8px_#d2dbe2,-4px_-4px_8px_#ffffff] transition-all rounded-2xl mx-2 hover:scale-[1.02] duration-200" href="#">
+<span class="material-symbols-outlined" data-icon="dashboard">dashboard</span>
+<span class="font-medium text-sm">Dashboard</span>
+</a>
+<a class="flex items-center space-x-4 p-3 text-[#404849] dark:text-[#c0c8c8] hover:shadow-[4px_4px_8px_#d2dbe2,-4px_-4px_8px_#ffffff] transition-all rounded-2xl mx-2 hover:scale-[1.02] duration-200" href="#">
+<span class="material-symbols-outlined" data-icon="group">group</span>
+<span class="font-medium text-sm">Students</span>
+</a>
+<a class="flex items-center space-x-4 p-3 text-[#404849] dark:text-[#c0c8c8] hover:shadow-[4px_4px_8px_#d2dbe2,-4px_-4px_8px_#ffffff] transition-all rounded-2xl mx-2 hover:scale-[1.02] duration-200" href="#">
+<span class="material-symbols-outlined" data-icon="school">school</span>
+<span class="font-medium text-sm">Faculty</span>
+</a>
+<a class="flex items-center space-x-4 p-3 text-[#404849] dark:text-[#c0c8c8] hover:shadow-[4px_4px_8px_#d2dbe2,-4px_-4px_8px_#ffffff] transition-all rounded-2xl mx-2 hover:scale-[1.02] duration-200" href="#">
+<span class="material-symbols-outlined" data-icon="event_available">event_available</span>
+<span class="font-medium text-sm">Attendance</span>
+</a>
+<a class="flex items-center space-x-4 p-3 text-[#404849] dark:text-[#c0c8c8] hover:shadow-[4px_4px_8px_#d2dbe2,-4px_-4px_8px_#ffffff] transition-all rounded-2xl mx-2 hover:scale-[1.02] duration-200" href="#">
+<span class="material-symbols-outlined" data-icon="grade">grade</span>
+<span class="font-medium text-sm">Grades</span>
+</a>
+<a class="flex items-center space-x-4 p-3 text-[#404849] dark:text-[#c0c8c8] hover:shadow-[4px_4px_8px_#d2dbe2,-4px_-4px_8px_#ffffff] transition-all rounded-2xl mx-2 hover:scale-[1.02] duration-200" href="#">
+<span class="material-symbols-outlined" data-icon="calendar_month">calendar_month</span>
+<span class="font-medium text-sm">Schedule</span>
+</a>
+</div>
+<!-- Footer Tabs -->
+<div class="mt-auto pt-4 border-t-0 space-y-2">
+<!-- 'Settings' acts as the parent section for 'About Us' in this context, so it's active -->
+<a class="flex items-center space-x-4 p-3 shadow-[inset_6px_6px_12px_#d2dbe2,inset_-6px_-6px_12px_#ffffff] text-[#396568] dark:text-[#ccfbfe] font-semibold bg-[#f5faff] dark:bg-[#141d22] rounded-2xl mx-2" href="#">
+<span class="material-symbols-outlined" data-icon="settings">settings</span>
+<span class="font-medium text-sm">Settings</span>
+</a>
+<a class="flex items-center space-x-4 p-3 text-[#404849] dark:text-[#c0c8c8] hover:shadow-[4px_4px_8px_#d2dbe2,-4px_-4px_8px_#ffffff] transition-all rounded-2xl mx-2 hover:scale-[1.02] duration-200" href="#">
+<span class="material-symbols-outlined" data-icon="logout">logout</span>
+<span class="font-medium text-sm">Logout</span>
+</a>
+</div>
+</nav>
+<!-- Main Content Area -->
+<div class="flex-1 flex flex-col ml-[320px]"> <!-- 72 (w-72) + 16 (ml-4) * 0.25rem = roughly 320px offset -->
+<!-- TopAppBar -->
+<header class="bg-[#f5faff] dark:bg-[#141d22] h-20 rounded-2xl m-4 sticky top-0 z-40 flex items-center justify-between px-8 shadow-[6px_6px_12px_#d2dbe2,-6px_-6px_12px_#ffffff] dark:shadow-[6px_6px_12px_#0a0f12,-6px_-6px_12px_#1e2b32]">
+<div class="flex items-center space-x-8">
+<h2 class="text-xl font-extrabold text-[#396568] tracking-tight hidden">Academic Management</h2>
+<!-- Search (on_left) -->
+<div class="flex items-center bg-[#f5faff] shadow-[inset_4px_4px_8px_#d2dbe2,inset_-4px_-4px_8px_#ffffff] rounded-xl px-4 py-2 w-64">
+<span class="material-symbols-outlined text-[#707979] mr-2 text-sm" data-icon="search">search</span>
+<input class="bg-transparent border-none outline-none text-sm text-[#404849] w-full focus:ring-0 placeholder-[#707979]" placeholder="Search..." type="text"/>
+</div>
+<!-- Navigation Links -->
+<nav class="flex space-x-6">
+<a class="text-[#404849] dark:text-[#c0c8c8] hover:opacity-80 transition-opacity font-['Lexend'] text-base font-medium" href="#">Term Overview</a>
+<a class="text-[#404849] dark:text-[#c0c8c8] hover:opacity-80 transition-opacity font-['Lexend'] text-base font-medium" href="#">Staff Directory</a>
+</nav>
+</div>
+<!-- Trailing Actions -->
+<div class="flex items-center space-x-4">
+<button class="w-10 h-10 rounded-xl shadow-[6px_6px_12px_#d2dbe2,-6px_-6px_12px_#ffffff] flex items-center justify-center text-[#396568] hover:shadow-[inset_4px_4px_8px_#d2dbe2,inset_-4px_-4px_8px_#ffffff] transition-all">
+<span class="material-symbols-outlined" data-icon="notifications">notifications</span>
+</button>
+<button class="w-10 h-10 rounded-xl shadow-[6px_6px_12px_#d2dbe2,-6px_-6px_12px_#ffffff] flex items-center justify-center text-[#396568] hover:shadow-[inset_4px_4px_8px_#d2dbe2,inset_-4px_-4px_8px_#ffffff] transition-all">
+<span class="material-symbols-outlined" data-icon="help_outline">help_outline</span>
+</button>
+<div class="h-8 w-[2px] bg-surface-container-highest rounded-full mx-2 shadow-[inset_1px_1px_2px_#d2dbe2,inset_-1px_-1px_2px_#ffffff]"></div>
+<button class="px-6 py-2 rounded-xl shadow-[6px_6px_12px_#d2dbe2,-6px_-6px_12px_#ffffff] bg-[#f5faff] text-[#396568] font-bold hover:shadow-[inset_4px_4px_8px_#d2dbe2,inset_-4px_-4px_8px_#ffffff] transition-all text-sm">
+                    Quick Action
+                </button>
+<div class="w-10 h-10 rounded-full shadow-[inset_4px_4px_8px_#d2dbe2,inset_-4px_-4px_8px_#ffffff] overflow-hidden ml-4 p-1">
+<div class="w-full h-full rounded-full bg-surface-container-highest flex items-center justify-center">
+<span class="material-symbols-outlined text-[#707979]" data-icon="person">person</span>
+</div>
+</div>
+</div>
+</header>
+<!-- Canvas -->
+<main class="flex-1 p-8 pt-4">
+<!-- Hero Section -->
+<section class="mb-12">
+<div class="bg-[#f5faff] rounded-[2rem] p-12 shadow-[10px_10px_20px_#d2dbe2,-10px_-10px_20px_#ffffff] flex flex-col items-center text-center relative overflow-hidden">
+<div class="absolute -top-24 -right-24 w-64 h-64 bg-primary-container opacity-20 rounded-full blur-3xl"></div>
+<div class="w-24 h-24 mb-8 rounded-full shadow-[inset_8px_8px_16px_#d2dbe2,inset_-8px_-8px_16px_#ffffff] flex items-center justify-center bg-[#f5faff]">
+<span class="material-symbols-outlined text-primary text-5xl" data-icon="auto_awesome">auto_awesome</span>
+</div>
+<h1 class="text-4xl font-extrabold text-primary mb-4 tracking-tight">Pioneering Educational Tactility</h1>
+<p class="text-lg text-on-surface-variant max-w-2xl leading-relaxed">
+                        EduTactile was born from a simple belief: academic management software shouldn't feel like a spreadsheet. We build neomorphic, physically responsive interfaces that bring a sense of touch and human connection back to digital administration.
+                    </p>
+</div>
+</section>
+<!-- Mission & Vision Grid -->
+<section class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-12">
+<!-- Mission Card -->
+<div class="bg-[#f5faff] rounded-3xl p-8 shadow-[10px_10px_20px_#d2dbe2,-10px_-10px_20px_#ffffff] hover:scale-[1.01] transition-transform duration-300">
+<div class="flex items-center space-x-4 mb-6">
+<div class="w-14 h-14 rounded-2xl shadow-[inset_6px_6px_12px_#d2dbe2,inset_-6px_-6px_12px_#ffffff] flex items-center justify-center">
+<span class="material-symbols-outlined text-secondary" data-icon="flag">flag</span>
+</div>
+<h2 class="text-2xl font-bold text-primary">Our Mission</h2>
+</div>
+<p class="text-on-surface-variant leading-relaxed">
+                        To eradicate digital fatigue in educational institutions by providing administrators, educators, and students with tools that are as intuitive and comforting to use as holding a physical notebook.
+                    </p>
+</div>
+<!-- Vision Card -->
+<div class="bg-[#f5faff] rounded-3xl p-8 shadow-[10px_10px_20px_#d2dbe2,-10px_-10px_20px_#ffffff] hover:scale-[1.01] transition-transform duration-300">
+<div class="flex items-center space-x-4 mb-6">
+<div class="w-14 h-14 rounded-2xl shadow-[inset_6px_6px_12px_#d2dbe2,inset_-6px_-6px_12px_#ffffff] flex items-center justify-center">
+<span class="material-symbols-outlined text-secondary" data-icon="visibility">visibility</span>
+</div>
+<h2 class="text-2xl font-bold text-primary">Our Vision</h2>
+</div>
+<p class="text-on-surface-variant leading-relaxed">
+                        A future where school management systems are entirely frictionless, enabling educators to focus 100% of their energy on shaping minds rather than navigating clunky interfaces.
+                    </p>
+</div>
+</section>
+<!-- Team Section -->
+<section class="mb-12">
+<div class="flex items-center space-x-4 mb-8 pl-4">
+<div class="h-8 w-2 bg-primary rounded-full shadow-[inset_2px_2px_4px_rgba(0,0,0,0.2)]"></div>
+<h2 class="text-3xl font-extrabold text-primary">The Architects</h2>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+<!-- Team Member 1 -->
+<div class="bg-[#f5faff] rounded-3xl p-6 shadow-[10px_10px_20px_#d2dbe2,-10px_-10px_20px_#ffffff] flex flex-col items-center text-center">
+<div class="w-32 h-32 mb-6 rounded-full shadow-[inset_6px_6px_12px_#d2dbe2,inset_-6px_-6px_12px_#ffffff] p-2">
+<img alt="Team Member" class="w-full h-full object-cover rounded-full shadow-[4px_4px_8px_#d2dbe2,-4px_-4px_8px_#ffffff]" data-alt="professional headshot of a woman with glasses smiling softly in a bright modern office setting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBSmRzKOtZAaKGoF85AaPGYJAKtwBxxWQJgqMeMIww5bdeEWToOH-msyggnjMZzya2kLXB2gdm7zVcs_cewzLTMQ-D0e0gA8yNiP23te17RHqk1DaWpZtnEpWVPE_Jf46XouMnlewrWjetzkn96fKSNj8dQFioes-dJ8liSi4DriRWjqQFC4B6zQn9diOKbAu5J9QOoSQkbWt-XgOq1ReSblEFMBw-oBzN9d7v-Xt5qeyvxU8pS50phMxLTHHW0nFODlq1TU7AtW1eF"/>
+</div>
+<h3 class="text-xl font-bold text-primary mb-1">Dr. Elena Rostova</h3>
+<p class="text-sm font-medium text-secondary mb-4">Founder &amp; UX Lead</p>
+<p class="text-xs text-on-surface-variant leading-relaxed">Former principal turned interaction designer, obsessed with reducing cognitive load for teachers.</p>
+</div>
+<!-- Team Member 2 -->
+<div class="bg-[#f5faff] rounded-3xl p-6 shadow-[10px_10px_20px_#d2dbe2,-10px_-10px_20px_#ffffff] flex flex-col items-center text-center">
+<div class="w-32 h-32 mb-6 rounded-full shadow-[inset_6px_6px_12px_#d2dbe2,inset_-6px_-6px_12px_#ffffff] p-2">
+<img alt="Team Member" class="w-full h-full object-cover rounded-full shadow-[4px_4px_8px_#d2dbe2,-4px_-4px_8px_#ffffff]" data-alt="professional headshot of a man in a crisp blue shirt looking confident in a sunlit studio" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBliua79jyGStEml_PH771QS5SmeQ0DR8HeOfLwcRIW56y7E_FoQLtmyL-0zysc5PnOnqUvvrRNBiIRH1eooQNW62ukxQH2iI3Juq-GxuKjDrJ1yq9BDLwmsaGzmVUYUrsytHnTnkOSKD4swXJlEuMeYAZwbRNuTfkKVE5osBypLqba8WyfuiprCIIckFQYEA-qig6PmWQMar6S6u4fzZh4zlZ1TxiG3IdHBs5fY6Ek8S0jb_1WQHTcYIUX5dZRBxw4BnPPVTnoArXG"/>
+</div>
+<h3 class="text-xl font-bold text-primary mb-1">Marcus Thorne</h3>
+<p class="text-sm font-medium text-secondary mb-4">Head of Engineering</p>
+<p class="text-xs text-on-surface-variant leading-relaxed">Systems architect ensuring our soft UI is backed by rock-solid, scalable infrastructure.</p>
+</div>
+<!-- Team Member 3 -->
+<div class="bg-[#f5faff] rounded-3xl p-6 shadow-[10px_10px_20px_#d2dbe2,-10px_-10px_20px_#ffffff] flex flex-col items-center text-center">
+<div class="w-32 h-32 mb-6 rounded-full shadow-[inset_6px_6px_12px_#d2dbe2,inset_-6px_-6px_12px_#ffffff] p-2">
+<img alt="Team Member" class="w-full h-full object-cover rounded-full shadow-[4px_4px_8px_#d2dbe2,-4px_-4px_8px_#ffffff]" data-alt="warm professional portrait of a woman with curly hair looking directly at camera against a soft background" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDK1PJpvqqmMnbISLGKTIRLctnGzQHmJRpAqwmtVftBOyrvD2V7C6vhG_YIMEfstk1_ms0wlkIJ6SCZrkiBwvE6W3x1j_lSWrNk61WzYnukSxMDz1IZFIGft-YgjzMoIP6C9QfPPSH-ZPOTjyn3SCj8B84E_wXxkSzMysXaN8-mijGJrF6NswSqDjrQlz3K6BSsYxMg_2d1ohKzHSF_FmChaa7pQT04gXSpJ1Xfth8s_Lp_C08HV-5ba2HlSun3BWdBP85XQpKMLc5y"/>
+</div>
+<h3 class="text-xl font-bold text-primary mb-1">Sarah Jenkins</h3>
+<p class="text-sm font-medium text-secondary mb-4">Director of Pedagogy</p>
+<p class="text-xs text-on-surface-variant leading-relaxed">Bridging the gap between software capabilities and real-world classroom workflows.</p>
+</div>
+</div>
+</section>
+</main>
+<!-- Footer -->
+<footer class="bg-[#f5faff] dark:bg-[#141d22] rounded-t-3xl mt-8 shadow-[0px_-8px_16px_#d2dbe2,0px_8px_16px_#ffffff] dark:shadow-[0px_-8px_16px_#0a0f12] mx-4 mb-4 p-8 flex justify-between items-center">
+<div class="flex items-center space-x-2">
+<span class="text-sm font-black text-[#396568]">EduTactile</span>
+<span class="text-[#404849] text-xs font-['Lexend'] tracking-widest uppercase">© 2024 Tactile SMS. All rights reserved.</span>
+</div>
+<div class="flex space-x-6">
+<a class="font-['Lexend'] text-xs uppercase tracking-widest text-[#404849] dark:text-[#c0c8c8] hover:text-primary transition-colors tap-highlight-transparent" href="#">Privacy Policy</a>
+<a class="font-['Lexend'] text-xs uppercase tracking-widest text-[#404849] dark:text-[#c0c8c8] hover:text-primary transition-colors tap-highlight-transparent" href="#">Terms of Service</a>
+<a class="font-['Lexend'] text-xs uppercase tracking-widest text-[#404849] dark:text-[#c0c8c8] hover:text-primary transition-colors tap-highlight-transparent" href="#">Support</a>
+</div>
+</footer>
+</div>
+</body></html>

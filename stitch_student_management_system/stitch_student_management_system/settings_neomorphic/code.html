@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Academic SMS - Settings</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Lexend:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "secondary-fixed-dim": "#feb4b1",
+                        "on-secondary-fixed-variant": "#6c3737",
+                        "on-tertiary-container": "#84685e",
+                        "on-secondary": "#ffffff",
+                        "secondary-container": "#feb4b1",
+                        "on-tertiary-fixed-variant": "#594139",
+                        "primary-fixed": "#bcebee",
+                        "on-secondary-fixed": "#360d0e",
+                        "tertiary-fixed-dim": "#e1bfb4",
+                        "surface-container": "#e6eff6",
+                        "inverse-on-surface": "#e9f2f9",
+                        "tertiary-fixed": "#ffdbcf",
+                        "surface": "#f5faff",
+                        "tertiary": "#73584f",
+                        "on-primary": "#ffffff",
+                        "primary": "#396568",
+                        "surface-container-low": "#ecf5fc",
+                        "secondary-fixed": "#ffdad8",
+                        "on-primary-fixed-variant": "#1f4d50",
+                        "on-secondary-container": "#7a4342",
+                        "on-primary-container": "#497578",
+                        "surface-bright": "#f5faff",
+                        "error": "#ba1a1a",
+                        "secondary": "#884e4d",
+                        "outline-variant": "#c0c8c8",
+                        "surface-container-high": "#e0e9f0",
+                        "primary-fixed-dim": "#a1cfd2",
+                        "on-tertiary-fixed": "#2a1710",
+                        "surface-tint": "#396568",
+                        "on-error-container": "#93000a",
+                        "tertiary-container": "#ffefea",
+                        "primary-container": "#ccfbfe",
+                        "outline": "#707979",
+                        "on-error": "#ffffff",
+                        "on-primary-fixed": "#002022",
+                        "surface-variant": "#dbe4eb",
+                        "on-tertiary": "#ffffff",
+                        "surface-container-highest": "#dbe4eb",
+                        "inverse-primary": "#a1cfd2",
+                        "error-container": "#ffdad6",
+                        "on-surface-variant": "#404849",
+                        "background": "#f5faff",
+                        "inverse-surface": "#293237",
+                        "surface-dim": "#d2dbe2",
+                        "on-surface": "#141d22",
+                        "on-background": "#141d22",
+                        "surface-container-lowest": "#ffffff"
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.5rem",
+                        "sm": "0.25rem",
+                        "md": "0.75rem",
+                        "lg": "1rem",
+                        "xl": "1.5rem",
+                        "full": "9999px"
+                    },
+                    fontFamily: {
+                        "headline": ["Lexend"],
+                        "display": ["Lexend"],
+                        "body": ["Lexend"],
+                        "label": ["Lexend"]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        body { font-family: 'Lexend', sans-serif; background-color: #f5faff; }
+        .neo-raised { box-shadow: 6px 6px 12px #d2dbe2, -6px -6px 12px #ffffff; }
+        .neo-sunken { box-shadow: inset 4px 4px 8px #d2dbe2, inset -4px -4px 8px #ffffff; }
+        .neo-pressed:active { box-shadow: inset 4px 4px 8px #d2dbe2, inset -4px -4px 8px #ffffff; transform: scale(0.98); }
+        .neo-raised-sm { box-shadow: 4px 4px 8px #d2dbe2, -4px -4px 8px #ffffff; }
+        .neo-sunken-sm { box-shadow: inset 2px 2px 5px #d2dbe2, inset -2px -2px 5px #ffffff; }
+    </style>
+</head>
+<body class="text-on-background min-h-screen flex">
+<!-- SideNavBar -->
+<nav class="hidden md:flex flex-col h-screen w-64 border-r-0 shadow-[6px_0_12px_#d2dbe2] bg-[#f5faff] fixed left-0 top-0 p-4 gap-6 z-20">
+<div class="flex items-center gap-3 px-2 mt-4 mb-6">
+<div class="w-10 h-10 rounded-full neo-raised flex items-center justify-center text-primary bg-[#f5faff]">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">school</span>
+</div>
+<div>
+<h1 class="text-2xl font-bold text-[#396568]">EduPortal</h1>
+<p class="text-xs text-on-surface-variant font-medium">Admin Console</p>
+</div>
+</div>
+<ul class="flex flex-col gap-4 flex-grow font-['Lexend'] text-base">
+<li>
+<a class="flex items-center gap-3 px-4 py-3 rounded-lg text-[#404849] hover:text-[#396568] hover:shadow-[4px_4px_8px_#d2dbe2,-4px_-4px_8px_#ffffff] transition-all active:scale-95 duration-150" href="#">
+<span class="material-symbols-outlined">dashboard</span>
+                    Dashboard
+                </a>
+</li>
+<li>
+<a class="flex items-center gap-3 px-4 py-3 rounded-lg text-[#404849] hover:text-[#396568] hover:shadow-[4px_4px_8px_#d2dbe2,-4px_-4px_8px_#ffffff] transition-all active:scale-95 duration-150" href="#">
+<span class="material-symbols-outlined">school</span>
+                    Students
+                </a>
+</li>
+<li>
+<a class="flex items-center gap-3 px-4 py-3 rounded-lg text-[#404849] hover:text-[#396568] hover:shadow-[4px_4px_8px_#d2dbe2,-4px_-4px_8px_#ffffff] transition-all active:scale-95 duration-150" href="#">
+<span class="material-symbols-outlined">badge</span>
+                    Faculty
+                </a>
+</li>
+<li>
+<a class="flex items-center gap-3 px-4 py-3 rounded-lg text-[#404849] hover:text-[#396568] hover:shadow-[4px_4px_8px_#d2dbe2,-4px_-4px_8px_#ffffff] transition-all active:scale-95 duration-150" href="#">
+<span class="material-symbols-outlined">analytics</span>
+                    Academic Records
+                </a>
+</li>
+<li>
+<a class="flex items-center gap-3 px-4 py-3 bg-[#f5faff] shadow-[inset_4px_4px_8px_#d2dbe2,inset_-4px_-4px_8px_#ffffff] text-[#396568] font-semibold rounded-lg transition-all active:scale-95 duration-150" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">settings</span>
+                    Settings
+                </a>
+</li>
+</ul>
+<div class="mt-auto">
+<a class="flex items-center gap-3 px-4 py-3 rounded-lg text-secondary hover:shadow-[4px_4px_8px_#d2dbe2,-4px_-4px_8px_#ffffff] transition-all active:scale-95 duration-150" href="#">
+<span class="material-symbols-outlined">logout</span>
+                Logout
+            </a>
+</div>
+</nav>
+<!-- Main Content Wrapper -->
+<div class="flex-1 flex flex-col md:ml-64 min-h-screen">
+<!-- TopAppBar -->
+<header class="flex justify-between items-center w-full px-6 py-4 bg-[#f5faff] shadow-[4px_4px_8px_#d2dbe2,-4px_-4px_8px_#ffffff] docked full-width top-0 z-10 sticky">
+<div class="flex items-center gap-4">
+<button class="md:hidden neo-raised-sm w-10 h-10 rounded-full flex items-center justify-center text-primary neo-pressed">
+<span class="material-symbols-outlined">menu</span>
+</button>
+<div class="text-xl font-bold text-[#396568]">Academic SMS</div>
+</div>
+<div class="flex items-center gap-6">
+<div class="flex items-center gap-4">
+<button class="w-10 h-10 rounded-full neo-raised-sm flex items-center justify-center text-[#404849] hover:text-[#396568] transition-colors active:shadow-[inset_4px_4px_8px_#d2dbe2,inset_-4px_-4px_8px_#ffffff] transition-all">
+<span class="material-symbols-outlined">notifications</span>
+</button>
+<button class="w-10 h-10 rounded-full neo-raised-sm flex items-center justify-center text-[#404849] hover:text-[#396568] transition-colors active:shadow-[inset_4px_4px_8px_#d2dbe2,inset_-4px_-4px_8px_#ffffff] transition-all">
+<span class="material-symbols-outlined">help_outline</span>
+</button>
+</div>
+<div class="w-10 h-10 rounded-full neo-raised-sm p-[2px] overflow-hidden cursor-pointer">
+<img alt="Administrator profile picture" class="w-full h-full rounded-full object-cover" data-alt="professional headshot of an administrator in a well-lit office" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDcE0JOwqQ7bHvT00qzh0dRG-pQwI-c2yv0AKTGKBAs71vgGRAwj4BDvjAXejQ4QrhqQm0HM96DJ6_B7WqXZCOD-FX_qqw7NOHCycZrdX8pQ3jfml2uafhyghTDvL39Kx2ur1L9Sa10ZFUU9muYgL7uKu6g_0oeEqJtcbzBeh80jSCO2t8uSslaD09nVWUhU4CVLkXPrMk9eM83XAkFvdS_mzh2GerJ4JnSAfhi-ILwl6lCw8lI60STB-oNJ0ZjeRg8awJDT7HBHCiT"/>
+</div>
+</div>
+</header>
+<!-- Main Canvas -->
+<main class="flex-1 p-6 md:p-10 max-w-5xl mx-auto w-full">
+<div class="mb-10">
+<h2 class="text-3xl font-bold text-on-surface font-['Lexend'] mb-2">Settings</h2>
+<p class="text-on-surface-variant font-['Lexend'] text-body-md">Manage your account preferences and system configurations.</p>
+</div>
+<div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+<!-- Left Column (Profile & Security) -->
+<div class="lg:col-span-2 flex flex-col gap-8">
+<!-- Profile Settings Card -->
+<div class="bg-surface rounded-xl p-8 neo-raised flex flex-col gap-6">
+<div class="flex justify-between items-center border-b border-surface-variant pb-4">
+<h3 class="text-xl font-semibold text-primary font-['Lexend'] flex items-center gap-2">
+<span class="material-symbols-outlined">person</span>
+                                Profile Settings
+                            </h3>
+</div>
+<div class="flex flex-col sm:flex-row gap-8 items-center sm:items-start">
+<div class="relative group">
+<div class="w-32 h-32 rounded-full neo-sunken p-2 flex-shrink-0">
+<img alt="User Profile" class="w-full h-full rounded-full object-cover shadow-sm" data-alt="professional headshot of an administrator in a well-lit office" src="https://lh3.googleusercontent.com/aida-public/AB6AXuATp4K-ZEqx-jsWJpQMmzfWxWujRZC7d2YgMQy07ROLjgxmSGM5e15933gXAvuq6difQJzhusyKl27cQyxSou7DvqHpdWwyIiej46SoDGItEEPCDYXB9sjw08TLTdWu0NYch1DOQCK2rjOoZnpSfF5d7u3p4y-40_1b1F5SpiIVDwK2g7_iyUUWL6k2k09oKgLa7k0BMOkhC_Nmnn0c7QuuM0nT9HM4CqyRHIELCrGvhGaJsNikJtDfTUTycq7DEdikO0RE1oRicdIE"/>
+</div>
+<button class="absolute bottom-0 right-0 w-10 h-10 bg-primary text-on-primary rounded-full neo-raised flex items-center justify-center neo-pressed transition-all">
+<span class="material-symbols-outlined text-sm">edit</span>
+</button>
+</div>
+<div class="flex-1 w-full flex flex-col gap-4">
+<div>
+<label class="block text-sm font-medium text-on-surface-variant mb-2 ml-2">Full Name</label>
+<div class="neo-sunken rounded-lg px-4 py-3 bg-surface text-on-surface font-['Lexend'] w-full flex items-center gap-3">
+<span class="material-symbols-outlined text-outline">badge</span>
+<input class="bg-transparent border-none p-0 focus:ring-0 w-full text-on-surface" readonly="" type="text" value="Dr. Alexander Wright"/>
+</div>
+</div>
+<div>
+<label class="block text-sm font-medium text-on-surface-variant mb-2 ml-2">Email Address</label>
+<div class="neo-sunken rounded-lg px-4 py-3 bg-surface text-on-surface font-['Lexend'] w-full flex items-center gap-3">
+<span class="material-symbols-outlined text-outline">mail</span>
+<input class="bg-transparent border-none p-0 focus:ring-0 w-full text-on-surface" readonly="" type="email" value="a.wright@eduportal.edu"/>
+</div>
+</div>
+<div class="mt-2 flex justify-end">
+<button class="neo-raised bg-surface text-primary font-medium px-6 py-2.5 rounded-lg flex items-center gap-2 hover:bg-primary-container hover:text-on-primary-container transition-all neo-pressed">
+<span class="material-symbols-outlined text-sm">edit_note</span>
+                                        Edit Details
+                                    </button>
+</div>
+</div>
+</div>
+</div>
+<!-- Security Settings Card -->
+<div class="bg-surface rounded-xl p-8 neo-raised flex flex-col gap-6">
+<div class="flex justify-between items-center border-b border-surface-variant pb-4">
+<h3 class="text-xl font-semibold text-primary font-['Lexend'] flex items-center gap-2">
+<span class="material-symbols-outlined">security</span>
+                                Security Settings
+                            </h3>
+</div>
+<div class="flex flex-col gap-6">
+<div class="flex items-center justify-between p-4 neo-raised-sm rounded-lg bg-surface">
+<div class="flex items-center gap-4">
+<div class="w-10 h-10 rounded-full neo-sunken flex items-center justify-center text-primary">
+<span class="material-symbols-outlined">password</span>
+</div>
+<div>
+<h4 class="font-medium text-on-surface">Password</h4>
+<p class="text-sm text-on-surface-variant">Last changed 3 months ago</p>
+</div>
+</div>
+<button class="neo-raised bg-surface text-on-surface px-4 py-2 rounded-lg text-sm font-medium hover:text-primary transition-colors neo-pressed">
+                                    Reset
+                                </button>
+</div>
+<div class="flex items-center justify-between p-4 neo-raised-sm rounded-lg bg-surface">
+<div class="flex items-center gap-4">
+<div class="w-10 h-10 rounded-full neo-sunken flex items-center justify-center text-primary">
+<span class="material-symbols-outlined">verified_user</span>
+</div>
+<div>
+<h4 class="font-medium text-on-surface">Two-Factor Authentication</h4>
+<p class="text-sm text-on-surface-variant">Add an extra layer of security</p>
+</div>
+</div>
+<label class="relative inline-flex items-center cursor-pointer">
+<input checked="" class="sr-only peer" type="checkbox" value=""/>
+<div class="w-14 h-7 bg-surface-variant rounded-full peer neo-sunken peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-primary after:border-gray-300 after:border after:rounded-full after:h-6 after:w-6 after:transition-all peer-checked:bg-primary-container peer-checked:after:bg-primary shadow-[inset_2px_2px_4px_#d2dbe2,inset_-2px_-2px_4px_#ffffff]"></div>
+</label>
+</div>
+</div>
+</div>
+</div>
+<!-- Right Column (Notifications) -->
+<div class="flex flex-col gap-8">
+<!-- Notification Preferences Card -->
+<div class="bg-surface rounded-xl p-8 neo-raised flex flex-col gap-6 h-full">
+<div class="flex justify-between items-center border-b border-surface-variant pb-4">
+<h3 class="text-xl font-semibold text-primary font-['Lexend'] flex items-center gap-2">
+<span class="material-symbols-outlined">notifications_active</span>
+                                Notifications
+                            </h3>
+</div>
+<p class="text-sm text-on-surface-variant font-['Lexend']">Choose how you receive updates and alerts from the system.</p>
+<div class="flex flex-col gap-5 mt-2">
+<!-- Email Toggle -->
+<div class="flex items-center justify-between p-4 rounded-lg neo-sunken-sm bg-surface">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-outline-variant">mail</span>
+<span class="font-medium text-on-surface text-sm">Email Alerts</span>
+</div>
+<label class="relative inline-flex items-center cursor-pointer">
+<input checked="" class="sr-only peer" type="checkbox" value=""/>
+<div class="w-11 h-6 bg-surface-variant rounded-full peer neo-sunken peer-checked:after:translate-x-full after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-surface after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-primary peer-checked:after:bg-surface shadow-[inset_2px_2px_4px_#d2dbe2,inset_-2px_-2px_4px_#ffffff]"></div>
+</label>
+</div>
+<!-- Push Toggle -->
+<div class="flex items-center justify-between p-4 rounded-lg neo-sunken-sm bg-surface">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-outline-variant">devices</span>
+<span class="font-medium text-on-surface text-sm">Push Notifications</span>
+</div>
+<label class="relative inline-flex items-center cursor-pointer">
+<input checked="" class="sr-only peer" type="checkbox" value=""/>
+<div class="w-11 h-6 bg-surface-variant rounded-full peer neo-sunken peer-checked:after:translate-x-full after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-surface after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-primary peer-checked:after:bg-surface shadow-[inset_2px_2px_4px_#d2dbe2,inset_-2px_-2px_4px_#ffffff]"></div>
+</label>
+</div>
+<!-- SMS Toggle -->
+<div class="flex items-center justify-between p-4 rounded-lg neo-sunken-sm bg-surface">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-outline-variant">sms</span>
+<span class="font-medium text-on-surface text-sm">SMS Messages</span>
+</div>
+<label class="relative inline-flex items-center cursor-pointer">
+<input class="sr-only peer" type="checkbox" value=""/>
+<div class="w-11 h-6 bg-surface-variant rounded-full peer neo-sunken peer-checked:after:translate-x-full after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-surface after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-primary peer-checked:after:bg-surface shadow-[inset_2px_2px_4px_#d2dbe2,inset_-2px_-2px_4px_#ffffff]"></div>
+</label>
+</div>
+<!-- Weekly Summary Toggle -->
+<div class="flex items-center justify-between p-4 rounded-lg neo-sunken-sm bg-surface">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-outline-variant">summarize</span>
+<span class="font-medium text-on-surface text-sm">Weekly Summary</span>
+</div>
+<label class="relative inline-flex items-center cursor-pointer">
+<input class="sr-only peer" type="checkbox" value=""/>
+<div class="w-11 h-6 bg-surface-variant rounded-full peer neo-sunken peer-checked:after:translate-x-full after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-surface after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-primary peer-checked:after:bg-surface shadow-[inset_2px_2px_4px_#d2dbe2,inset_-2px_-2px_4px_#ffffff]"></div>
+</label>
+</div>
+</div>
+<div class="mt-auto pt-6 flex justify-center">
+<button class="neo-raised bg-surface text-primary font-medium px-8 py-3 rounded-lg w-full flex items-center justify-center gap-2 hover:bg-primary-container hover:text-on-primary-container transition-all neo-pressed">
+                                Save Preferences
+                            </button>
+</div>
+</div>
+</div>
+</div>
+</main>
+</div>
+</body></html>

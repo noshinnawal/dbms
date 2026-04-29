@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>EduTactile - User Management</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Lexend:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "surface-bright": "#f5faff",
+                        "surface-container-highest": "#dbe4eb",
+                        "secondary-container": "#feb4b1",
+                        "primary-fixed": "#bcebee",
+                        "tertiary-fixed-dim": "#e1bfb4",
+                        "primary-fixed-dim": "#a1cfd2",
+                        "on-tertiary-container": "#84685e",
+                        "primary": "#396568",
+                        "surface": "#f5faff",
+                        "secondary-fixed-dim": "#feb4b1",
+                        "secondary": "#884e4d",
+                        "on-secondary-container": "#7a4342",
+                        "on-surface-variant": "#404849",
+                        "inverse-on-surface": "#e9f2f9",
+                        "tertiary-container": "#ffefea",
+                        "surface-variant": "#dbe4eb",
+                        "surface-container-high": "#e0e9f0",
+                        "on-secondary": "#ffffff",
+                        "background": "#f5faff",
+                        "tertiary-fixed": "#ffdbcf",
+                        "on-tertiary-fixed-variant": "#594139",
+                        "on-primary-container": "#497578",
+                        "error-container": "#ffdad6",
+                        "on-tertiary": "#ffffff",
+                        "on-error": "#ffffff",
+                        "surface-dim": "#d2dbe2",
+                        "surface-container": "#e6eff6",
+                        "on-surface": "#141d22",
+                        "on-error-container": "#93000a",
+                        "tertiary": "#73584f",
+                        "surface-container-lowest": "#ffffff",
+                        "outline": "#707979",
+                        "outline-variant": "#c0c8c8",
+                        "surface-container-low": "#ecf5fc",
+                        "inverse-surface": "#293237",
+                        "on-secondary-fixed": "#360d0e",
+                        "surface-tint": "#396568",
+                        "inverse-primary": "#a1cfd2",
+                        "primary-container": "#ccfbfe",
+                        "on-secondary-fixed-variant": "#6c3737",
+                        "on-primary-fixed-variant": "#1f4d50",
+                        "on-primary-fixed": "#002022",
+                        "error": "#ba1a1a",
+                        "secondary-fixed": "#ffdad8",
+                        "on-background": "#141d22",
+                        "on-tertiary-fixed": "#2a1710",
+                        "on-primary": "#ffffff"
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.5rem",
+                        "sm": "0.25rem",
+                        "md": "0.75rem",
+                        "lg": "1rem",
+                        "xl": "1.5rem",
+                        "full": "9999px"
+                    },
+                    fontFamily: {
+                        "sans": ["Lexend", "sans-serif"],
+                        "body": ["Lexend", "sans-serif"],
+                        "headline": ["Lexend", "sans-serif"]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        body { background-color: #f5faff; font-family: 'Lexend', sans-serif; }
+    </style>
+</head>
+<body class="text-on-surface antialiased selection:bg-primary-container selection:text-on-primary-container min-h-screen flex flex-col">
+<!-- SideNavBar -->
+<nav class="fixed left-0 top-0 h-[calc(100vh-32px)] flex flex-col p-4 space-y-6 w-72 m-4 rounded-[1.5rem] bg-[#f5faff] shadow-[10px_10px_20px_#d2dbe2,-10px_-10px_20px_#ffffff] z-50">
+<div class="px-4 py-2 flex items-center gap-3">
+<div class="w-10 h-10 rounded-xl bg-surface shadow-[inset_4px_4px_8px_#d2dbe2,inset_-4px_-4px_8px_#ffffff] flex items-center justify-center">
+<img alt="Institution Logo" class="w-6 h-6 object-contain mix-blend-multiply rounded-md" data-alt="minimalist abstract geometric logo mark in deep teal and warm grey" src="https://lh3.googleusercontent.com/aida-public/AB6AXuC1NlokW8po3oybp1_sZZvh-gWkZdl3tH7U8rosivnbTt9BLng_LEtAor3FuS8YfJUE8iry9PRFqTGNozW1ZV06Kf7hRRrXRNWwvv2-v5sRfti-Yq-rSuj53u6hN5ioBfjKMaeS0is3aAzhwnOpEqoqsR-9RDepkxrkADQcdoqUdTLWMnPLDktZrhEtFxeON5hJFwlRYP2L6hXHDLrirAgpngAUdrnkYoTXCMxRFIWIgE3_N8VncdczKem9mQalDsKiJVs81a_E2ZQO"/>
+</div>
+<div>
+<h1 class="text-2xl font-bold text-[#396568] tracking-tight">EduTactile</h1>
+<p class="text-xs font-medium text-[#404849] opacity-70">Admin Portal</p>
+</div>
+</div>
+<div class="flex-1 space-y-2 mt-8">
+<a class="text-[#404849] hover:shadow-[4px_4px_8px_#d2dbe2,-4px_-4px_8px_#ffffff] transition-all rounded-2xl mx-2 p-3 flex items-center gap-3 font-medium text-sm hover:scale-[1.02]" href="#">
+<span class="material-symbols-outlined text-lg">dashboard</span>
+                Dashboard
+            </a>
+<a class="shadow-[inset_6px_6px_12px_#d2dbe2,inset_-6px_-6px_12px_#ffffff] text-[#396568] font-semibold bg-[#f5faff] rounded-2xl mx-2 p-3 flex items-center gap-3 text-sm scale-[0.98]" href="#">
+<span class="material-symbols-outlined text-lg" style="font-variation-settings: 'FILL' 1;">group</span>
+                Students
+            </a>
+<a class="text-[#404849] hover:shadow-[4px_4px_8px_#d2dbe2,-4px_-4px_8px_#ffffff] transition-all rounded-2xl mx-2 p-3 flex items-center gap-3 font-medium text-sm hover:scale-[1.02]" href="#">
+<span class="material-symbols-outlined text-lg">school</span>
+                Faculty
+            </a>
+<a class="text-[#404849] hover:shadow-[4px_4px_8px_#d2dbe2,-4px_-4px_8px_#ffffff] transition-all rounded-2xl mx-2 p-3 flex items-center gap-3 font-medium text-sm hover:scale-[1.02]" href="#">
+<span class="material-symbols-outlined text-lg">event_available</span>
+                Attendance
+            </a>
+<a class="text-[#404849] hover:shadow-[4px_4px_8px_#d2dbe2,-4px_-4px_8px_#ffffff] transition-all rounded-2xl mx-2 p-3 flex items-center gap-3 font-medium text-sm hover:scale-[1.02]" href="#">
+<span class="material-symbols-outlined text-lg">grade</span>
+                Grades
+            </a>
+<a class="text-[#404849] hover:shadow-[4px_4px_8px_#d2dbe2,-4px_-4px_8px_#ffffff] transition-all rounded-2xl mx-2 p-3 flex items-center gap-3 font-medium text-sm hover:scale-[1.02]" href="#">
+<span class="material-symbols-outlined text-lg">calendar_month</span>
+                Schedule
+            </a>
+</div>
+<div class="mt-auto pt-4 border-t border-surface-variant border-opacity-30">
+<button class="w-full mb-4 px-4 py-3 rounded-xl bg-surface shadow-[4px_4px_8px_#d2dbe2,-4px_-4px_8px_#ffffff] text-primary font-semibold text-sm flex items-center justify-center gap-2 hover:shadow-[inset_4px_4px_8px_#d2dbe2,inset_-4px_-4px_8px_#ffffff] active:scale-[0.98] transition-all">
+<span class="material-symbols-outlined text-base">add</span>
+                New Registration
+            </button>
+<div class="flex gap-2">
+<a class="flex-1 text-[#404849] hover:shadow-[4px_4px_8px_#d2dbe2,-4px_-4px_8px_#ffffff] transition-all rounded-xl p-2 flex items-center justify-center hover:text-primary" href="#">
+<span class="material-symbols-outlined">settings</span>
+</a>
+<a class="flex-1 text-[#404849] hover:shadow-[4px_4px_8px_#d2dbe2,-4px_-4px_8px_#ffffff] transition-all rounded-xl p-2 flex items-center justify-center hover:text-error" href="#">
+<span class="material-symbols-outlined">logout</span>
+</a>
+</div>
+</div>
+</nav>
+<!-- TopAppBar -->
+<header class="sticky top-0 z-40 flex items-center justify-between px-8 ml-80 h-20 rounded-[1rem] m-4 bg-[#f5faff] shadow-[6px_6px_12px_#d2dbe2,-6px_-6px_12px_#ffffff]">
+<div class="flex items-center gap-6">
+<h2 class="font-bold text-[#396568] tracking-tight hidden lg:block">Academic Management</h2>
+<div class="relative hidden md:block">
+<span class="material-symbols-outlined absolute left-3 top-2.5 text-[#404849] text-sm">search</span>
+<input class="pl-10 pr-4 py-2 w-64 bg-transparent outline-none shadow-[inset_4px_4px_8px_#d2dbe2,inset_-4px_-4px_8px_#ffffff] rounded-xl text-sm text-[#141d22] placeholder:text-[#707979]" placeholder="Search system..." type="text"/>
+</div>
+</div>
+<div class="flex items-center gap-8">
+<nav class="hidden xl:flex gap-6">
+<a class="text-[#404849] text-sm font-medium hover:opacity-80 transition-opacity" href="#">Term Overview</a>
+<a class="text-[#404849] text-sm font-medium hover:opacity-80 transition-opacity" href="#">Staff Directory</a>
+</nav>
+<div class="flex items-center gap-4">
+<button class="w-10 h-10 rounded-xl flex items-center justify-center text-[#404849] hover:shadow-[4px_4px_8px_#d2dbe2,-4px_-4px_8px_#ffffff] transition-all">
+<span class="material-symbols-outlined">notifications</span>
+</button>
+<button class="w-10 h-10 rounded-xl flex items-center justify-center text-[#404849] hover:shadow-[4px_4px_8px_#d2dbe2,-4px_-4px_8px_#ffffff] transition-all">
+<span class="material-symbols-outlined">help_outline</span>
+</button>
+<button class="px-4 py-2 rounded-xl text-[#396568] font-semibold text-sm shadow-[4px_4px_8px_#d2dbe2,-4px_-4px_8px_#ffffff] hover:shadow-[inset_2px_2px_4px_#d2dbe2,inset_-2px_-2px_4px_#ffffff] active:scale-[0.98] transition-all hidden sm:block">
+                    Quick Action
+                </button>
+<div class="w-10 h-10 rounded-xl shadow-[4px_4px_8px_#d2dbe2,-4px_-4px_8px_#ffffff] p-0.5 overflow-hidden border-2 border-surface cursor-pointer">
+<img alt="User Avatar" class="w-full h-full object-cover rounded-[0.6rem]" data-alt="professional headshot of a middle-aged man with short hair wearing a navy blue sweater against a soft gray background" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAJRtox13_wlui9oX-kkXf05aLPyuulgIHwI9vqDa2NiMQYLg1JAfqGHSN-5VfEau4cWw7DGWmw2yE9eo0sKSZ3OPLTK4yQEnC0piTmFv1ef3a8kg_yyHIlRq-YCoppLk0NDXcuxrj-mwm4bv8kYPBGp8Rk0RNbE2GzrhjJ6xHuUAXlHjDeNyv5Eu1hs00k7PO4j00BcS9Tl0sw6ciz9GfbkMrASH_EhbEvz6yebR-wYYEA8yuYA58ffZveor59Jb4_imdVLrvZjYNC"/>
+</div>
+</div>
+</div>
+</header>
+<!-- Main Content Area -->
+<main class="flex-1 ml-80 mr-4 px-8 pb-12 mt-4">
+<!-- Page Header & Actions -->
+<div class="flex flex-col md:flex-row justify-between items-start md:items-end gap-6 mb-10">
+<div>
+<h1 class="text-3xl font-bold text-primary mb-2">User Management</h1>
+<p class="text-on-surface-variant text-sm">Manage student profiles, academic status, and system access.</p>
+</div>
+<button class="px-6 py-3 rounded-xl bg-surface shadow-[6px_6px_12px_#d2dbe2,-6px_-6px_12px_#ffffff] text-primary font-semibold text-sm flex items-center gap-2 hover:shadow-[inset_4px_4px_8px_#d2dbe2,inset_-4px_-4px_8px_#ffffff] active:scale-[0.98] transition-all">
+<span class="material-symbols-outlined text-lg">person_add</span>
+                Add New Student
+            </button>
+</div>
+<!-- Filters & Search Bar -->
+<div class="bg-surface rounded-2xl shadow-[6px_6px_12px_#d2dbe2,-6px_-6px_12px_#ffffff] p-6 mb-8 flex flex-col xl:flex-row gap-6 items-center justify-between">
+<div class="flex flex-wrap items-center gap-4 w-full xl:w-auto">
+<span class="text-sm font-medium text-on-surface-variant mr-2">Filter by:</span>
+<!-- Active Filter (Sunken) -->
+<button class="px-5 py-2 rounded-xl bg-surface shadow-[inset_4px_4px_8px_#d2dbe2,inset_-4px_-4px_8px_#ffffff] text-primary font-semibold text-sm transition-all scale-[0.98]">
+                    All Students
+                </button>
+<!-- Inactive Filters (Raised) -->
+<button class="px-5 py-2 rounded-xl bg-surface shadow-[4px_4px_8px_#d2dbe2,-4px_-4px_8px_#ffffff] text-on-surface-variant font-medium text-sm hover:shadow-[inset_2px_2px_4px_#d2dbe2,inset_-2px_-2px_4px_#ffffff] hover:text-primary transition-all">
+                    Enrolled
+                </button>
+<button class="px-5 py-2 rounded-xl bg-surface shadow-[4px_4px_8px_#d2dbe2,-4px_-4px_8px_#ffffff] text-on-surface-variant font-medium text-sm hover:shadow-[inset_2px_2px_4px_#d2dbe2,inset_-2px_-2px_4px_#ffffff] hover:text-primary transition-all">
+                    Graduated
+                </button>
+<button class="px-5 py-2 rounded-xl bg-surface shadow-[4px_4px_8px_#d2dbe2,-4px_-4px_8px_#ffffff] text-on-surface-variant font-medium text-sm hover:shadow-[inset_2px_2px_4px_#d2dbe2,inset_-2px_-2px_4px_#ffffff] hover:text-primary transition-all">
+                    Suspended
+                </button>
+</div>
+<!-- Neomorphic Search -->
+<div class="relative w-full xl:w-80">
+<span class="material-symbols-outlined absolute left-4 top-3 text-on-surface-variant">search</span>
+<input class="w-full pl-12 pr-4 py-3 bg-transparent outline-none shadow-[inset_4px_4px_8px_#d2dbe2,inset_-4px_-4px_8px_#ffffff] rounded-xl text-sm text-on-surface font-medium placeholder:font-normal placeholder:text-outline-variant focus:shadow-[inset_6px_6px_12px_#d2dbe2,inset_-6px_-6px_12px_#ffffff] transition-shadow" placeholder="Search by ID or Name..." type="text"/>
+</div>
+</div>
+<!-- User List (Raised Panels) -->
+<div class="space-y-5">
+<!-- Row 1 -->
+<div class="bg-surface rounded-[1.25rem] shadow-[6px_6px_12px_#d2dbe2,-6px_-6px_12px_#ffffff] p-5 flex flex-col lg:flex-row items-center justify-between gap-6 hover:scale-[1.005] transition-transform duration-300">
+<div class="flex items-center gap-5 w-full lg:w-1/3">
+<div class="w-14 h-14 rounded-full shadow-[inset_3px_3px_6px_#d2dbe2,inset_-3px_-3px_6px_#ffffff] p-1">
+<img alt="User Portrait" class="w-full h-full object-cover rounded-full" data-alt="portrait of a young woman with dark curly hair smiling warmly, natural lighting, soft blurred background" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCpmDi0qoE8WyVq92CedzDIm06NvFu_gkgJGeG_S-Xj8jRE5JasudBErdyEkLXzp3bV4bYlsXEXDu1r22WMDT4VI5EWHENxgyzi1GIRbMSXuBfxJtGsHV-QCDfxCUkh0V5i5nTPvTZ1WWppBHHCiPU20FUZlcYcoe5YZrW5zMK_gHw4Ls8qa73BOPSs4dBPwz_GbN0VrQ2VZU9jFMiciwhGQgTbaAdbGqdchBYzseA-Nca9mRqWN5Q-tbK3vk6dRyENbZx4S-YJYuhP"/>
+</div>
+<div>
+<h3 class="text-base font-bold text-on-surface">Elena Rodriguez</h3>
+<p class="text-xs font-medium text-on-surface-variant mt-0.5">ID: STU-2024-089</p>
+</div>
+</div>
+<div class="flex items-center justify-between w-full lg:w-2/3">
+<div class="flex flex-col gap-1 w-1/3 hidden sm:flex">
+<span class="text-xs text-outline font-medium uppercase tracking-wider">Program</span>
+<span class="text-sm font-semibold text-on-surface">Computer Science</span>
+</div>
+<div class="w-1/4 flex justify-center">
+<div class="px-4 py-1.5 rounded-full shadow-[inset_3px_3px_6px_#d2dbe2,inset_-3px_-3px_6px_#ffffff] flex items-center gap-2">
+<div class="w-2 h-2 rounded-full bg-primary shadow-[0_0_5px_#396568]"></div>
+<span class="text-xs font-bold text-primary">Enrolled</span>
+</div>
+</div>
+<div class="flex items-center gap-3 justify-end w-1/4">
+<button class="w-10 h-10 rounded-xl bg-surface shadow-[4px_4px_8px_#d2dbe2,-4px_-4px_8px_#ffffff] flex items-center justify-center text-primary hover:shadow-[inset_2px_2px_4px_#d2dbe2,inset_-2px_-2px_4px_#ffffff] transition-all" title="Edit Record">
+<span class="material-symbols-outlined text-lg">edit_square</span>
+</button>
+<button class="w-10 h-10 rounded-xl bg-surface shadow-[4px_4px_8px_#d2dbe2,-4px_-4px_8px_#ffffff] flex items-center justify-center text-secondary hover:shadow-[inset_2px_2px_4px_#d2dbe2,inset_-2px_-2px_4px_#ffffff] transition-all" title="Delete Record">
+<span class="material-symbols-outlined text-lg">delete</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Row 2 -->
+<div class="bg-surface rounded-[1.25rem] shadow-[6px_6px_12px_#d2dbe2,-6px_-6px_12px_#ffffff] p-5 flex flex-col lg:flex-row items-center justify-between gap-6 hover:scale-[1.005] transition-transform duration-300">
+<div class="flex items-center gap-5 w-full lg:w-1/3">
+<div class="w-14 h-14 rounded-full shadow-[inset_3px_3px_6px_#d2dbe2,inset_-3px_-3px_6px_#ffffff] p-1">
+<img alt="User Portrait" class="w-full h-full object-cover rounded-full" data-alt="portrait of a young man with glasses and short beard looking confident, modern office lighting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuB6map7CveJo1ZdexKT9WclU1r-7KBYtd35ZtogcFEydYufUyOgw_zDG4lYEwJbXCYLk9bwVuT4ISRj0mfxaG6DAWWcf4e5rO6-JxUxPME43W7jyvBoEewZRI0nPSx2JViFeeWjzY-GDihNAR0SOYnvf7VhVks4AIDaoC24F633Y5MeoPso8nl5SugJ1O4tzfS8dguyvn0IdF3sgy8hcE2F1R4agxSMneLKtMFgsX0HmayUUlvvFTYk6-GmpfepDaEUb6GR65MOhHUy"/>
+</div>
+<div>
+<h3 class="text-base font-bold text-on-surface">Marcus Chen</h3>
+<p class="text-xs font-medium text-on-surface-variant mt-0.5">ID: STU-2023-142</p>
+</div>
+</div>
+<div class="flex items-center justify-between w-full lg:w-2/3">
+<div class="flex flex-col gap-1 w-1/3 hidden sm:flex">
+<span class="text-xs text-outline font-medium uppercase tracking-wider">Program</span>
+<span class="text-sm font-semibold text-on-surface">Business Admin</span>
+</div>
+<div class="w-1/4 flex justify-center">
+<div class="px-4 py-1.5 rounded-full shadow-[inset_3px_3px_6px_#d2dbe2,inset_-3px_-3px_6px_#ffffff] flex items-center gap-2 opacity-70">
+<div class="w-2 h-2 rounded-full bg-outline"></div>
+<span class="text-xs font-bold text-on-surface-variant">Graduated</span>
+</div>
+</div>
+<div class="flex items-center gap-3 justify-end w-1/4">
+<button class="w-10 h-10 rounded-xl bg-surface shadow-[4px_4px_8px_#d2dbe2,-4px_-4px_8px_#ffffff] flex items-center justify-center text-primary hover:shadow-[inset_2px_2px_4px_#d2dbe2,inset_-2px_-2px_4px_#ffffff] transition-all" title="Edit Record">
+<span class="material-symbols-outlined text-lg">edit_square</span>
+</button>
+<button class="w-10 h-10 rounded-xl bg-surface shadow-[4px_4px_8px_#d2dbe2,-4px_-4px_8px_#ffffff] flex items-center justify-center text-secondary hover:shadow-[inset_2px_2px_4px_#d2dbe2,inset_-2px_-2px_4px_#ffffff] transition-all" title="Delete Record">
+<span class="material-symbols-outlined text-lg">delete</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Row 3 -->
+<div class="bg-surface rounded-[1.25rem] shadow-[6px_6px_12px_#d2dbe2,-6px_-6px_12px_#ffffff] p-5 flex flex-col lg:flex-row items-center justify-between gap-6 hover:scale-[1.005] transition-transform duration-300 border border-secondary-container border-opacity-30">
+<div class="flex items-center gap-5 w-full lg:w-1/3">
+<div class="w-14 h-14 rounded-full shadow-[inset_3px_3px_6px_#d2dbe2,inset_-3px_-3px_6px_#ffffff] p-1 bg-secondary-fixed-dim bg-opacity-20">
+<span class="material-symbols-outlined w-full h-full flex items-center justify-center text-2xl text-secondary">person_off</span>
+</div>
+<div>
+<h3 class="text-base font-bold text-on-surface">Sarah Jenkins</h3>
+<p class="text-xs font-medium text-on-surface-variant mt-0.5">ID: STU-2024-005</p>
+</div>
+</div>
+<div class="flex items-center justify-between w-full lg:w-2/3">
+<div class="flex flex-col gap-1 w-1/3 hidden sm:flex">
+<span class="text-xs text-outline font-medium uppercase tracking-wider">Program</span>
+<span class="text-sm font-semibold text-on-surface">Mechanical Eng</span>
+</div>
+<div class="w-1/4 flex justify-center">
+<div class="px-4 py-1.5 rounded-full shadow-[inset_3px_3px_6px_#d2dbe2,inset_-3px_-3px_6px_#ffffff] flex items-center gap-2 bg-error-container bg-opacity-20">
+<div class="w-2 h-2 rounded-full bg-error shadow-[0_0_5px_#ba1a1a]"></div>
+<span class="text-xs font-bold text-error">Suspended</span>
+</div>
+</div>
+<div class="flex items-center gap-3 justify-end w-1/4">
+<button class="w-10 h-10 rounded-xl bg-surface shadow-[4px_4px_8px_#d2dbe2,-4px_-4px_8px_#ffffff] flex items-center justify-center text-primary hover:shadow-[inset_2px_2px_4px_#d2dbe2,inset_-2px_-2px_4px_#ffffff] transition-all" title="Edit Record">
+<span class="material-symbols-outlined text-lg">edit_square</span>
+</button>
+<button class="w-10 h-10 rounded-xl bg-surface shadow-[inset_2px_2px_4px_#d2dbe2,inset_-2px_-2px_4px_#ffffff] flex items-center justify-center text-secondary scale-95 transition-all" title="Delete Record">
+<span class="material-symbols-outlined text-lg">delete_forever</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+<!-- Pagination (Neomorphic buttons) -->
+<div class="flex items-center justify-between mt-10">
+<span class="text-sm text-on-surface-variant font-medium">Showing 1 to 3 of 124 entries</span>
+<div class="flex items-center gap-3">
+<button class="w-10 h-10 rounded-xl bg-surface shadow-[4px_4px_8px_#d2dbe2,-4px_-4px_8px_#ffffff] flex items-center justify-center text-outline hover:shadow-[inset_2px_2px_4px_#d2dbe2,inset_-2px_-2px_4px_#ffffff] hover:text-primary transition-all">
+<span class="material-symbols-outlined">chevron_left</span>
+</button>
+<button class="w-10 h-10 rounded-xl bg-surface shadow-[inset_4px_4px_8px_#d2dbe2,inset_-4px_-4px_8px_#ffffff] flex items-center justify-center text-primary font-bold text-sm">
+                    1
+                </button>
+<button class="w-10 h-10 rounded-xl bg-surface shadow-[4px_4px_8px_#d2dbe2,-4px_-4px_8px_#ffffff] flex items-center justify-center text-on-surface-variant font-medium text-sm hover:shadow-[inset_2px_2px_4px_#d2dbe2,inset_-2px_-2px_4px_#ffffff] hover:text-primary transition-all">
+                    2
+                </button>
+<button class="w-10 h-10 rounded-xl bg-surface shadow-[4px_4px_8px_#d2dbe2,-4px_-4px_8px_#ffffff] flex items-center justify-center text-on-surface-variant font-medium text-sm hover:shadow-[inset_2px_2px_4px_#d2dbe2,inset_-2px_-2px_4px_#ffffff] hover:text-primary transition-all">
+                    3
+                </button>
+<span class="text-on-surface-variant">...</span>
+<button class="w-10 h-10 rounded-xl bg-surface shadow-[4px_4px_8px_#d2dbe2,-4px_-4px_8px_#ffffff] flex items-center justify-center text-on-surface-variant hover:shadow-[inset_2px_2px_4px_#d2dbe2,inset_-2px_-2px_4px_#ffffff] hover:text-primary transition-all">
+<span class="material-symbols-outlined">chevron_right</span>
+</button>
+</div>
+</div>
+</main>
+<!-- Footer -->
+<footer class="ml-80 mr-4 mb-4 p-8 flex justify-between items-center rounded-t-3xl mt-auto bg-[#f5faff] shadow-[0px_-8px_16px_#d2dbe2,0px_8px_16px_#ffffff]">
+<div class="text-sm font-black text-[#396568]">EduTactile SMS</div>
+<div class="text-xs text-[#404849]">© 2024 Tactile SMS. All rights reserved.</div>
+<div class="flex gap-6">
+<a class="text-[#404849] hover:text-primary transition-colors font-['Lexend'] text-xs uppercase tracking-widest" href="#">Privacy Policy</a>
+<a class="text-[#404849] hover:text-primary transition-colors font-['Lexend'] text-xs uppercase tracking-widest" href="#">Terms of Service</a>
+<a class="text-[#404849] hover:text-primary transition-colors font-['Lexend'] text-xs uppercase tracking-widest" href="#">Support</a>
+</div>
+</footer>
+</body></html>

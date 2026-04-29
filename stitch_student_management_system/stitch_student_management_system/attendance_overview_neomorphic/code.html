@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Academia SMS - Attendance Overview</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Lexend:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+  tailwind.config = {
+    darkMode: "class",
+    theme: {
+      extend: {
+        "colors": {
+                "surface-container-high": "#e0e9f0",
+                "secondary-container": "#feb4b1",
+                "on-error": "#ffffff",
+                "inverse-surface": "#293237",
+                "surface-tint": "#396568",
+                "outline-variant": "#c0c8c8",
+                "error": "#ba1a1a",
+                "background": "#f5faff",
+                "outline": "#707979",
+                "surface-bright": "#f5faff",
+                "on-primary": "#ffffff",
+                "tertiary-fixed-dim": "#e1bfb4",
+                "primary-fixed-dim": "#a1cfd2",
+                "on-secondary-fixed": "#360d0e",
+                "tertiary-fixed": "#ffdbcf",
+                "on-tertiary-container": "#84685e",
+                "on-secondary-container": "#7a4342",
+                "on-surface-variant": "#404849",
+                "primary": "#396568",
+                "on-error-container": "#93000a",
+                "primary-container": "#ccfbfe",
+                "surface-container": "#e6eff6",
+                "on-tertiary-fixed-variant": "#594139",
+                "on-surface": "#141d22",
+                "surface-variant": "#dbe4eb",
+                "error-container": "#ffdad6",
+                "secondary-fixed": "#ffdad8",
+                "on-background": "#141d22",
+                "surface-container-highest": "#dbe4eb",
+                "on-tertiary-fixed": "#2a1710",
+                "on-tertiary": "#ffffff",
+                "on-secondary": "#ffffff",
+                "surface-container-low": "#ecf5fc",
+                "surface": "#f5faff",
+                "primary-fixed": "#bcebee",
+                "inverse-on-surface": "#e9f2f9",
+                "secondary-fixed-dim": "#feb4b1",
+                "on-secondary-fixed-variant": "#6c3737",
+                "tertiary": "#73584f",
+                "surface-dim": "#d2dbe2",
+                "on-primary-fixed": "#002022",
+                "tertiary-container": "#ffefea",
+                "surface-container-lowest": "#ffffff",
+                "on-primary-container": "#497578",
+                "on-primary-fixed-variant": "#1f4d50",
+                "inverse-primary": "#a1cfd2",
+                "secondary": "#884e4d"
+        },
+        "borderRadius": {
+                "DEFAULT": "0.5rem",
+                "lg": "1rem",
+                "xl": "1.5rem",
+                "full": "9999px"
+        },
+        "fontFamily": {
+                "headline": ["Lexend"],
+                "display": ["Lexend"],
+                "body": ["Lexend"],
+                "label": ["Lexend"]
+        }
+      }
+    }
+  }
+</script>
+<style>
+    /* Neomorphic utility classes */
+    .neo-raised {
+        box-shadow: 6px 6px 12px #d2dbe2, -6px -6px 12px #ffffff;
+    }
+    .neo-sunken {
+        box-shadow: inset 4px 4px 8px #d2dbe2, inset -4px -4px 8px #ffffff;
+    }
+    .neo-pressed:active {
+        box-shadow: inset 4px 4px 8px #d2dbe2, inset -4px -4px 8px #ffffff;
+        transform: translateY(2px);
+    }
+    .neo-pill {
+        box-shadow: 4px 4px 8px #d2dbe2, -4px -4px 8px #ffffff;
+        border-radius: 9999px;
+    }
+    .neo-sunken-pill {
+        box-shadow: inset 4px 4px 8px #d2dbe2, inset -4px -4px 8px #ffffff;
+        border-radius: 9999px;
+    }
+    body {
+        background-color: #f5faff; /* surface color */
+    }
+</style>
+</head>
+<body class="font-body text-on-surface bg-surface min-h-screen flex antialiased selection:bg-primary-container selection:text-on-primary-container">
+<!-- SideNavBar -->
+<nav class="hidden md:flex flex-col h-screen w-64 rounded-r-2xl bg-[#f5faff] dark:bg-[#141d22] font-['Lexend'] text-sm font-medium shadow-[8px_0_16px_#d2dbe2] dark:shadow-[8px_0_16px_#000000] fixed left-0 top-0 p-4 z-50 gap-6">
+<div class="flex items-center gap-3 px-4 py-2">
+<div class="w-10 h-10 rounded-full neo-raised flex items-center justify-center overflow-hidden bg-surface-container-high">
+<span class="material-symbols-outlined text-primary">school</span>
+</div>
+<div>
+<h1 class="text-lg font-black tracking-tighter text-[#396568]">Academia</h1>
+<p class="text-xs text-on-surface-variant">Management System</p>
+</div>
+</div>
+<div class="flex-1 flex flex-col gap-2 mt-4">
+<a class="flex items-center gap-3 text-[#404849] dark:text-[#c0c8c8] px-4 py-3 hover:bg-[#ecf5fc] dark:hover:bg-[#1f4d50] rounded-xl transition-all hover:translate-x-1 duration-200 active:scale-95" href="#">
+<span class="material-symbols-outlined">dashboard</span>
+<span>Dashboard</span>
+</a>
+<a class="flex items-center gap-3 bg-[#f5faff] dark:bg-[#141d22] shadow-[inset_4px_4px_8px_#d2dbe2,inset_-4px_-4px_8px_#ffffff] dark:shadow-[inset_4px_4px_8px_#000000,inset_-4px_-4px_8px_#293237] text-[#396568] rounded-xl px-4 py-3 active:scale-95 transition-transform" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">calendar_today</span>
+<span class="font-bold">Attendance</span>
+</a>
+<a class="flex items-center gap-3 text-[#404849] dark:text-[#c0c8c8] px-4 py-3 hover:bg-[#ecf5fc] dark:hover:bg-[#1f4d50] rounded-xl transition-all hover:translate-x-1 duration-200 active:scale-95" href="#">
+<span class="material-symbols-outlined">group</span>
+<span>Students</span>
+</a>
+<a class="flex items-center gap-3 text-[#404849] dark:text-[#c0c8c8] px-4 py-3 hover:bg-[#ecf5fc] dark:hover:bg-[#1f4d50] rounded-xl transition-all hover:translate-x-1 duration-200 active:scale-95" href="#">
+<span class="material-symbols-outlined">school</span>
+<span>Grades</span>
+</a>
+<a class="flex items-center gap-3 text-[#404849] dark:text-[#c0c8c8] px-4 py-3 hover:bg-[#ecf5fc] dark:hover:bg-[#1f4d50] rounded-xl transition-all hover:translate-x-1 duration-200 active:scale-95" href="#">
+<span class="material-symbols-outlined">settings</span>
+<span>Settings</span>
+</a>
+</div>
+<div class="flex flex-col gap-2 mt-auto border-t border-surface-dim/30 pt-4">
+<a class="flex items-center gap-3 text-[#404849] dark:text-[#c0c8c8] px-4 py-3 hover:bg-[#ecf5fc] dark:hover:bg-[#1f4d50] rounded-xl transition-all hover:translate-x-1 duration-200 active:scale-95" href="#">
+<span class="material-symbols-outlined">help</span>
+<span>Help Center</span>
+</a>
+<a class="flex items-center gap-3 text-[#404849] dark:text-[#c0c8c8] px-4 py-3 hover:bg-[#ecf5fc] dark:hover:bg-[#1f4d50] rounded-xl transition-all hover:translate-x-1 duration-200 active:scale-95" href="#">
+<span class="material-symbols-outlined">logout</span>
+<span>Sign Out</span>
+</a>
+</div>
+</nav>
+<!-- Main Content Wrapper -->
+<div class="flex-1 md:ml-64 flex flex-col min-h-screen">
+<!-- TopAppBar -->
+<header class="fixed top-0 left-0 md:left-64 right-0 w-auto z-40 flex justify-between items-center px-8 h-16 bg-[#f5faff] dark:bg-[#141d22] font-['Lexend'] antialiased shadow-[4px_4px_8px_#d2dbe2,-4px_-4px_8px_#ffffff] dark:shadow-[4px_4px_8px_#000000,-4px_-4px_8px_#293237]">
+<div class="flex items-center gap-4 w-full max-w-md">
+<!-- Mobile Menu Toggle -->
+<button class="md:hidden p-2 rounded-lg neo-raised text-primary">
+<span class="material-symbols-outlined">menu</span>
+</button>
+<span class="text-xl font-bold text-[#396568] dark:text-[#ccfbfe] md:hidden">SMS Pro</span>
+<div class="hidden md:flex flex-1 items-center bg-surface neo-sunken rounded-full px-4 py-2">
+<span class="material-symbols-outlined text-outline">search</span>
+<input class="bg-transparent border-none focus:ring-0 w-full text-sm placeholder:text-outline-variant text-on-surface ml-2 pb-0.5" placeholder="Search students, classes..." type="text"/>
+</div>
+</div>
+<div class="flex items-center gap-6">
+<div class="hidden md:flex gap-6">
+<a class="text-[#404849] dark:text-[#c0c8c8] hover:text-[#396568] hover:scale-105 transition-all active:shadow-inner" href="#">Dashboard</a>
+<a class="text-[#396568] font-bold border-b-2 border-[#396568] pb-1 hover:text-[#396568] hover:scale-105 transition-all" href="#">Attendance</a>
+</div>
+<div class="flex items-center gap-4 pl-4 border-l border-surface-dim/30">
+<button class="w-10 h-10 rounded-full neo-raised flex items-center justify-center text-primary neo-pressed transition-all relative">
+<span class="material-symbols-outlined">notifications</span>
+<span class="absolute top-2 right-2 w-2 h-2 bg-secondary rounded-full"></span>
+</button>
+<button class="w-10 h-10 rounded-full neo-raised flex items-center justify-center text-primary neo-pressed transition-all">
+<span class="material-symbols-outlined">account_circle</span>
+</button>
+</div>
+</div>
+</header>
+<!-- Main Canvas -->
+<main class="flex-1 mt-16 p-6 md:p-10 lg:p-12 max-w-7xl mx-auto w-full flex flex-col gap-8">
+<!-- Page Header & Actions -->
+<div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
+<div>
+<h2 class="text-3xl font-bold text-on-surface mb-1">Attendance Overview</h2>
+<p class="text-on-surface-variant text-sm">Monitor daily and historical attendance patterns.</p>
+</div>
+<div class="flex gap-4">
+<button class="px-6 py-2.5 rounded-lg bg-surface text-primary font-medium neo-raised neo-pressed transition-all flex items-center gap-2">
+<span class="material-symbols-outlined text-sm">download</span>
+                        Download Report
+                    </button>
+<button class="px-6 py-2.5 rounded-lg bg-primary-container text-on-primary-container font-medium neo-raised neo-pressed transition-all flex items-center gap-2">
+<span class="material-symbols-outlined text-sm">add</span>
+                        Add Record
+                    </button>
+</div>
+</div>
+<!-- Top Stats Row (Bento Style) -->
+<div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+<!-- Daily Rate -->
+<div class="bg-surface rounded-xl p-6 neo-raised flex flex-col justify-between h-48 relative overflow-hidden">
+<div class="flex justify-between items-start z-10">
+<h3 class="text-sm font-medium text-on-surface-variant">Daily Attendance Rate</h3>
+<div class="p-2 bg-surface-container-high rounded-full neo-sunken">
+<span class="material-symbols-outlined text-primary text-xl" style="font-variation-settings: 'FILL' 1;">trending_up</span>
+</div>
+</div>
+<div class="z-10">
+<div class="text-5xl font-bold text-primary mb-1">94.2%</div>
+<p class="text-xs text-outline font-medium flex items-center gap-1">
+<span class="text-primary-container bg-primary px-1.5 py-0.5 rounded-sm neo-sunken text-[10px]">+1.2%</span> from yesterday
+                        </p>
+</div>
+<!-- Decorative Sparkline (CSS based) -->
+<div class="absolute bottom-0 left-0 w-full h-16 opacity-20 pointer-events-none">
+<svg class="w-full h-full stroke-primary stroke-2 fill-none" preserveaspectratio="none" viewbox="0 0 100 30">
+<path d="M0,25 L10,20 L20,22 L30,15 L40,18 L50,10 L60,12 L70,5 L80,8 L90,2 L100,0"></path>
+</svg>
+</div>
+</div>
+<!-- Active Absences -->
+<div class="bg-surface rounded-xl p-6 neo-raised flex flex-col justify-between h-48">
+<div class="flex justify-between items-start">
+<h3 class="text-sm font-medium text-on-surface-variant">Total Absences Today</h3>
+<div class="p-2 bg-surface-container-high rounded-full neo-sunken">
+<span class="material-symbols-outlined text-secondary text-xl" style="font-variation-settings: 'FILL' 1;">person_off</span>
+</div>
+</div>
+<div>
+<div class="text-5xl font-bold text-secondary mb-1">42</div>
+<p class="text-xs text-outline font-medium">Across 12 classes</p>
+</div>
+</div>
+<!-- Absence Patterns Card -->
+<div class="bg-surface rounded-xl p-6 neo-raised h-48 flex flex-col">
+<h3 class="text-sm font-medium text-on-surface-variant mb-4">Absence Patterns (This Week)</h3>
+<div class="flex-1 flex flex-col gap-3 justify-center">
+<div class="flex items-center gap-3">
+<div class="w-16 text-xs font-medium text-on-surface">Illness</div>
+<div class="flex-1 h-3 bg-surface-container rounded-full neo-sunken overflow-hidden">
+<div class="h-full bg-secondary-container w-[65%] rounded-full shadow-[inset_-2px_-2px_4px_rgba(0,0,0,0.1)]"></div>
+</div>
+<div class="w-8 text-right text-xs font-bold text-on-surface-variant">65%</div>
+</div>
+<div class="flex items-center gap-3">
+<div class="w-16 text-xs font-medium text-on-surface">Personal</div>
+<div class="flex-1 h-3 bg-surface-container rounded-full neo-sunken overflow-hidden">
+<div class="h-full bg-tertiary-container w-[25%] rounded-full shadow-[inset_-2px_-2px_4px_rgba(0,0,0,0.1)]"></div>
+</div>
+<div class="w-8 text-right text-xs font-bold text-on-surface-variant">25%</div>
+</div>
+<div class="flex items-center gap-3">
+<div class="w-16 text-xs font-medium text-on-surface">Unexcused</div>
+<div class="flex-1 h-3 bg-surface-container rounded-full neo-sunken overflow-hidden">
+<div class="h-full bg-error-container w-[10%] rounded-full shadow-[inset_-2px_-2px_4px_rgba(0,0,0,0.1)]"></div>
+</div>
+<div class="w-8 text-right text-xs font-bold text-on-surface-variant">10%</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Lower Section: Table & Filters -->
+<div class="bg-surface rounded-xl neo-raised p-6 flex flex-col gap-6">
+<!-- Table Controls -->
+<div class="flex flex-col sm:flex-row justify-between items-center gap-4 border-b border-surface-dim/30 pb-4">
+<h3 class="text-lg font-bold text-on-surface">Recent Attendance Records</h3>
+<div class="flex bg-surface-container p-1 rounded-lg neo-sunken">
+<button class="px-4 py-1.5 text-sm font-medium rounded-md bg-surface text-primary shadow-[2px_2px_4px_#d2dbe2,-2px_-2px_4px_#ffffff] transition-all">
+                            Students
+                        </button>
+<button class="px-4 py-1.5 text-sm font-medium rounded-md text-on-surface-variant hover:text-primary transition-all">
+                            Classes
+                        </button>
+</div>
+</div>
+<!-- Data Table -->
+<div class="overflow-x-auto">
+<table class="w-full text-left border-collapse">
+<thead>
+<tr class="text-xs text-outline font-semibold uppercase tracking-wider border-b border-surface-dim/50">
+<th class="py-3 px-4">Student Name</th>
+<th class="py-3 px-4">Class</th>
+<th class="py-3 px-4">Status</th>
+<th class="py-3 px-4">Date</th>
+<th class="py-3 px-4 text-right">Actions</th>
+</tr>
+</thead>
+<tbody class="text-sm">
+<tr class="border-b border-surface-dim/20 hover:bg-surface-container-low/50 transition-colors">
+<td class="py-4 px-4 font-medium text-on-surface flex items-center gap-3">
+<div class="w-8 h-8 rounded-full bg-primary-container text-primary flex items-center justify-center font-bold text-xs neo-sunken">
+                                        JD
+                                    </div>
+                                    John Doe
+                                </td>
+<td class="py-4 px-4 text-on-surface-variant">Mathematics 101</td>
+<td class="py-4 px-4">
+<span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-medium bg-primary-container text-on-primary-container neo-sunken-pill">
+<span class="w-1.5 h-1.5 rounded-full bg-primary"></span>
+                                        Present
+                                    </span>
+</td>
+<td class="py-4 px-4 text-on-surface-variant">Oct 24, 2023</td>
+<td class="py-4 px-4 text-right">
+<button class="p-1.5 rounded-md text-outline hover:text-primary neo-raised neo-pressed transition-all">
+<span class="material-symbols-outlined text-sm">edit</span>
+</button>
+</td>
+</tr>
+<tr class="border-b border-surface-dim/20 hover:bg-surface-container-low/50 transition-colors">
+<td class="py-4 px-4 font-medium text-on-surface flex items-center gap-3">
+<div class="w-8 h-8 rounded-full bg-secondary-container text-secondary flex items-center justify-center font-bold text-xs neo-sunken">
+                                        JS
+                                    </div>
+                                    Jane Smith
+                                </td>
+<td class="py-4 px-4 text-on-surface-variant">Physics 202</td>
+<td class="py-4 px-4">
+<span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-medium bg-secondary-container text-on-secondary-container neo-sunken-pill">
+<span class="w-1.5 h-1.5 rounded-full bg-secondary"></span>
+                                        Absent (Illness)
+                                    </span>
+</td>
+<td class="py-4 px-4 text-on-surface-variant">Oct 24, 2023</td>
+<td class="py-4 px-4 text-right">
+<button class="p-1.5 rounded-md text-outline hover:text-primary neo-raised neo-pressed transition-all">
+<span class="material-symbols-outlined text-sm">edit</span>
+</button>
+</td>
+</tr>
+<tr class="border-b border-surface-dim/20 hover:bg-surface-container-low/50 transition-colors">
+<td class="py-4 px-4 font-medium text-on-surface flex items-center gap-3">
+<div class="w-8 h-8 rounded-full bg-tertiary-container text-tertiary flex items-center justify-center font-bold text-xs neo-sunken">
+                                        MJ
+                                    </div>
+                                    Michael Johnson
+                                </td>
+<td class="py-4 px-4 text-on-surface-variant">History 105</td>
+<td class="py-4 px-4">
+<span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-medium bg-tertiary-container text-on-tertiary-container neo-sunken-pill">
+<span class="w-1.5 h-1.5 rounded-full bg-tertiary"></span>
+                                        Late (15m)
+                                    </span>
+</td>
+<td class="py-4 px-4 text-on-surface-variant">Oct 24, 2023</td>
+<td class="py-4 px-4 text-right">
+<button class="p-1.5 rounded-md text-outline hover:text-primary neo-raised neo-pressed transition-all">
+<span class="material-symbols-outlined text-sm">edit</span>
+</button>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="flex justify-center mt-4">
+<button class="text-sm font-medium text-primary hover:text-surface-tint transition-colors">View All Records</button>
+</div>
+</div>
+</main>
+</div>
+</body></html>
