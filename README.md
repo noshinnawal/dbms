@@ -4,7 +4,7 @@
 [![Language](https://img.shields.io/badge/Language-PHP-777bb4.svg)](https://www.php.net/)
 [![Design](https://img.shields.io/badge/Design-Neomorphism-e6eff6.svg)](#academic-tactility)
 
-Stitch is a comprehensive, database-focused School Management System (SMS) designed for academic institutions. Built as part of the **CSE 425 - Database Management** course, it prioritizes robust database architecture, clean vanilla implementation, and a cutting-edge "Academic Tactility" neomorphic user interface.
+The Student Management System is a comprehensive, database-focused School Management System (SMS) designed for academic institutions. Built as part of the **CSE 425 - Database Management** course, it prioritizes robust database architecture, clean vanilla implementation, and a cutting-edge "Academic Tactility" neomorphic user interface.
 
 ![ER Diagram](university_er_diagram_v4.png)
 
@@ -25,7 +25,7 @@ The system is organized into specialized modules designed to handle the complex 
 
 ## 🎨 Design Philosophy: "Academic Tactility"
 
-Stitch breaks away from the sterile flatness of traditional administrative software by employing **Neomorphism (Soft UI)**. This "Academic Tactility" system creates a physically responsive interface that feels organic and reduces visual fatigue.
+The Student Management System breaks away from the sterile flatness of traditional administrative software by employing **Neomorphism (Soft UI)**. This "Academic Tactility" system creates a physically responsive interface that feels organic and reduces visual fatigue.
 
 ### Core Principles
 -   **Dual Shadow Dynamics**: Using light and shadow (135° source) to create **Raised (Convex)** elements for interactivity and **Sunken (Concave)** elements for data input.
@@ -61,7 +61,7 @@ Stitch breaks away from the sterile flatness of traditional administrative softw
 │   ├── faculty/        # Staff management
 │   ├── grades/         # Assessment & transcripts
 │   └── students/       # Student records (CRUD)
-├── stitch_student_management_system/ # UI Prototypes & Screen Mockups
+├── student_management_system/ # UI Prototypes & Screen Mockups
 └── university_er_diagram_v4.png      # Database Schema Documentation
 ```
 
@@ -92,7 +92,7 @@ Stitch breaks away from the sterile flatness of traditional administrative softw
 
 ## 🔒 Security Standards
 
-Stitch implements several layers of security to protect sensitive academic data:
+The Student Management System implements several layers of security to protect sensitive academic data:
 -   **SQL Injection Protection**: Strict use of PDO prepared statements for all database interactions.
 -   **Password Security**: Industry-standard `password_hash()` and `password_verify()`.
 -   **Role-Based Access Control (RBAC)**: Middleware-enforced permissions for Admin, Faculty, and Student roles.
