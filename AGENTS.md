@@ -2,11 +2,11 @@
 
 ## Project Context
 - **Repo**: `cse425/` — CSE 425 course project (no traditional build/test pipeline)
-- **Primary content**: `stitch_student_management_system/` — Neomorphic UI mockups and design specs for a school management system (no runnable app, no package manager, no framework)
+- **Primary content**: `student_management_system/` — Neomorphic UI mockups and design specs for a school management system (no runnable app, no package manager, no framework)
 - **No build/test commands** — This is a design/Figma-style prototype collection, not a compiled application
 
 ## What This Repo Contains
-- `stitch_student_management_system/stitch_student_management_system/` — 10 feature modules (login, dashboard, faculty, attendance, etc.)
+- `student_management_system/student_management_system/` — 10 feature modules (login, dashboard, faculty, attendance, etc.)
   - Each module has `code.html` (standalone HTML/CSS prototype using Tailwind + Lexend font)
   - `academic_tactility/DESIGN.md` — Design tokens (colors, typography, spacing, neomorphic principles)
 - `university_er_diagram_v4.png` — ER diagram
@@ -15,7 +15,7 @@
 ## Setup (No Build Required)
 - Open any `code.html` in a browser to view prototypes
 - No `npm install`, no dev server, no compilation step
-- For Kilo/OpenCode: workspace root is `/cse425` or `/stitch_student_management_system`
+- For Kilo/OpenCode: workspace root is `/cse425` or `/student_management_system`
 
 ## Important: No Executable Source Code
 - This repository holds UI mockups only. There is no:
@@ -27,7 +27,7 @@
 
 ## Working with Kilo / OpenCode
 - Global Kilo config: `~/.config/kilo/kilo.jsonc` (exists, allows all bash)
-- To add a local `.kilo/` config: place it at `/cse425/.kilo/` or `/cse425/stitch_student_management_system/.kilo/`
+- To add a local `.kilo/` config: place it at `/cse425/.kilo/` or `/cse425/student_management_system/.kilo/`
 - Skills: install via `npx @lobehub/market-cli skills install <id> --agent kilo-code` or manually to `.kilo/skills/`
 - No project-level `kilo.json` present — inherits global config only
 
