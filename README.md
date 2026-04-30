@@ -8,43 +8,40 @@ The Student Management System is a comprehensive, database-focused School Manage
 
 ![ER Diagram](university_er_diagram_v4.png)
 
-## 🌟 Key Features
+## Key Features
 
 The system is organized into specialized modules designed to handle the complex workflows of a modern university:
 
--   **Comprehensive Dashboards**: Role-specific overviews for Administrators, Faculty, and Students featuring real-time statistics.
--   **Student Management**: Full lifecycle tracking from registration to graduation, including detailed profiles and enrollment history.
--   **Faculty Portal**: Management of academic staff, department assignments, and teaching schedules.
--   **Course & Section Catalog**: Dynamic management of course offerings, credits, and per-semester section scheduling.
--   **Enrollment System**: Intelligent student-to-section mapping with capacity validation and conflict detection.
--   **Attendance Tracking**: Daily, bulk-entry attendance recording with automated percentage calculations.
--   **Gradebook & Transcripts**: Weighted assessment tracking (quizzes, midterms, finals) and automated transcript generation.
--   **Notification Engine**: System-wide alerts for important academic updates and status changes.
+- **Comprehensive Dashboards**: Role-specific overviews for Administrators, Faculty, and Students featuring real-time statistics.
+- **Student Management**: Full lifecycle tracking from registration to graduation, including detailed profiles and enrollment history.
+- **Faculty Portal**: Management of academic staff, department assignments, and teaching schedules.
+- **Course & Section Catalog**: Dynamic management of course offerings, credits, and per-semester section scheduling.
+- **Enrollment System**: Intelligent student-to-section mapping with capacity validation and conflict detection.
+- **Attendance Tracking**: Daily, bulk-entry attendance recording with automated percentage calculations.
+- **Gradebook & Transcripts**: Weighted assessment tracking (quizzes, midterms, finals) and automated transcript generation.
+- **Notification Engine**: System-wide alerts for important academic updates and status changes.
 
 ---
-
-## 🎨 Design Philosophy: "Academic Tactility"
-
-The Student Management System breaks away from the sterile flatness of traditional administrative software by employing **Neomorphism (Soft UI)**. This "Academic Tactility" system creates a physically responsive interface that feels organic and reduces visual fatigue.
 
 ### Core Principles
--   **Dual Shadow Dynamics**: Using light and shadow (135° source) to create **Raised (Convex)** elements for interactivity and **Sunken (Concave)** elements for data input.
--   **Lexend Typography**: Utilizing the Lexend typeface, specifically engineered to improve reading proficiency and reduce visual stress during long administrative sessions.
--   **Physical Feedback**: Interactive elements provide tactile feedback by transitioning from raised to sunken states upon interaction.
--   **Softened Geometry**: A strict "no sharp corners" rule ensures a soft, molded aesthetic that feels premium and modern.
+
+- **Dual Shadow Dynamics**: Using light and shadow (135° source) to create **Raised (Convex)** elements for interactivity and **Sunken (Concave)** elements for data input.
+- **Lexend Typography**: Utilizing the Lexend typeface, specifically engineered to improve reading proficiency and reduce visual stress during long administrative sessions.
+- **Physical Feedback**: Interactive elements provide tactile feedback by transitioning from raised to sunken states upon interaction.
+- **Softened Geometry**: A strict "no sharp corners" rule ensures a soft, molded aesthetic that feels premium and modern.
 
 ---
 
-## 💻 Tech Stack
+## Tech Stack
 
--   **Backend**: PHP 8.x (Vanilla)
--   **Database**: MySQL (InnoDB Engine, 3NF Normalization)
--   **Frontend**: HTML5, CSS3 (Custom Neomorphic Framework), Vanilla JavaScript
--   **Environment**: XAMPP / Apache
+- **Backend**: PHP 8.x (Vanilla)
+- **Database**: MySQL (InnoDB Engine, 3NF Normalization)
+- **Frontend**: HTML5, CSS3 (Custom Neomorphic Framework), Vanilla JavaScript
+- **Environment**: XAMPP / Apache
 
 ---
 
-## 📂 Project Structure
+## Project Structure
 
 ```text
 /
@@ -67,42 +64,56 @@ The Student Management System breaks away from the sterile flatness of tradition
 
 ---
 
-## 🛠️ Installation & Setup
+## Installation & Setup (XAMPP on Windows)
 
-### Prerequisites
--   [XAMPP](https://www.apachefriends.org/index.html) or any PHP/MySQL environment.
--   PHP 8.0 or higher.
+Follow these steps to get the system running on your local machine using XAMPP.
 
-### Steps
-1.  **Clone the Repository**:
-    ```bash
-    git clone https://github.com/noshinnawal119-bot/dbsm.git
-    ```
-2.  **Database Setup**:
-    -   Open PHPMyAdmin.
-    -   Create a new database named `university_sms`.
-    -   Import the schema (located in `plan.md` or the dedicated SQL export file).
-3.  **Configuration**:
-    -   Update `config/database.php` with your local database credentials (host, username, password).
-4.  **Run the Application**:
-    -   Move the project to your server root (e.g., `htdocs`).
-    -   Navigate to `http://localhost/dbsm` in your browser.
+### 1. Prerequisites
+
+- **XAMPP**: Download and install from [apachefriends.org](https://www.apachefriends.org/).
+- **Git**: (Optional) For cloning the repository.
+
+### 2. Environment Setup
+
+1.  **Start XAMPP**: Open the **XAMPP Control Panel** and click **Start** for both **Apache** and **MySQL**.
+2.  **Place Project Files**:
+    - Navigate to your XAMPP installation directory (usually `C:\xampp\htdocs`).
+    - Create a folder named `dbsm`.
+    - Copy all project files into `C:\xampp\htdocs\dbsm`.
+    - _Alternatively, if using Git:_
+      ```bash
+      cd C:\xampp\htdocs
+      git clone https://github.com/noshinnawal119-bot/dbsm.git
+      ```
+
+### 3. Database Configuration
+
+1.  **Open phpMyAdmin**: Go to [http://localhost/phpmyadmin](http://localhost/phpmyadmin) in your browser.
+2.  **Create Database**:
+    - Click on **New** in the left sidebar.
+    - Database name: `university_sms`
+    - Collation: `utf8mb4_general_ci`
+    - Click **Create**.
+3.  **Import Schema**:
+    - Select the `university_sms` database.
+    - Click the **Import** tab at the top.
+    - Click **Choose File** and select `database.sql` from the project root.
+    - Scroll to the bottom and click **Go**.
+
+### 4. Run the Application
+
+- Open your browser and navigate to: [**http://localhost/dbsm**](http://localhost/dbsm)
 
 ---
 
-## 🔒 Security Standards
+## Default Credentials
 
-The Student Management System implements several layers of security to protect sensitive academic data:
--   **SQL Injection Protection**: Strict use of PDO prepared statements for all database interactions.
--   **Password Security**: Industry-standard `password_hash()` and `password_verify()`.
--   **Role-Based Access Control (RBAC)**: Middleware-enforced permissions for Admin, Faculty, and Student roles.
--   **XSS/CSRF Prevention**: Comprehensive input sanitization and token-based form protection.
+The system comes pre-loaded with sample accounts for testing:
 
----
-
-## 🎓 Academic Context
-This project was developed for **CSE 425 - Database Management**. It serves as a practical implementation of advanced database concepts, including normalization (3NF), referential integrity, complex joins, and secure data transaction management.
+| Role              | Username  | Password     |
+| :---------------- | :-------- | :----------- |
+| **Administrator** | `admin`   | `admin123`   |
+| **Faculty**       | `jdoe`    | `faculty123` |
+| **Student**       | `sasmith` | `student123` |
 
 ---
-
-Developed with ❤️ for academic excellence.
