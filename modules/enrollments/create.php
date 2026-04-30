@@ -41,7 +41,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         if ($cap['current'] >= $cap['max_capacity']) {
             $error = "Error: This section is already at maximum capacity (" . $cap['max_capacity'] . ").";
         } else {
-            $stmt = $pdo->prepare("INSERT INTO enrollments (student_id, section_id) VALUES (?, ?)");
+            $stmt = $pdo->prepare("INSERT INTO enrollments (student_id, section_id, status) VALUES (?, ?, 'enrolled') 
+                                   ON DUPLICATE KEY UPDATE status = 'enrolled', enrollment_date = CURRENT_TIMESTAMP");
             $stmt->execute([$student_id, $section_id]);
             $success = "Student enrolled successfully!";
         }

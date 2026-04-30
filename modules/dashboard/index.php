@@ -85,19 +85,11 @@ require_once '../../includes/navbar.php';
     </div>
 
     <!-- Main Content Area -->
-    <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
-        <!-- Recent Activities -->
-        <div class="lg:col-span-2 bg-surface-container rounded-[32px] p-8 shadow-[12px_12px_24px_#dbe4eb,-12px_-12px_24px_#ffffff]">
-            <h2 class="text-xl font-bold text-on-surface mb-6">Recent Activities</h2>
-            <div class="flex flex-col gap-6">
-                <p class="text-on-surface-variant text-center py-10 italic">No recent activities to show.</p>
-            </div>
-        </div>
-
+    <div class="grid grid-cols-1 gap-8">
         <!-- Quick Links -->
         <div class="bg-surface-container rounded-[32px] p-8 shadow-[12px_12px_24px_#dbe4eb,-12px_-12px_24px_#ffffff]">
             <h2 class="text-xl font-bold text-on-surface mb-6">Quick Actions</h2>
-            <div class="flex flex-col gap-4">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-4">
                 <a href="../students/create.php" class="w-full py-4 rounded-2xl bg-surface-container shadow-[6px_6px_12px_#dbe4eb,-6px_-6px_12px_#ffffff] text-on-surface font-medium flex items-center justify-center gap-2 hover:text-primary transition-all">
                     <span class="material-symbols-outlined">person_add</span>
                     Add Student
@@ -105,6 +97,14 @@ require_once '../../includes/navbar.php';
                 <a href="../courses/create.php" class="w-full py-4 rounded-2xl bg-surface-container shadow-[6px_6px_12px_#dbe4eb,-6px_-6px_12px_#ffffff] text-on-surface font-medium flex items-center justify-center gap-2 hover:text-primary transition-all">
                     <span class="material-symbols-outlined">library_add</span>
                     New Course
+                </a>
+                <a href="../sections/create.php" class="w-full py-4 rounded-2xl bg-surface-container shadow-[6px_6px_12px_#dbe4eb,-6px_-6px_12px_#ffffff] text-on-surface font-medium flex items-center justify-center gap-2 hover:text-primary transition-all">
+                    <span class="material-symbols-outlined">calendar_add_on</span>
+                    Schedule Section
+                </a>
+                <a href="../enrollments/create.php" class="w-full py-4 rounded-2xl bg-surface-container shadow-[6px_6px_12px_#dbe4eb,-6px_-6px_12px_#ffffff] text-on-surface font-medium flex items-center justify-center gap-2 hover:text-primary transition-all">
+                    <span class="material-symbols-outlined">how_to_reg</span>
+                    New Enrollment
                 </a>
                 <a href="../attendance/record.php" class="w-full py-4 rounded-2xl bg-surface-container shadow-[6px_6px_12px_#dbe4eb,-6px_-6px_12px_#ffffff] text-on-surface font-medium flex items-center justify-center gap-2 hover:text-primary transition-all">
                     <span class="material-symbols-outlined">checklist</span>

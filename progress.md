@@ -61,6 +61,12 @@
 - [ ] **Student Portal Enhancements**
   - [ ] My Schedule View
   - [ ] My Grades View
+- [ ] **User & System Improvements**
+  - [ ] User Profile Management (Edit details)
+  - [ ] Password Reset / Forgot Password flow
+  - [ ] List Pagination for Students/Faculty/Courses
+  - [ ] Improved Input Sanitization & CSRF Protection
+  - [ ] System Audit Logs (Admin View)
 
 ---
 
