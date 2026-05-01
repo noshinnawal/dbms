@@ -9,12 +9,13 @@ session_start();
 $error = '';
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $email = filter_input(INPUT_POST, 'email', FILTER_SANITIZE_EMAIL);
-    $password = $_POST['password'];
+    $login_input = trim($_POST['login_input'] ?? '');
+    $password = $_POST['password'] ?? '';
 
-    if ($email && $password) {
-        $stmt = $pdo->prepare("SELECT * FROM users WHERE email = ? AND is_active = 1");
-        $stmt->execute([$email]);
+    if ($login_input && $password) {
+        // Check if input is email or username
+        $stmt = $pdo->prepare("SELECT * FROM users WHERE (email = ? OR username = ?) AND is_active = 1");
+        $stmt->execute([$login_input, $login_input]);
         $user = $stmt->fetch();
 
         if ($user && password_verify($password, $user['password'])) {
@@ -27,7 +28,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             header("Location: ../dashboard/index.php");
             exit;
         } else {
-            $error = 'Invalid email or password.';
+            $error = 'Invalid credentials.';
         }
     } else {
         $error = 'Please fill in all fields.';
@@ -58,13 +59,13 @@ require_once '../../includes/header.php';
 
         <!-- Login Form -->
         <form action="login.php" class="w-full flex flex-col gap-6" method="POST">
-            <!-- Email Input Group -->
+            <!-- Email/Username Input Group -->
             <div class="w-full">
-                <label class="text-sm font-medium text-on-surface-variant block mb-3 ml-2" for="email">Email Address</label>
+                <label class="text-sm font-medium text-on-surface-variant block mb-3 ml-2" for="login_input">Username or Email</label>
                 <div class="relative flex items-center">
-                    <span class="material-symbols-outlined absolute left-4 text-outline-variant select-none pointer-events-none">mail</span>
+                    <span class="material-symbols-outlined absolute left-4 text-outline-variant select-none pointer-events-none">person</span>
                     <input class="w-full bg-surface-container border-none rounded-2xl py-4 pl-12 pr-4 text-on-surface placeholder:text-outline-variant focus:outline-none focus:ring-1 focus:ring-primary/30 shadow-[inset_6px_6px_12px_#dbe4eb,inset_-6px_-6px_12px_#ffffff] transition-shadow duration-200" 
-                           id="email" name="email" placeholder="admin@school.edu" required type="email" value="<?php echo isset($_POST['email']) ? htmlspecialchars($_POST['email']) : ''; ?>"/>
+                           id="login_input" name="login_input" placeholder="admin or admin@school.edu" required type="text" value="<?php echo isset($_POST['login_input']) ? htmlspecialchars($_POST['login_input']) : ''; ?>"/>
                 </div>
             </div>
 
