@@ -6,6 +6,19 @@ SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
 SET time_zone = "+00:00";
 
+-- Disable foreign key checks for clean drop
+SET foreign_key_checks = 0;
+DROP TABLE IF EXISTS notifications;
+DROP TABLE IF EXISTS grades;
+DROP TABLE IF EXISTS attendance;
+DROP TABLE IF EXISTS enrollments;
+DROP TABLE IF EXISTS sections;
+DROP TABLE IF EXISTS courses;
+DROP TABLE IF EXISTS faculty;
+DROP TABLE IF EXISTS students;
+DROP TABLE IF EXISTS users;
+SET foreign_key_checks = 1;
+
 -- --------------------------------------------------------
 -- TABLE: users
 -- --------------------------------------------------------
@@ -174,14 +187,14 @@ CREATE TABLE IF NOT EXISTS notifications (
 
 -- Admin user (password: admin123)
 INSERT INTO users (username, password, email, role, first_name, last_name) 
-VALUES ('admin', '$2y$10$8K9p0Z9Xk6zY2gG7aU1V6O6lR/h/GqB5n9e6F6u5O9R/h/GqB5n9e', 'admin@school.edu', 'admin', 'System', 'Admin');
+VALUES ('admin', '$2y$10$74.7iE59xkDepw8Tphz45.zxh/VJ3sbU/DkrnrAPBqj0yGRjRWzPa', 'admin@school.edu', 'admin', 'System', 'Admin');
 
 -- Faculty user (password: faculty123)
 INSERT INTO users (username, password, email, role, first_name, last_name) 
-VALUES ('jdoe', '$2y$10$8K9p0Z9Xk6zY2gG7aU1V6O6lR/h/GqB5n9e6F6u5O9R/h/GqB5n9e', 'j.doe@school.edu', 'faculty', 'John', 'Doe');
+VALUES ('jdoe', '$2y$10$XLb6klSSZ8i1Hx0VjpgodeVMZb/5FCyfoPVIBb9Euy0CveB9FucWm', 'j.doe@school.edu', 'faculty', 'John', 'Doe');
 
 -- Student user (password: student123)
 INSERT INTO users (username, password, email, role, first_name, last_name) 
-VALUES ('sasmith', '$2y$10$8K9p0Z9Xk6zY2gG7aU1V6O6lR/h/GqB5n9e6F6u5O9R/h/GqB5n9e', 's.smith@school.edu', 'student', 'Sarah', 'Smith');
+VALUES ('sasmith', '$2y$10$vMi22uZXvJoBTNxrIcDG7uSpaFamthAgmhssB3T9yJX.mmIs0S/wS', 's.smith@school.edu', 'student', 'Sarah', 'Smith');
 
 COMMIT;
