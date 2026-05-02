@@ -1,7 +1,7 @@
 <?php
 /**
  * Registration Backend Processor
- * Handles student and faculty registration logic.
+ * Handles student registration logic. (Faculty registration is deprecated)
  */
 require_once __DIR__ . '/../../config/database.php';
 session_start();
@@ -35,7 +35,7 @@ if ($password !== $confirm_password) {
     $errors[] = "Passwords do not match.";
 }
 
-if (!in_array($role, ['student', 'faculty'])) {
+if ($role !== 'student') {
     $errors[] = "Invalid role selected.";
 }
 
@@ -49,21 +49,11 @@ if ($role === 'student') {
     if (empty($student_number)) {
         $errors[] = "Student number is required.";
     }
-} elseif ($role === 'faculty') {
-    $employee_number = $_POST['employee_number'] ?? '';
-    $department = $_POST['department'] ?? '';
-    $title = $_POST['title'] ?? '';
-    $hire_date = $_POST['hire_date'] ?? '';
-    $office_location = $_POST['office_location'] ?? '';
-
-    if (empty($employee_number) || empty($department)) {
-        $errors[] = "Employee number and department are required.";
-    }
 }
 
 if (!empty($errors)) {
     $_SESSION['error'] = implode("<br>", $errors);
-    header('Location: ' . ($role === 'student' ? 'register_student.php' : 'register_teacher.php'));
+    header('Location: register_student.php');
     exit();
 }
 
@@ -73,7 +63,7 @@ try {
     $stmt->execute([$email, $username]);
     if ($stmt->fetch()) {
         $_SESSION['error'] = "Email or Username already exists.";
-        header('Location: ' . ($role === 'student' ? 'register_student.php' : 'register_teacher.php'));
+        header('Location: register_student.php');
         exit();
     }
 
@@ -93,10 +83,6 @@ try {
         $enrollment_date = empty($_POST['enrollment_date']) ? date('Y-m-d') : $_POST['enrollment_date'];
         $stmt = $pdo->prepare("INSERT INTO students (user_id, student_number, date_of_birth, phone, address, enrollment_date) VALUES (?, ?, ?, ?, ?, ?)");
         $stmt->execute([$user_id, $student_number, $date_of_birth, $phone, $address, $enrollment_date]);
-    } else {
-        $hire_date = empty($hire_date) ? date('Y-m-d') : $hire_date;
-        $stmt = $pdo->prepare("INSERT INTO faculty (user_id, employee_number, department, title, hire_date, office_location) VALUES (?, ?, ?, ?, ?, ?)");
-        $stmt->execute([$user_id, $employee_number, $department, $title, $hire_date, $office_location]);
     }
 
     // 8. Commit Transaction
@@ -113,6 +99,6 @@ try {
         $pdo->rollBack();
     }
     $_SESSION['error'] = "Registration failed: " . $e->getMessage();
-    header('Location: ' . ($role === 'student' ? 'register_student.php' : 'register_teacher.php'));
+    header('Location: register_student.php');
     exit();
 }

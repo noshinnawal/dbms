@@ -3,6 +3,8 @@
  * Registration Choice Page
  * Allows users to choose between Student and Teacher registration.
  */
+header("Location: register_student.php");
+exit;
 $pageTitle = "Choose Your Role";
 require_once '../../includes/header.php';
 ?>
