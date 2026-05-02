@@ -13,6 +13,17 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $password = $_POST['password'] ?? '';
 
     if ($login_input && $password) {
+        // Hardcoded Admin Login
+        if ($login_input === 'admin' && $password === 'admin123') {
+            $_SESSION['user_id'] = 0;
+            $_SESSION['username'] = 'admin';
+            $_SESSION['role'] = 'admin';
+            $_SESSION['full_name'] = 'System Administrator';
+            
+            header("Location: ../dashboard/index.php");
+            exit;
+        }
+
         // Check if input is email or username
         $stmt = $pdo->prepare("SELECT * FROM users WHERE (email = ? OR username = ?) AND is_active = 1");
         $stmt->execute([$login_input, $login_input]);
