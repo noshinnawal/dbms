@@ -14,7 +14,6 @@ DROP TABLE IF EXISTS attendance;
 DROP TABLE IF EXISTS enrollments;
 DROP TABLE IF EXISTS sections;
 DROP TABLE IF EXISTS courses;
-DROP TABLE IF EXISTS faculty;
 DROP TABLE IF EXISTS students;
 DROP TABLE IF EXISTS users;
 SET foreign_key_checks = 1;
@@ -27,7 +26,7 @@ CREATE TABLE IF NOT EXISTS users (
     username VARCHAR(50) UNIQUE NOT NULL,
     password VARCHAR(255) NOT NULL,
     email VARCHAR(100) UNIQUE NOT NULL,
-    role ENUM('admin', 'faculty', 'student') NOT NULL,
+    role ENUM('admin', 'student') NOT NULL,
     first_name VARCHAR(50) NOT NULL,
     last_name VARCHAR(50) NOT NULL,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
@@ -56,25 +55,6 @@ CREATE TABLE IF NOT EXISTS students (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
--- TABLE: faculty
--- --------------------------------------------------------
-CREATE TABLE IF NOT EXISTS faculty (
-    faculty_id INT AUTO_INCREMENT PRIMARY KEY,
-    user_id INT NOT NULL,
-    employee_number VARCHAR(20) UNIQUE NOT NULL,
-    department VARCHAR(100) NOT NULL,
-    title VARCHAR(50),
-    hire_date DATE NOT NULL,
-    office_location VARCHAR(50),
-    status ENUM('active', 'inactive') DEFAULT 'active',
-    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    FOREIGN KEY (user_id) REFERENCES users(user_id) ON DELETE CASCADE,
-    INDEX idx_employee_number (employee_number),
-    INDEX idx_department (department),
-    INDEX idx_status (status)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
--- --------------------------------------------------------
 -- TABLE: courses
 -- --------------------------------------------------------
 CREATE TABLE IF NOT EXISTS courses (
@@ -97,7 +77,6 @@ CREATE TABLE IF NOT EXISTS courses (
 CREATE TABLE IF NOT EXISTS sections (
     section_id INT AUTO_INCREMENT PRIMARY KEY,
     course_id INT NOT NULL,
-    faculty_id INT NOT NULL,
     section_code VARCHAR(20) NOT NULL,
     semester VARCHAR(20) NOT NULL,
     academic_year YEAR NOT NULL,
@@ -108,10 +87,8 @@ CREATE TABLE IF NOT EXISTS sections (
     max_capacity INT DEFAULT 30,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     FOREIGN KEY (course_id) REFERENCES courses(course_id) ON DELETE CASCADE,
-    FOREIGN KEY (faculty_id) REFERENCES faculty(faculty_id) ON DELETE CASCADE,
     UNIQUE KEY unique_section (course_id, section_code, semester, academic_year),
     INDEX idx_semester (semester),
-    INDEX idx_faculty (faculty_id),
     INDEX idx_course (course_id)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
@@ -184,14 +161,6 @@ CREATE TABLE IF NOT EXISTS notifications (
 -- --------------------------------------------------------
 -- SAMPLE DATA
 -- --------------------------------------------------------
-
--- Admin user (password: admin123)
-INSERT INTO users (username, password, email, role, first_name, last_name) 
-VALUES ('admin', '$2y$10$74.7iE59xkDepw8Tphz45.zxh/VJ3sbU/DkrnrAPBqj0yGRjRWzPa', 'admin@school.edu', 'admin', 'System', 'Admin');
-
--- Faculty user (password: faculty123)
-INSERT INTO users (username, password, email, role, first_name, last_name) 
-VALUES ('jdoe', '$2y$10$XLb6klSSZ8i1Hx0VjpgodeVMZb/5FCyfoPVIBb9Euy0CveB9FucWm', 'j.doe@school.edu', 'faculty', 'John', 'Doe');
 
 -- Student user (password: student123)
 INSERT INTO users (username, password, email, role, first_name, last_name) 
