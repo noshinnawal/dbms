@@ -28,10 +28,6 @@ $role = $_SESSION['role'] ?? 'student';
             <span class="material-symbols-outlined">group</span>
             <span class="font-medium">Students</span>
         </a>
-        <a href="../faculty/index.php" class="flex items-center gap-4 px-4 py-3 rounded-2xl transition-all text-on-surface-variant hover:text-primary">
-            <span class="material-symbols-outlined">person_pin</span>
-            <span class="font-medium">Faculty</span>
-        </a>
         <a href="../courses/index.php" class="flex items-center gap-4 px-4 py-3 rounded-2xl transition-all text-on-surface-variant hover:text-primary">
             <span class="material-symbols-outlined">menu_book</span>
             <span class="font-medium">Courses</span>
