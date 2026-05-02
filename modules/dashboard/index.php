@@ -9,14 +9,12 @@ require_once '../../includes/auth_check.php';
 // Fetch Statistics
 $stats = [
     'students' => 0,
-    'faculty' => 0,
     'courses' => 0,
     'attendance_today' => 0
 ];
 
 try {
     $stats['students'] = $pdo->query("SELECT COUNT(*) FROM students WHERE status = 'active'")->fetchColumn();
-    $stats['faculty'] = $pdo->query("SELECT COUNT(*) FROM faculty WHERE status = 'active'")->fetchColumn();
     $stats['courses'] = $pdo->query("SELECT COUNT(*) FROM courses WHERE is_active = 1")->fetchColumn();
     $stats['attendance_today'] = $pdo->query("SELECT COUNT(*) FROM attendance WHERE attendance_date = CURDATE() AND status = 'present'")->fetchColumn();
 } catch (PDOException $e) {
@@ -46,7 +44,7 @@ require_once '../../includes/navbar.php';
     </header>
 
     <!-- Stats Grid -->
-    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-10">
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-10">
         <!-- Stat Card: Students -->
         <div class="bg-surface-container rounded-[32px] p-8 shadow-[12px_12px_24px_#dbe4eb,-12px_-12px_24px_#ffffff]">
             <div class="w-12 h-12 rounded-2xl bg-primary-container flex items-center justify-center text-primary mb-6">
@@ -54,15 +52,6 @@ require_once '../../includes/navbar.php';
             </div>
             <h3 class="text-on-surface-variant text-sm font-medium mb-1">Total Students</h3>
             <div class="text-3xl font-bold text-on-surface"><?php echo number_format($stats['students']); ?></div>
-        </div>
-
-        <!-- Stat Card: Faculty -->
-        <div class="bg-surface-container rounded-[32px] p-8 shadow-[12px_12px_24px_#dbe4eb,-12px_-12px_24px_#ffffff]">
-            <div class="w-12 h-12 rounded-2xl bg-secondary-container flex items-center justify-center text-secondary mb-6">
-                <span class="material-symbols-outlined">person_pin</span>
-            </div>
-            <h3 class="text-on-surface-variant text-sm font-medium mb-1">Total Faculty</h3>
-            <div class="text-3xl font-bold text-on-surface"><?php echo number_format($stats['faculty']); ?></div>
         </div>
 
         <!-- Stat Card: Courses -->
