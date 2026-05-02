@@ -22,7 +22,7 @@ require_once '../../includes/header.php';
     <div class="flex flex-col md:flex-row gap-12 w-full max-w-4xl justify-center items-stretch">
         
         <!-- Student Portal Card -->
-        <a href="login.php" class="group flex-1" aria-label="Access Student Portal">
+        <a href="login_student.php" class="group flex-1" aria-label="Access Student Portal">
             <section class="h-full bg-surface-container rounded-[40px] p-10 md:p-12 shadow-[16px_16px_32px_#dbe4eb,-16px_-16px_32px_#ffffff] hover:scale-[1.02] transition-all duration-300 flex flex-col items-center text-center">
                 <div class="w-24 h-24 rounded-full bg-surface-container flex items-center justify-center mb-8 shadow-[8px_8px_16px_#dbe4eb,-8px_-8px_16px_#ffffff] group-hover:shadow-[inset_6px_6px_12px_#dbe4eb,inset_-6px_-6px_12px_#ffffff] transition-shadow duration-300">
                     <span class="material-symbols-outlined text-primary text-5xl" style="font-variation-settings: 'FILL' 1;" aria-hidden="true">person</span>
@@ -37,7 +37,7 @@ require_once '../../includes/header.php';
         </a>
 
         <!-- Admin Portal Card -->
-        <a href="login.php" class="group flex-1" aria-label="Access Admin Portal">
+        <a href="login_admin.php" class="group flex-1" aria-label="Access Admin Portal">
             <section class="h-full bg-surface-container rounded-[40px] p-10 md:p-12 shadow-[16px_16px_32px_#dbe4eb,-16px_-16px_32px_#ffffff] hover:scale-[1.02] transition-all duration-300 flex flex-col items-center text-center">
                 <div class="w-24 h-24 rounded-full bg-surface-container flex items-center justify-center mb-8 shadow-[8px_8px_16px_#dbe4eb,-8px_-8px_16px_#ffffff] group-hover:shadow-[inset_6px_6px_12px_#dbe4eb,inset_-6px_-6px_12px_#ffffff] transition-shadow duration-300">
                     <span class="material-symbols-outlined text-primary text-5xl" style="font-variation-settings: 'FILL' 1;" aria-hidden="true">admin_panel_settings</span>
