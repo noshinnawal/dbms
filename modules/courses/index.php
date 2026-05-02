@@ -5,7 +5,7 @@
 require_once '../../config/database.php';
 require_once '../../includes/auth_check.php';
 
-checkRole(['admin', 'faculty']);
+checkRole(['admin']);
 
 $search = $_GET['search'] ?? '';
 

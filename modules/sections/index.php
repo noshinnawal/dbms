@@ -5,17 +5,15 @@
 require_once '../../config/database.php';
 require_once '../../includes/auth_check.php';
 
-checkRole(['admin', 'faculty']);
+checkRole(['admin']);
 
 $semester_filter = $_GET['semester'] ?? '';
 $year_filter = $_GET['year'] ?? '';
 
 try {
-    $query = "SELECT s.*, c.course_name, c.course_code, u.first_name, u.last_name 
+    $query = "SELECT s.*, c.course_name, c.course_code 
               FROM sections s
-              JOIN courses c ON s.course_id = c.course_id
-              JOIN faculty f ON s.faculty_id = f.faculty_id
-              JOIN users u ON f.user_id = u.user_id";
+              JOIN courses c ON s.course_id = c.course_id";
     
     $where_clauses = [];
     $params = [];
@@ -59,7 +57,7 @@ require_once '../../includes/navbar.php';
     <header class="flex justify-between items-center mb-10">
         <div>
             <h1 class="text-3xl font-bold text-on-surface">Manage Sections</h1>
-            <p class="text-on-surface-variant mt-1">Schedule courses, assign faculty, and manage rosters.</p>
+            <p class="text-on-surface-variant mt-1">Schedule courses and manage rosters.</p>
         </div>
         <?php if ($_SESSION['role'] === 'admin'): ?>
         <a href="create.php" class="flex items-center gap-2 bg-surface-container rounded-2xl px-6 py-3 font-bold text-primary shadow-[8px_8px_16px_#dbe4eb,-8px_-8px_16px_#ffffff] hover:shadow-[4px_4px_8px_#dbe4eb,-4px_-4px_8px_#ffffff] transition-all">
@@ -106,7 +104,6 @@ require_once '../../includes/navbar.php';
                 <tr class="border-b border-outline-variant">
                     <th class="px-8 py-6 text-sm font-bold text-on-surface-variant uppercase tracking-wider">Course</th>
                     <th class="px-8 py-6 text-sm font-bold text-on-surface-variant uppercase tracking-wider">Section</th>
-                    <th class="px-8 py-6 text-sm font-bold text-on-surface-variant uppercase tracking-wider">Faculty</th>
                     <th class="px-8 py-6 text-sm font-bold text-on-surface-variant uppercase tracking-wider">Schedule</th>
                     <th class="px-8 py-6 text-sm font-bold text-on-surface-variant uppercase tracking-wider">Room</th>
                     <th class="px-8 py-6 text-sm font-bold text-on-surface-variant uppercase tracking-wider text-right">Actions</th>
@@ -115,7 +112,7 @@ require_once '../../includes/navbar.php';
             <tbody class="divide-y divide-outline-variant/30">
                 <?php if (empty($sections)): ?>
                     <tr>
-                        <td colspan="6" class="px-8 py-12 text-center text-on-surface-variant italic">No sections scheduled for the selected filters.</td>
+                        <td colspan="5" class="px-8 py-12 text-center text-on-surface-variant italic">No sections scheduled for the selected filters.</td>
                     </tr>
                 <?php else: ?>
                     <?php foreach ($sections as $section): ?>
@@ -131,9 +128,6 @@ require_once '../../includes/navbar.php';
                                     <span class="text-on-surface font-medium"><?php echo htmlspecialchars($section['section_code']); ?></span>
                                     <span class="text-[10px] text-on-surface-variant uppercase font-bold"><?php echo htmlspecialchars($section['semester'] . ' ' . $section['academic_year']); ?></span>
                                 </div>
-                            </td>
-                            <td class="px-8 py-6 text-on-surface-variant font-medium">
-                                <?php echo htmlspecialchars($section['first_name'] . ' ' . $section['last_name']); ?>
                             </td>
                             <td class="px-8 py-6">
                                 <div class="flex flex-col">

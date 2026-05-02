@@ -1,13 +1,14 @@
 <?php
 /**
- * Enrollment Listing
+ * Enrollment Management
  */
 require_once '../../config/database.php';
 require_once '../../includes/auth_check.php';
 
-checkRole(['admin', 'faculty']);
+checkRole(['admin']);
 
 $search = $_GET['search'] ?? '';
+?>
 
 try {
     $query = "SELECT e.*, s.student_number, u_s.first_name as s_first, u_s.last_name as s_last, 

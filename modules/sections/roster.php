@@ -5,6 +5,8 @@
 require_once '../../config/database.php';
 require_once '../../includes/auth_check.php';
 
+checkRole(['admin']);
+
 $section_id = $_GET['id'] ?? null;
 
 if (!$section_id) {
@@ -14,28 +16,15 @@ if (!$section_id) {
 
 try {
     // Fetch section details
-    $stmt = $pdo->prepare("SELECT s.*, c.course_name, c.course_code, u.first_name as f_first, u.last_name as f_last 
+    $stmt = $pdo->prepare("SELECT s.*, c.course_name, c.course_code 
                            FROM sections s
                            JOIN courses c ON s.course_id = c.course_id
-                           JOIN faculty f ON s.faculty_id = f.faculty_id
-                           JOIN users u ON f.user_id = u.user_id
                            WHERE s.section_id = ?");
     $stmt->execute([$section_id]);
     $section = $stmt->fetch();
 
     if (!$section) {
         die("Section not found.");
-    }
-
-    // Security: Faculty can only see their own rosters
-    if ($_SESSION['role'] === 'faculty') {
-        $stmt_f = $pdo->prepare("SELECT faculty_id FROM faculty WHERE user_id = ?");
-        $stmt_f->execute([$_SESSION['user_id']]);
-        $f_id = $stmt_f->fetchColumn();
-        if ($section['faculty_id'] != $f_id) {
-            header("Location: index.php?error=unauthorized");
-            exit;
-        }
     }
 
     // Fetch roster
@@ -70,7 +59,6 @@ require_once '../../includes/navbar.php';
             </div>
             <h1 class="text-3xl font-bold text-on-surface"><?php echo htmlspecialchars($section['course_name']); ?></h1>
             <p class="text-on-surface-variant mt-1">
-                Instructor: <span class="font-bold"><?php echo htmlspecialchars($section['f_first'] . ' ' . $section['f_last']); ?></span> | 
                 Term: <span class="font-bold"><?php echo htmlspecialchars($section['semester'] . ' ' . $section['academic_year']); ?></span>
             </p>
         </div>
