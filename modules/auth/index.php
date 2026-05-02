@@ -56,10 +56,7 @@ require_once '../../includes/header.php';
     <!-- Additional Options -->
     <footer class="mt-20 text-center">
         <p class="text-on-surface-variant mb-4">New to the system?</p>
-        <a href="register_choice.php" class="inline-flex items-center gap-2 bg-surface-container px-8 py-4 rounded-2xl text-primary font-bold shadow-[8px_8px_16px_#dbe4eb,-8px_-8px_16px_#ffffff] hover:shadow-[4px_4px_8px_#dbe4eb,-4px_-4px_8px_#ffffff] active:shadow-[inset_4px_4px_8px_#dbe4eb,inset_-4px_-4px_8px_#ffffff] transition-all">
-            <span>Create Academic Account</span>
-            <span class="material-symbols-outlined text-xl">person_add</span>
-        </a>
+        <p class="text-lg text-primary font-bold italic">Contact Admin for account creation</p>
     </footer>
 </main>
 

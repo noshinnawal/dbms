@@ -108,17 +108,15 @@ require_once '../../includes/header.php';
                 <span class="material-symbols-outlined text-lg">login</span>
             </button>
 
-            <!-- Registration Link -->
-            <div class="w-full flex flex-col items-center gap-4 mt-6">
+            <!-- Contact Admin Message -->
+            <div class="w-full flex flex-col items-center gap-2 mt-6">
                 <p class="text-sm text-on-surface-variant">Don't have an account?</p>
-                <a href="register_student.php" class="w-full flex items-center justify-center py-3 border-2 border-primary/20 rounded-2xl text-primary text-sm font-bold hover:bg-primary/5 transition-all">
-                    Register as Student
-                </a>
+                <p class="text-sm text-primary font-bold italic">Contact Admin for account creation</p>
             </div>
 
             <!-- Back Link -->
             <div class="w-full flex items-center justify-center gap-2 mt-4">
-                <a href="login.php" class="text-sm text-on-surface-variant hover:text-primary transition-all flex items-center gap-1">
+                <a href="index.php" class="text-sm text-on-surface-variant hover:text-primary transition-all flex items-center gap-1">
                     <span class="material-symbols-outlined text-[16px]">arrow_back</span>
                     Back to Portal Selection
                 </a>

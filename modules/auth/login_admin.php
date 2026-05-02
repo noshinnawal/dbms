@@ -109,9 +109,9 @@ require_once '../../includes/header.php';
 
             <!-- Back Link -->
             <div class="w-full flex items-center justify-center gap-2 mt-4">
-                <a href="login.php" class="text-sm text-on-surface-variant hover:text-primary transition-all flex items-center gap-1">
+                <a href="index.php" class="text-sm text-on-surface-variant hover:text-primary transition-all flex items-center gap-1">
                     <span class="material-symbols-outlined text-[16px]">arrow_back</span>
-                    Standard Login
+                    Portal Selection
                 </a>
             </div>
         </form>
