@@ -19,6 +19,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $last_name = trim($_POST['last_name']);
     
     $student_number = trim($_POST['student_number']);
+    $login_id = trim($_POST['login_id'] ?? '');
     $dob = $_POST['dob'];
     $phone = trim($_POST['phone']);
     $address = trim($_POST['address']);
@@ -33,8 +34,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $user_id = $pdo->lastInsertId();
 
         // 2. Insert into students table
-        $stmt = $pdo->prepare("INSERT INTO students (user_id, student_number, date_of_birth, phone, address, enrollment_date) VALUES (?, ?, ?, ?, ?, ?)");
-        $stmt->execute([$user_id, $student_number, $dob, $phone, $address, $enrollment_date]);
+        $stmt = $pdo->prepare("INSERT INTO students (user_id, student_number, login_id, date_of_birth, phone, address, enrollment_date) VALUES (?, ?, ?, ?, ?, ?, ?)");
+        $stmt->execute([$user_id, $student_number, $login_id, $dob, $phone, $address, $enrollment_date]);
 
         $pdo->commit();
         $success = "Student created successfully!";
@@ -124,22 +125,27 @@ require_once '../../includes/navbar.php';
                                class="w-full bg-surface-container border-none rounded-2xl py-3 px-4 text-on-surface shadow-[inset_4px_4px_8px_#dbe4eb,inset_-4px_-4px_8px_#ffffff] outline-none focus:ring-1 focus:ring-primary/30">
                     </div>
                     <div>
-                        <label class="text-sm font-medium text-on-surface-variant block mb-2 ml-2" for="enrollment_date">Enrollment Date</label>
-                        <input type="date" id="enrollment_date" name="enrollment_date"
+                        <label class="text-sm font-medium text-on-surface-variant block mb-2 ml-2" for="login_id">Student Login ID</label>
+                        <input type="text" id="login_id" name="login_id" placeholder="e.g. jdoe2026"
                                class="w-full bg-surface-container border-none rounded-2xl py-3 px-4 text-on-surface shadow-[inset_4px_4px_8px_#dbe4eb,inset_-4px_-4px_8px_#ffffff] outline-none focus:ring-1 focus:ring-primary/30">
                     </div>
                 </div>
                 <div class="grid grid-cols-2 gap-4">
                     <div>
+                        <label class="text-sm font-medium text-on-surface-variant block mb-2 ml-2" for="enrollment_date">Enrollment Date</label>
+                        <input type="date" id="enrollment_date" name="enrollment_date"
+                               class="w-full bg-surface-container border-none rounded-2xl py-3 px-4 text-on-surface shadow-[inset_4px_4px_8px_#dbe4eb,inset_-4px_-4px_8px_#ffffff] outline-none focus:ring-1 focus:ring-primary/30">
+                    </div>
+                    <div>
                         <label class="text-sm font-medium text-on-surface-variant block mb-2 ml-2" for="dob">Date of Birth</label>
                         <input type="date" id="dob" name="dob"
                                class="w-full bg-surface-container border-none rounded-2xl py-3 px-4 text-on-surface shadow-[inset_4px_4px_8px_#dbe4eb,inset_-4px_-4px_8px_#ffffff] outline-none focus:ring-1 focus:ring-primary/30">
                     </div>
-                    <div>
-                        <label class="text-sm font-medium text-on-surface-variant block mb-2 ml-2" for="phone">Phone Number</label>
-                        <input type="text" id="phone" name="phone"
-                               class="w-full bg-surface-container border-none rounded-2xl py-3 px-4 text-on-surface shadow-[inset_4px_4px_8px_#dbe4eb,inset_-4px_-4px_8px_#ffffff] outline-none focus:ring-1 focus:ring-primary/30">
-                    </div>
+                </div>
+                <div>
+                    <label class="text-sm font-medium text-on-surface-variant block mb-2 ml-2" for="phone">Phone Number</label>
+                    <input type="text" id="phone" name="phone"
+                           class="w-full bg-surface-container border-none rounded-2xl py-3 px-4 text-on-surface shadow-[inset_4px_4px_8px_#dbe4eb,inset_-4px_-4px_8px_#ffffff] outline-none focus:ring-1 focus:ring-primary/30">
                 </div>
                 <div>
                     <label class="text-sm font-medium text-on-surface-variant block mb-2 ml-2" for="address">Mailing Address</label>

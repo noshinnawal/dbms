@@ -8,7 +8,7 @@ if (session_status() === PHP_SESSION_NONE) {
 }
 
 if (!isset($_SESSION['user_id'])) {
-    header("Location: ../../modules/auth/login.php");
+    header("Location: ../../modules/auth/index.php");
     exit;
 }
 
