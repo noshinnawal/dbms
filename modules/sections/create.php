@@ -10,21 +10,15 @@ checkRole(['admin']);
 $error = '';
 $success = '';
 
-// Fetch courses and faculty for selection
+// Fetch courses for selection
 try {
     $courses = $pdo->query("SELECT course_id, course_code, course_name FROM courses WHERE is_active = 1 ORDER BY course_code")->fetchAll();
-    $faculty = $pdo->query("SELECT f.faculty_id, u.first_name, u.last_name 
-                            FROM faculty f 
-                            JOIN users u ON f.user_id = u.user_id 
-                            WHERE f.status = 'active' 
-                            ORDER BY u.first_name")->fetchAll();
 } catch (PDOException $e) {
     die("Error fetching data: " . $e->getMessage());
 }
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $course_id = (int)$_POST['course_id'];
-    $faculty_id = (int)$_POST['faculty_id'];
     $section_code = trim($_POST['section_code']);
     $semester = $_POST['semester'];
     $academic_year = $_POST['academic_year'];
@@ -35,9 +29,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $capacity = (int)$_POST['max_capacity'];
 
     try {
-        $stmt = $pdo->prepare("INSERT INTO sections (course_id, faculty_id, section_code, semester, academic_year, schedule_day, schedule_time_start, schedule_time_end, room, max_capacity) 
-                               VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
-        $stmt->execute([$course_id, $faculty_id, $section_code, $semester, $academic_year, $schedule_day, $time_start, $time_end, $room, $capacity]);
+        $stmt = $pdo->prepare("INSERT INTO sections (course_id, section_code, semester, academic_year, schedule_day, schedule_time_start, schedule_time_end, room, max_capacity) 
+                               VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)");
+        $stmt->execute([$course_id, $section_code, $semester, $academic_year, $schedule_day, $time_start, $time_end, $room, $capacity]);
         $success = "Section scheduled successfully!";
     } catch (PDOException $e) {
         if ($e->getCode() == 23000) {
@@ -56,7 +50,7 @@ require_once '../../includes/navbar.php';
 <main class="p-8 flex-1">
     <header class="mb-10">
         <h1 class="text-3xl font-bold text-on-surface">Create New Section</h1>
-        <p class="text-on-surface-variant mt-1">Schedule a course offering and assign a faculty member.</p>
+        <p class="text-on-surface-variant mt-1">Schedule a course offering.</p>
     </header>
 
     <?php if ($error): ?>
@@ -139,17 +133,6 @@ require_once '../../includes/navbar.php';
                 Assignment & Details
             </h2>
             <div class="flex flex-col gap-6">
-                <div>
-                    <label class="text-sm font-medium text-on-surface-variant block mb-2 ml-2" for="faculty_id">Assigned Faculty</label>
-                    <select id="faculty_id" name="faculty_id" required
-                            class="w-full bg-surface-container border-none rounded-2xl py-3 px-4 text-on-surface shadow-[inset_4px_4px_8px_#dbe4eb,inset_-4px_-4px_8px_#ffffff] outline-none focus:ring-1 focus:ring-primary/30 appearance-none">
-                        <option value="">Select Instructor</option>
-                        <?php foreach ($faculty as $f): ?>
-                            <option value="<?php echo $f['faculty_id']; ?>"><?php echo htmlspecialchars($f['first_name'] . ' ' . $f['last_name']); ?></option>
-                        <?php endforeach; ?>
-                    </select>
-                </div>
-
                 <div class="grid grid-cols-2 gap-4">
                     <div>
                         <label class="text-sm font-medium text-on-surface-variant block mb-2 ml-2" for="section_code">Section Code</label>
