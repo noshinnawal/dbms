@@ -87,11 +87,11 @@ require_once '../../includes/navbar.php';
 
         <!-- Main Content: Details -->
         <div class="lg:col-span-2 space-y-8">
-            <!-- Information Grid -->
+            <!-- Core Profile Information -->
             <section class="bg-surface-container rounded-[32px] p-8 shadow-[12px_12px_24px_#dbe4eb,-12px_-12px_24px_#ffffff]">
                 <h3 class="text-xl font-bold text-on-surface mb-8 flex items-center gap-2">
                     <span class="material-symbols-outlined text-primary">badge</span>
-                    Detailed Information
+                    Academic & Personal
                 </h3>
                 
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-8">
@@ -111,9 +111,51 @@ require_once '../../includes/navbar.php';
                         <p class="text-xs font-bold text-on-surface-variant uppercase tracking-wider mb-1">System Username</p>
                         <p class="text-on-surface font-medium"><?php echo htmlspecialchars($student['username']); ?></p>
                     </div>
-                    <div class="md:col-span-2">
-                        <p class="text-xs font-bold text-on-surface-variant uppercase tracking-wider mb-1">Mailing Address</p>
-                        <p class="text-on-surface font-medium"><?php echo nl2br(htmlspecialchars($student['address'] ?: 'No address provided')); ?></p>
+                </div>
+            </section>
+
+            <!-- Parental Information -->
+            <section class="bg-surface-container rounded-[32px] p-8 shadow-[12px_12px_24px_#dbe4eb,-12px_-12px_24px_#ffffff]">
+                <h3 class="text-xl font-bold text-on-surface mb-8 flex items-center gap-2">
+                    <span class="material-symbols-outlined text-primary">family_restroom</span>
+                    Parental Information
+                </h3>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-8">
+                    <div>
+                        <p class="text-xs font-bold text-on-surface-variant uppercase tracking-wider mb-1">Father's Name</p>
+                        <p class="text-on-surface font-medium"><?php echo htmlspecialchars($student['father_name'] ?: 'Not provided'); ?></p>
+                    </div>
+                    <div>
+                        <p class="text-xs font-bold text-on-surface-variant uppercase tracking-wider mb-1">Father's Occupation</p>
+                        <p class="text-on-surface font-medium"><?php echo htmlspecialchars($student['father_occupation'] ?: 'Not provided'); ?></p>
+                    </div>
+                    <div>
+                        <p class="text-xs font-bold text-on-surface-variant uppercase tracking-wider mb-1">Mother's Name</p>
+                        <p class="text-on-surface font-medium"><?php echo htmlspecialchars($student['mother_name'] ?: 'Not provided'); ?></p>
+                    </div>
+                    <div>
+                        <p class="text-xs font-bold text-on-surface-variant uppercase tracking-wider mb-1">Mother's Occupation</p>
+                        <p class="text-on-surface font-medium"><?php echo htmlspecialchars($student['mother_occupation'] ?: 'Not provided'); ?></p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Residential Details -->
+            <section class="bg-surface-container rounded-[32px] p-8 shadow-[12px_12px_24px_#dbe4eb,-12px_-12px_24px_#ffffff]">
+                <h3 class="text-xl font-bold text-on-surface mb-8 flex items-center gap-2">
+                    <span class="material-symbols-outlined text-primary">home_pin</span>
+                    Residential Details
+                </h3>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-8">
+                    <div>
+                        <p class="text-xs font-bold text-on-surface-variant uppercase tracking-wider mb-1">Present Address</p>
+                        <p class="text-on-surface font-medium"><?php echo nl2br(htmlspecialchars($student['present_address'] ?: 'No address provided')); ?></p>
+                    </div>
+                    <div>
+                        <p class="text-xs font-bold text-on-surface-variant uppercase tracking-wider mb-1">Permanent Address</p>
+                        <p class="text-on-surface font-medium"><?php echo nl2br(htmlspecialchars($student['permanent_address'] ?: 'No address provided')); ?></p>
                     </div>
                 </div>
             </section>

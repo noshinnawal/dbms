@@ -43,7 +43,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $login_id = trim($_POST['login_id'] ?? '');
     $dob = $_POST['dob'];
     $phone = trim($_POST['phone']);
-    $address = trim($_POST['address']);
+    $present_address = trim($_POST['present_address']);
+    $permanent_address = trim($_POST['permanent_address']);
+    $father_name = trim($_POST['father_name']);
+    $mother_name = trim($_POST['mother_name']);
+    $father_occupation = trim($_POST['father_occupation']);
+    $mother_occupation = trim($_POST['mother_occupation']);
     $status = $_POST['status'];
     $enrollment_date = $_POST['enrollment_date'];
     $new_password = trim($_POST['new_password'] ?? '');
@@ -63,8 +68,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         }
 
         // 2. Update students table
-        $stmt = $pdo->prepare("UPDATE students SET student_number = ?, login_id = ?, date_of_birth = ?, phone = ?, address = ?, status = ?, enrollment_date = ? WHERE student_id = ?");
-        $stmt->execute([$student_number, $login_id, $dob, $phone, $address, $status, $enrollment_date, $student_id]);
+        $stmt = $pdo->prepare("UPDATE students SET student_number = ?, login_id = ?, father_name = ?, mother_name = ?, father_occupation = ?, mother_occupation = ?, date_of_birth = ?, phone = ?, present_address = ?, permanent_address = ?, status = ?, enrollment_date = ? WHERE student_id = ?");
+        $stmt->execute([$student_number, $login_id, $father_name, $mother_name, $father_occupation, $mother_occupation, $dob, $phone, $present_address, $permanent_address, $status, $enrollment_date, $student_id]);
 
         $pdo->commit();
         $success = "Student updated successfully!";
@@ -75,9 +80,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $student['last_name'] = $last_name;
         $student['student_number'] = $student_number;
         $student['login_id'] = $login_id;
+        $student['father_name'] = $father_name;
+        $student['mother_name'] = $mother_name;
+        $student['father_occupation'] = $father_occupation;
+        $student['mother_occupation'] = $mother_occupation;
         $student['date_of_birth'] = $dob;
         $student['phone'] = $phone;
-        $student['address'] = $address;
+        $student['present_address'] = $present_address;
+        $student['permanent_address'] = $permanent_address;
         $student['status'] = $status;
         $student['enrollment_date'] = $enrollment_date;
 
@@ -204,10 +214,59 @@ require_once '../../includes/navbar.php';
                     <input type="text" id="phone" name="phone" value="<?php echo htmlspecialchars($student['phone']); ?>"
                            class="w-full bg-surface-container border-none rounded-2xl py-3 px-4 text-on-surface shadow-[inset_4px_4px_8px_#dbe4eb,inset_-4px_-4px_8px_#ffffff] outline-none focus:ring-1 focus:ring-primary/30">
                 </div>
+            </div>
+        </section>
+
+        <!-- Parental Information -->
+        <section class="bg-surface-container rounded-[32px] p-8 shadow-[12px_12px_24px_#dbe4eb,-12px_-12px_24px_#ffffff]">
+            <h2 class="text-xl font-bold text-on-surface mb-6 flex items-center gap-2">
+                <span class="material-symbols-outlined text-primary">family_restroom</span>
+                Parental Information
+            </h2>
+            <div class="flex flex-col gap-6">
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <label class="text-sm font-medium text-on-surface-variant block mb-2 ml-2" for="father_name">Father's Name</label>
+                        <input type="text" id="father_name" name="father_name" value="<?php echo htmlspecialchars($student['father_name'] ?? ''); ?>"
+                               class="w-full bg-surface-container border-none rounded-2xl py-3 px-4 text-on-surface shadow-[inset_4px_4px_8px_#dbe4eb,inset_-4px_-4px_8px_#ffffff] outline-none focus:ring-1 focus:ring-primary/30">
+                    </div>
+                    <div>
+                        <label class="text-sm font-medium text-on-surface-variant block mb-2 ml-2" for="father_occupation">Father's Occupation</label>
+                        <input type="text" id="father_occupation" name="father_occupation" value="<?php echo htmlspecialchars($student['father_occupation'] ?? ''); ?>"
+                               class="w-full bg-surface-container border-none rounded-2xl py-3 px-4 text-on-surface shadow-[inset_4px_4px_8px_#dbe4eb,inset_-4px_-4px_8px_#ffffff] outline-none focus:ring-1 focus:ring-primary/30">
+                    </div>
+                </div>
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <label class="text-sm font-medium text-on-surface-variant block mb-2 ml-2" for="mother_name">Mother's Name</label>
+                        <input type="text" id="mother_name" name="mother_name" value="<?php echo htmlspecialchars($student['mother_name'] ?? ''); ?>"
+                               class="w-full bg-surface-container border-none rounded-2xl py-3 px-4 text-on-surface shadow-[inset_4px_4px_8px_#dbe4eb,inset_-4px_-4px_8px_#ffffff] outline-none focus:ring-1 focus:ring-primary/30">
+                    </div>
+                    <div>
+                        <label class="text-sm font-medium text-on-surface-variant block mb-2 ml-2" for="mother_occupation">Mother's Occupation</label>
+                        <input type="text" id="mother_occupation" name="mother_occupation" value="<?php echo htmlspecialchars($student['mother_occupation'] ?? ''); ?>"
+                               class="w-full bg-surface-container border-none rounded-2xl py-3 px-4 text-on-surface shadow-[inset_4px_4px_8px_#dbe4eb,inset_-4px_-4px_8px_#ffffff] outline-none focus:ring-1 focus:ring-primary/30">
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Residential Details -->
+        <section class="lg:col-span-2 bg-surface-container rounded-[32px] p-8 shadow-[12px_12px_24px_#dbe4eb,-12px_-12px_24px_#ffffff]">
+            <h2 class="text-xl font-bold text-on-surface mb-6 flex items-center gap-2">
+                <span class="material-symbols-outlined text-primary">home_pin</span>
+                Residential Details
+            </h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
                 <div>
-                    <label class="text-sm font-medium text-on-surface-variant block mb-2 ml-2" for="address">Mailing Address</label>
-                    <textarea id="address" name="address" rows="3"
-                              class="w-full bg-surface-container border-none rounded-2xl py-3 px-4 text-on-surface shadow-[inset_4px_4px_8px_#dbe4eb,inset_-4px_-4px_8px_#ffffff] outline-none focus:ring-1 focus:ring-primary/30 resize-none"><?php echo htmlspecialchars($student['address']); ?></textarea>
+                    <label class="text-sm font-medium text-on-surface-variant block mb-2 ml-2" for="present_address">Present Address</label>
+                    <textarea id="present_address" name="present_address" rows="3"
+                              class="w-full bg-surface-container border-none rounded-2xl py-3 px-4 text-on-surface shadow-[inset_4px_4px_8px_#dbe4eb,inset_-4px_-4px_8px_#ffffff] outline-none focus:ring-1 focus:ring-primary/30 resize-none"><?php echo htmlspecialchars($student['present_address'] ?? ''); ?></textarea>
+                </div>
+                <div>
+                    <label class="text-sm font-medium text-on-surface-variant block mb-2 ml-2" for="permanent_address">Permanent Address</label>
+                    <textarea id="permanent_address" name="permanent_address" rows="3"
+                              class="w-full bg-surface-container border-none rounded-2xl py-3 px-4 text-on-surface shadow-[inset_4px_4px_8px_#dbe4eb,inset_-4px_-4px_8px_#ffffff] outline-none focus:ring-1 focus:ring-primary/30 resize-none"><?php echo htmlspecialchars($student['permanent_address'] ?? ''); ?></textarea>
                 </div>
             </div>
         </section>

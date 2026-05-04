@@ -25,7 +25,9 @@ if (isset($_SESSION['role']) && $_SESSION['role'] === 'student') {
     try {
         $stmt = $pdo->prepare("
             SELECT u.username, u.email, u.first_name, u.last_name, 
-                   s.student_number, s.login_id, s.date_of_birth, s.phone, s.address, s.enrollment_date, s.status
+                   s.student_number, s.login_id, s.date_of_birth, s.phone, s.present_address, s.permanent_address, 
+                   s.father_name, s.mother_name, s.father_occupation, s.mother_occupation,
+                   s.enrollment_date, s.status
             FROM users u 
             JOIN students s ON u.user_id = s.user_id 
             WHERE u.user_id = ?
@@ -119,50 +121,82 @@ require_once '../../includes/navbar.php';
             </div>
 
             <!-- Details Grid -->
-            <div class="lg:col-span-2 grid grid-cols-1 md:grid-cols-2 gap-6">
-                <!-- Account Info -->
-                <div class="bg-surface-container rounded-[32px] p-8 shadow-[12px_12px_24px_#dbe4eb,-12px_-12px_24px_#ffffff]">
-                    <h3 class="text-lg font-bold text-on-surface mb-6 flex items-center gap-2">
-                        <span class="material-symbols-outlined text-primary">account_circle</span>
-                        Account Details
-                    </h3>
-                    <div class="space-y-4">
-                        <div>
-                            <p class="text-xs font-bold text-on-surface-variant uppercase mb-1 ml-1">Username</p>
-                            <p class="p-3 rounded-xl bg-surface-container shadow-[inset_4px_4px_8px_#dbe4eb,inset_-4px_-4px_8px_#ffffff] text-on-surface font-medium"><?php echo htmlspecialchars($studentInfo['username']); ?></p>
-                        </div>
-                        <div>
-                            <p class="text-xs font-bold text-on-surface-variant uppercase mb-1 ml-1">Email</p>
-                            <p class="p-3 rounded-xl bg-surface-container shadow-[inset_4px_4px_8px_#dbe4eb,inset_-4px_-4px_8px_#ffffff] text-on-surface font-medium"><?php echo htmlspecialchars($studentInfo['email']); ?></p>
-                        </div>
-                        <div>
-                            <p class="text-xs font-bold text-on-surface-variant uppercase mb-1 ml-1">Login ID</p>
-                            <p class="p-3 rounded-xl bg-surface-container shadow-[inset_4px_4px_8px_#dbe4eb,inset_-4px_-4px_8px_#ffffff] text-on-surface font-medium"><?php echo htmlspecialchars($studentInfo['login_id'] ?: 'N/A'); ?></p>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Personal Info -->
-                <div class="bg-surface-container rounded-[32px] p-8 shadow-[12px_12px_24px_#dbe4eb,-12px_-12px_24px_#ffffff]">
-                    <h3 class="text-lg font-bold text-on-surface mb-6 flex items-center gap-2">
-                        <span class="material-symbols-outlined text-primary">contact_page</span>
-                        Personal Information
-                    </h3>
-                    <div class="space-y-4">
-                        <div class="grid grid-cols-2 gap-4">
+            <div class="lg:col-span-2 space-y-8">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    <!-- Account Info -->
+                    <div class="bg-surface-container rounded-[32px] p-8 shadow-[12px_12px_24px_#dbe4eb,-12px_-12px_24px_#ffffff]">
+                        <h3 class="text-lg font-bold text-on-surface mb-6 flex items-center gap-2">
+                            <span class="material-symbols-outlined text-primary">account_circle</span>
+                            Account & Identity
+                        </h3>
+                        <div class="space-y-4">
                             <div>
-                                <p class="text-xs font-bold text-on-surface-variant uppercase mb-1 ml-1">Date of Birth</p>
-                                <p class="p-3 rounded-xl bg-surface-container shadow-[inset_4px_4px_8px_#dbe4eb,inset_-4px_-4px_8px_#ffffff] text-on-surface font-medium"><?php echo $studentInfo['date_of_birth'] ? date('M d, Y', strtotime($studentInfo['date_of_birth'])) : 'N/A'; ?></p>
+                                <p class="text-xs font-bold text-on-surface-variant uppercase mb-1 ml-1">Email</p>
+                                <p class="p-3 rounded-xl bg-surface-container shadow-[inset_4px_4px_8px_#dbe4eb,inset_-4px_-4px_8px_#ffffff] text-on-surface font-medium truncate"><?php echo htmlspecialchars($studentInfo['email']); ?></p>
+                            </div>
+                            <div class="grid grid-cols-2 gap-3">
+                                <div>
+                                    <p class="text-xs font-bold text-on-surface-variant uppercase mb-1 ml-1">Username</p>
+                                    <p class="p-3 rounded-xl bg-surface-container shadow-[inset_4px_4px_8px_#dbe4eb,inset_-4px_-4px_8px_#ffffff] text-on-surface font-medium"><?php echo htmlspecialchars($studentInfo['username']); ?></p>
+                                </div>
+                                <div>
+                                    <p class="text-xs font-bold text-on-surface-variant uppercase mb-1 ml-1">Date of Birth</p>
+                                    <p class="p-3 rounded-xl bg-surface-container shadow-[inset_4px_4px_8px_#dbe4eb,inset_-4px_-4px_8px_#ffffff] text-on-surface font-medium"><?php echo $studentInfo['date_of_birth'] ? date('M d, Y', strtotime($studentInfo['date_of_birth'])) : 'N/A'; ?></p>
+                                </div>
                             </div>
                             <div>
                                 <p class="text-xs font-bold text-on-surface-variant uppercase mb-1 ml-1">Phone</p>
                                 <p class="p-3 rounded-xl bg-surface-container shadow-[inset_4px_4px_8px_#dbe4eb,inset_-4px_-4px_8px_#ffffff] text-on-surface font-medium"><?php echo htmlspecialchars($studentInfo['phone'] ?: 'N/A'); ?></p>
                             </div>
                         </div>
+                    </div>
+
+                    <!-- Parental Info -->
+                    <div class="bg-surface-container rounded-[32px] p-8 shadow-[12px_12px_24px_#dbe4eb,-12px_-12px_24px_#ffffff]">
+                        <h3 class="text-lg font-bold text-on-surface mb-6 flex items-center gap-2">
+                            <span class="material-symbols-outlined text-primary">family_restroom</span>
+                            Parental Information
+                        </h3>
+                        <div class="space-y-4">
+                            <div>
+                                <p class="text-xs font-bold text-on-surface-variant uppercase mb-1 ml-1">Father's Name</p>
+                                <p class="p-3 rounded-xl bg-surface-container shadow-[inset_4px_4px_8px_#dbe4eb,inset_-4px_-4px_8px_#ffffff] text-on-surface font-medium"><?php echo htmlspecialchars($studentInfo['father_name'] ?: 'N/A'); ?></p>
+                            </div>
+                            <div>
+                                <p class="text-xs font-bold text-on-surface-variant uppercase mb-1 ml-1">Mother's Name</p>
+                                <p class="p-3 rounded-xl bg-surface-container shadow-[inset_4px_4px_8px_#dbe4eb,inset_-4px_-4px_8px_#ffffff] text-on-surface font-medium"><?php echo htmlspecialchars($studentInfo['mother_name'] ?: 'N/A'); ?></p>
+                            </div>
+                            <div class="grid grid-cols-2 gap-3">
+                                <div>
+                                    <p class="text-xs font-bold text-on-surface-variant uppercase mb-1 ml-1">Father's Occ.</p>
+                                    <p class="p-3 rounded-xl bg-surface-container shadow-[inset_4px_4px_8px_#dbe4eb,inset_-4px_-4px_8px_#ffffff] text-on-surface font-medium truncate"><?php echo htmlspecialchars($studentInfo['father_occupation'] ?: 'N/A'); ?></p>
+                                </div>
+                                <div>
+                                    <p class="text-xs font-bold text-on-surface-variant uppercase mb-1 ml-1">Mother's Occ.</p>
+                                    <p class="p-3 rounded-xl bg-surface-container shadow-[inset_4px_4px_8px_#dbe4eb,inset_-4px_-4px_8px_#ffffff] text-on-surface font-medium truncate"><?php echo htmlspecialchars($studentInfo['mother_occupation'] ?: 'N/A'); ?></p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Residential Details -->
+                <div class="bg-surface-container rounded-[32px] p-8 shadow-[12px_12px_24px_#dbe4eb,-12px_-12px_24px_#ffffff]">
+                    <h3 class="text-lg font-bold text-on-surface mb-6 flex items-center gap-2">
+                        <span class="material-symbols-outlined text-primary">home_pin</span>
+                        Residential Details
+                    </h3>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                         <div>
-                            <p class="text-xs font-bold text-on-surface-variant uppercase mb-1 ml-1">Address</p>
-                            <div class="p-3 rounded-xl bg-surface-container shadow-[inset_4px_4px_8px_#dbe4eb,inset_-4px_-4px_8px_#ffffff] text-on-surface font-medium min-h-[80px]">
-                                <?php echo nl2br(htmlspecialchars($studentInfo['address'] ?: 'No address provided.')); ?>
+                            <p class="text-xs font-bold text-on-surface-variant uppercase mb-1 ml-1">Present Address</p>
+                            <div class="p-4 rounded-xl bg-surface-container shadow-[inset_4px_4px_8px_#dbe4eb,inset_-4px_-4px_8px_#ffffff] text-on-surface font-medium min-h-[100px]">
+                                <?php echo nl2br(htmlspecialchars($studentInfo['present_address'] ?: 'No address provided.')); ?>
+                            </div>
+                        </div>
+                        <div>
+                            <p class="text-xs font-bold text-on-surface-variant uppercase mb-1 ml-1">Permanent Address</p>
+                            <div class="p-4 rounded-xl bg-surface-container shadow-[inset_4px_4px_8px_#dbe4eb,inset_-4px_-4px_8px_#ffffff] text-on-surface font-medium min-h-[100px]">
+                                <?php echo nl2br(htmlspecialchars($studentInfo['permanent_address'] ?: 'No address provided.')); ?>
                             </div>
                         </div>
                     </div>
