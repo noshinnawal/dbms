@@ -69,14 +69,23 @@ require_once '../../includes/navbar.php';
                         <div class="bg-tertiary-fixed text-tertiary px-3 py-1 rounded-lg text-xs font-bold uppercase tracking-wider">
                             <?php echo htmlspecialchars($course['course_code']); ?>
                         </div>
-                        <?php if ($_SESSION['role'] === 'admin'): ?>
-                        <a href="edit.php?id=<?php echo $course['course_id']; ?>" class="text-on-surface-variant hover:text-primary transition-colors">
-                            <span class="material-symbols-outlined text-xl">edit_note</span>
-                        </a>
-                        <?php endif; ?>
+                        <div class="flex gap-2">
+                            <a href="view.php?id=<?php echo $course['course_id']; ?>" class="text-on-surface-variant hover:text-primary transition-colors" title="View Details">
+                                <span class="material-symbols-outlined text-xl">visibility</span>
+                            </a>
+                            <?php if ($_SESSION['role'] === 'admin'): ?>
+                            <a href="edit.php?id=<?php echo $course['course_id']; ?>" class="text-on-surface-variant hover:text-primary transition-colors" title="Edit Course">
+                                <span class="material-symbols-outlined text-xl">edit_note</span>
+                            </a>
+                            <?php endif; ?>
+                        </div>
                     </div>
                     
-                    <h3 class="text-xl font-bold text-on-surface mb-2 line-clamp-1"><?php echo htmlspecialchars($course['course_name']); ?></h3>
+                    <h3 class="text-xl font-bold text-on-surface mb-2 line-clamp-1">
+                        <a href="view.php?id=<?php echo $course['course_id']; ?>" class="hover:text-primary transition-colors">
+                            <?php echo htmlspecialchars($course['course_name']); ?>
+                        </a>
+                    </h3>
                     <p class="text-on-surface-variant text-sm mb-6 line-clamp-2"><?php echo htmlspecialchars($course['description'] ?: 'No description available.'); ?></p>
                     
                     <div class="mt-auto flex items-center justify-between pt-6 border-t border-outline-variant/30">

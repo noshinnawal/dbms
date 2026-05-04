@@ -1,21 +1,40 @@
 <?php
 /**
- * Create Section
+ * Edit Section
  */
 require_once '../../config/database.php';
 require_once '../../includes/auth_check.php';
 
 checkRole(['admin']);
 
+$section_id = $_GET['id'] ?? null;
+if (!$section_id) {
+    header("Location: index.php");
+    exit;
+}
+
 $error = '';
 $success = '';
-$preselected_course_id = $_GET['course_id'] ?? null;
 
-// Fetch courses for selection
+// Fetch current section data and course info
 try {
+    $stmt = $pdo->prepare("SELECT s.*, c.course_code, c.course_name 
+                           FROM sections s 
+                           JOIN courses c ON s.course_id = c.course_id 
+                           WHERE s.section_id = ?");
+    $stmt->execute([$section_id]);
+    $section = $stmt->fetch();
+
+    if (!$section) {
+        header("Location: index.php");
+        exit;
+    }
+    
+    // Fetch all courses for the dropdown (in case they want to move the section, though rare)
     $courses = $pdo->query("SELECT course_id, course_code, course_name FROM courses WHERE is_active = 1 ORDER BY course_code")->fetchAll();
+
 } catch (PDOException $e) {
-    die("Error fetching data: " . $e->getMessage());
+    die("Database error: " . $e->getMessage());
 }
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
@@ -30,10 +49,23 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $capacity = (int)$_POST['max_capacity'];
 
     try {
-        $stmt = $pdo->prepare("INSERT INTO sections (course_id, section_code, semester, academic_year, schedule_day, schedule_time_start, schedule_time_end, room, max_capacity) 
-                               VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)");
-        $stmt->execute([$course_id, $section_code, $semester, $academic_year, $schedule_day, $time_start, $time_end, $room, $capacity]);
-        $success = "Section scheduled successfully!";
+        $stmt = $pdo->prepare("UPDATE sections SET 
+                                course_id = ?, 
+                                section_code = ?, 
+                                semester = ?, 
+                                academic_year = ?, 
+                                schedule_day = ?, 
+                                schedule_time_start = ?, 
+                                schedule_time_end = ?, 
+                                room = ?, 
+                                max_capacity = ? 
+                                WHERE section_id = ?");
+        $stmt->execute([$course_id, $section_code, $semester, $academic_year, $schedule_day, $time_start, $time_end, $room, $capacity, $section_id]);
+        
+        $success = "Section updated successfully!";
+        
+        // Redirect back to course detail view after a short delay or immediately
+        header("Refresh: 2; URL=../courses/view.php?id=" . $course_id);
     } catch (PDOException $e) {
         if ($e->getCode() == 23000) {
             $error = "Error: This course already has a section with code '$section_code' for the selected semester/year.";
@@ -43,15 +75,21 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 }
 
-$pageTitle = "Create Section";
+$pageTitle = "Edit Section: " . $section['section_code'];
 require_once '../../includes/header.php';
 require_once '../../includes/navbar.php';
 ?>
 
 <main class="p-8 flex-1">
-    <header class="mb-10">
-        <h1 class="text-3xl font-bold text-on-surface">Create New Section</h1>
-        <p class="text-on-surface-variant mt-1">Schedule a course offering.</p>
+    <header class="mb-10 flex items-center justify-between">
+        <div>
+            <h1 class="text-3xl font-bold text-on-surface">Edit Section</h1>
+            <p class="text-on-surface-variant mt-1">Modify scheduling for <span class="text-primary font-bold"><?php echo htmlspecialchars($section['course_code']); ?></span></p>
+        </div>
+        <a href="../courses/view.php?id=<?php echo $section['course_id']; ?>" class="flex items-center gap-2 text-on-surface-variant hover:text-primary transition-colors">
+            <span class="material-symbols-outlined">arrow_back</span>
+            Back to Course
+        </a>
     </header>
 
     <?php if ($error): ?>
@@ -62,11 +100,11 @@ require_once '../../includes/navbar.php';
 
     <?php if ($success): ?>
         <div class="mb-8 p-4 bg-primary-container text-primary rounded-2xl text-sm font-medium">
-            <?php echo htmlspecialchars($success); ?>
+            <?php echo htmlspecialchars($success); ?>. Redirecting...
         </div>
     <?php endif; ?>
 
-    <form action="create.php" method="POST" class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+    <form action="edit.php?id=<?php echo $section_id; ?>" method="POST" class="grid grid-cols-1 lg:grid-cols-2 gap-8">
         <!-- Core Scheduling -->
         <section class="bg-surface-container rounded-[32px] p-8 shadow-[12px_12px_24px_#dbe4eb,-12px_-12px_24px_#ffffff]">
             <h2 class="text-xl font-bold text-on-surface mb-6 flex items-center gap-2">
@@ -78,9 +116,8 @@ require_once '../../includes/navbar.php';
                     <label class="text-sm font-medium text-on-surface-variant block mb-2 ml-2" for="course_id">Course</label>
                     <select id="course_id" name="course_id" required
                             class="w-full bg-surface-container border-none rounded-2xl py-3 px-4 text-on-surface shadow-[inset_4px_4px_8px_#dbe4eb,inset_-4px_-4px_8px_#ffffff] outline-none focus:ring-1 focus:ring-primary/30 appearance-none">
-                        <option value="">Select Course</option>
                         <?php foreach ($courses as $c): ?>
-                            <option value="<?php echo $c['course_id']; ?>" <?php echo ($preselected_course_id == $c['course_id']) ? 'selected' : ''; ?>>
+                            <option value="<?php echo $c['course_id']; ?>" <?php echo $c['course_id'] == $section['course_id'] ? 'selected' : ''; ?>>
                                 <?php echo htmlspecialchars($c['course_code'] . ' - ' . $c['course_name']); ?>
                             </option>
                         <?php endforeach; ?>
@@ -92,14 +129,14 @@ require_once '../../includes/navbar.php';
                         <label class="text-sm font-medium text-on-surface-variant block mb-2 ml-2" for="semester">Semester</label>
                         <select id="semester" name="semester" required
                                 class="w-full bg-surface-container border-none rounded-2xl py-3 px-4 text-on-surface shadow-[inset_4px_4px_8px_#dbe4eb,inset_-4px_-4px_8px_#ffffff] outline-none focus:ring-1 focus:ring-primary/30 appearance-none">
-                            <option value="Fall">Fall</option>
-                            <option value="Spring">Spring</option>
-                            <option value="Summer">Summer</option>
+                            <option value="Fall" <?php echo $section['semester'] == 'Fall' ? 'selected' : ''; ?>>Fall</option>
+                            <option value="Spring" <?php echo $section['semester'] == 'Spring' ? 'selected' : ''; ?>>Spring</option>
+                            <option value="Summer" <?php echo $section['semester'] == 'Summer' ? 'selected' : ''; ?>>Summer</option>
                         </select>
                     </div>
                     <div>
                         <label class="text-sm font-medium text-on-surface-variant block mb-2 ml-2" for="academic_year">Academic Year</label>
-                        <input type="number" id="academic_year" name="academic_year" required value="<?php echo date('Y'); ?>"
+                        <input type="number" id="academic_year" name="academic_year" required value="<?php echo htmlspecialchars($section['academic_year']); ?>"
                                class="w-full bg-surface-container border-none rounded-2xl py-3 px-4 text-on-surface shadow-[inset_4px_4px_8px_#dbe4eb,inset_-4px_-4px_8px_#ffffff] outline-none focus:ring-1 focus:ring-primary/30">
                     </div>
                 </div>
@@ -109,20 +146,20 @@ require_once '../../includes/navbar.php';
                         <label class="text-sm font-medium text-on-surface-variant block mb-2 ml-2" for="schedule_day">Day</label>
                         <select id="schedule_day" name="schedule_day" required
                                 class="w-full bg-surface-container border-none rounded-2xl py-3 px-4 text-on-surface shadow-[inset_4px_4px_8px_#dbe4eb,inset_-4px_-4px_8px_#ffffff] outline-none focus:ring-1 focus:ring-primary/30 appearance-none">
-                            <option value="Mon/Wed">Mon/Wed</option>
-                            <option value="Tue/Thu">Tue/Thu</option>
-                            <option value="Friday">Friday</option>
-                            <option value="Saturday">Saturday</option>
+                            <option value="Mon/Wed" <?php echo $section['schedule_day'] == 'Mon/Wed' ? 'selected' : ''; ?>>Mon/Wed</option>
+                            <option value="Tue/Thu" <?php echo $section['schedule_day'] == 'Tue/Thu' ? 'selected' : ''; ?>>Tue/Thu</option>
+                            <option value="Friday" <?php echo $section['schedule_day'] == 'Friday' ? 'selected' : ''; ?>>Friday</option>
+                            <option value="Saturday" <?php echo $section['schedule_day'] == 'Saturday' ? 'selected' : ''; ?>>Saturday</option>
                         </select>
                     </div>
                     <div>
                         <label class="text-sm font-medium text-on-surface-variant block mb-2 ml-2" for="time_start">Start Time</label>
-                        <input type="time" id="time_start" name="time_start" required
+                        <input type="time" id="time_start" name="time_start" required value="<?php echo htmlspecialchars($section['schedule_time_start']); ?>"
                                class="w-full bg-surface-container border-none rounded-2xl py-3 px-4 text-on-surface shadow-[inset_4px_4px_8px_#dbe4eb,inset_-4px_-4px_8px_#ffffff] outline-none focus:ring-1 focus:ring-primary/30">
                     </div>
                     <div>
                         <label class="text-sm font-medium text-on-surface-variant block mb-2 ml-2" for="time_end">End Time</label>
-                        <input type="time" id="time_end" name="time_end" required
+                        <input type="time" id="time_end" name="time_end" required value="<?php echo htmlspecialchars($section['schedule_time_end']); ?>"
                                class="w-full bg-surface-container border-none rounded-2xl py-3 px-4 text-on-surface shadow-[inset_4px_4px_8px_#dbe4eb,inset_-4px_-4px_8px_#ffffff] outline-none focus:ring-1 focus:ring-primary/30">
                     </div>
                 </div>
@@ -139,19 +176,19 @@ require_once '../../includes/navbar.php';
                 <div class="grid grid-cols-2 gap-4">
                     <div>
                         <label class="text-sm font-medium text-on-surface-variant block mb-2 ml-2" for="section_code">Section Code</label>
-                        <input type="text" id="section_code" name="section_code" required placeholder="A01"
+                        <input type="text" id="section_code" name="section_code" required placeholder="A01" value="<?php echo htmlspecialchars($section['section_code']); ?>"
                                class="w-full bg-surface-container border-none rounded-2xl py-3 px-4 text-on-surface shadow-[inset_4px_4px_8px_#dbe4eb,inset_-4px_-4px_8px_#ffffff] outline-none focus:ring-1 focus:ring-primary/30 uppercase">
                     </div>
                     <div>
                         <label class="text-sm font-medium text-on-surface-variant block mb-2 ml-2" for="max_capacity">Max Capacity</label>
-                        <input type="number" id="max_capacity" name="max_capacity" required value="30" min="1" max="500"
+                        <input type="number" id="max_capacity" name="max_capacity" required min="1" max="500" value="<?php echo htmlspecialchars($section['max_capacity']); ?>"
                                class="w-full bg-surface-container border-none rounded-2xl py-3 px-4 text-on-surface shadow-[inset_4px_4px_8px_#dbe4eb,inset_-4px_-4px_8px_#ffffff] outline-none focus:ring-1 focus:ring-primary/30">
                     </div>
                 </div>
 
                 <div>
                     <label class="text-sm font-medium text-on-surface-variant block mb-2 ml-2" for="room">Room / Location</label>
-                    <input type="text" id="room" name="room" required placeholder="Lab 301, Engineering Bldg"
+                    <input type="text" id="room" name="room" required placeholder="Lab 301, Engineering Bldg" value="<?php echo htmlspecialchars($section['room']); ?>"
                            class="w-full bg-surface-container border-none rounded-2xl py-3 px-4 text-on-surface shadow-[inset_4px_4px_8px_#dbe4eb,inset_-4px_-4px_8px_#ffffff] outline-none focus:ring-1 focus:ring-primary/30">
                 </div>
             </div>
@@ -159,9 +196,9 @@ require_once '../../includes/navbar.php';
 
         <!-- Submit -->
         <div class="lg:col-span-2 flex justify-end gap-4 mt-4">
-            <a href="index.php" class="px-8 py-4 rounded-2xl text-on-surface-variant font-bold hover:text-on-surface transition-all">Cancel</a>
+            <a href="../courses/view.php?id=<?php echo $section['course_id']; ?>" class="px-8 py-4 rounded-2xl text-on-surface-variant font-bold hover:text-on-surface transition-all">Cancel</a>
             <button type="submit" class="px-10 py-4 bg-surface-container rounded-2xl font-bold text-primary shadow-[8px_8px_16px_#dbe4eb,-8px_-8px_16px_#ffffff] hover:shadow-[4px_4px_8px_#dbe4eb,-4px_-4px_8px_#ffffff] active:scale-95 transition-all">
-                Schedule Section
+                Update Section
             </button>
         </div>
     </form>
