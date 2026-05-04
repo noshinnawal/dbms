@@ -46,13 +46,21 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $address = trim($_POST['address']);
     $status = $_POST['status'];
     $enrollment_date = $_POST['enrollment_date'];
+    $new_password = trim($_POST['new_password'] ?? '');
 
     try {
         $pdo->beginTransaction();
 
-        // 1. Update users table
+        // 1. Update users table (basic info)
         $stmt = $pdo->prepare("UPDATE users SET email = ?, first_name = ?, last_name = ? WHERE user_id = ?");
         $stmt->execute([$email, $first_name, $last_name, $student['user_id']]);
+
+        // 1b. Update password if provided
+        if (!empty($new_password)) {
+            $hashed_password = password_hash($new_password, PASSWORD_DEFAULT);
+            $stmt = $pdo->prepare("UPDATE users SET password = ? WHERE user_id = ?");
+            $stmt->execute([$hashed_password, $student['user_id']]);
+        }
 
         // 2. Update students table
         $stmt = $pdo->prepare("UPDATE students SET student_number = ?, login_id = ?, date_of_birth = ?, phone = ?, address = ?, status = ?, enrollment_date = ? WHERE student_id = ?");
@@ -124,6 +132,17 @@ require_once '../../includes/navbar.php';
                     <input type="text" value="<?php echo htmlspecialchars($student['username']); ?>" disabled
                            class="w-full bg-surface-container border-none rounded-2xl py-3 px-4 text-on-surface-variant shadow-[inset_4px_4px_8px_#dbe4eb,inset_-4px_-4px_8px_#ffffff] cursor-not-allowed">
                     <p class="text-[10px] text-on-surface-variant mt-2 ml-2 italic">Username cannot be changed after creation.</p>
+                </div>
+                <div>
+                    <label class="text-sm font-medium text-on-surface-variant block mb-2 ml-2" for="new_password">Reset Password (Optional)</label>
+                    <div class="relative flex items-center">
+                        <input type="text" id="new_password" name="new_password" placeholder="Enter new password to reset"
+                               class="w-full bg-surface-container border-none rounded-2xl py-3 px-4 text-on-surface shadow-[inset_4px_4px_8px_#dbe4eb,inset_-4px_-4px_8px_#ffffff] outline-none focus:ring-1 focus:ring-primary/30">
+                        <button type="button" onclick="generatePassword()" class="absolute right-2 p-2 text-primary hover:scale-110 transition-transform">
+                            <span class="material-symbols-outlined text-xl">autorenew</span>
+                        </button>
+                    </div>
+                    <p class="text-[10px] text-on-surface-variant mt-2 ml-2 italic">Leave blank to keep current password.</p>
                 </div>
                 <div>
                     <label class="text-sm font-medium text-on-surface-variant block mb-2 ml-2" for="email">Email Address</label>
@@ -202,6 +221,17 @@ require_once '../../includes/navbar.php';
         </div>
     </form>
 </main>
+
+<script>
+function generatePassword() {
+    const chars = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%^&*";
+    let pass = "";
+    for (let i = 0; i < 12; i++) {
+        pass += chars.charAt(Math.floor(Math.random() * chars.length));
+    }
+    document.getElementById('new_password').value = pass;
+}
+</script>
 
 <?php 
 echo "</div>";
