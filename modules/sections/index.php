@@ -141,9 +141,6 @@ require_once '../../includes/navbar.php';
                             <td class="px-8 py-6 text-on-surface font-medium"><?php echo htmlspecialchars($section['room']); ?></td>
                             <td class="px-8 py-6 text-right">
                                 <div class="flex justify-end gap-2">
-                                    <a href="roster.php?id=<?php echo $section['section_id']; ?>" class="w-10 h-10 rounded-xl bg-surface-container shadow-[2px_2px_4px_#dbe4eb,-2px_-2px_4px_#ffffff] flex items-center justify-center text-primary hover:scale-110 transition-transform" title="View Roster">
-                                        <span class="material-symbols-outlined text-xl">groups</span>
-                                    </a>
                                     <?php if ($_SESSION['role'] === 'admin'): ?>
                                     <a href="edit.php?id=<?php echo $section['section_id']; ?>" class="w-10 h-10 rounded-xl bg-surface-container shadow-[2px_2px_4px_#dbe4eb,-2px_-2px_4px_#ffffff] flex items-center justify-center text-on-surface-variant hover:scale-110 transition-transform" title="Edit Section">
                                         <span class="material-symbols-outlined text-xl">settings</span>

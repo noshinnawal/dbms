@@ -9,9 +9,6 @@ SET time_zone = "+00:00";
 -- Disable foreign key checks for clean drop
 SET foreign_key_checks = 0;
 DROP TABLE IF EXISTS notifications;
-DROP TABLE IF EXISTS grades;
-DROP TABLE IF EXISTS attendance;
-DROP TABLE IF EXISTS enrollments;
 DROP TABLE IF EXISTS sections;
 DROP TABLE IF EXISTS courses;
 DROP TABLE IF EXISTS students;
@@ -94,55 +91,6 @@ CREATE TABLE IF NOT EXISTS sections (
     INDEX idx_course (course_id)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
--- --------------------------------------------------------
--- TABLE: enrollments
--- --------------------------------------------------------
-CREATE TABLE IF NOT EXISTS enrollments (
-    enrollment_id INT AUTO_INCREMENT PRIMARY KEY,
-    student_id INT NOT NULL,
-    section_id INT NOT NULL,
-    enrollment_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    status ENUM('enrolled', 'dropped', 'completed') DEFAULT 'enrolled',
-    FOREIGN KEY (student_id) REFERENCES students(student_id) ON DELETE CASCADE,
-    FOREIGN KEY (section_id) REFERENCES sections(section_id) ON DELETE CASCADE,
-    UNIQUE KEY unique_enrollment (student_id, section_id),
-    INDEX idx_student (student_id),
-    INDEX idx_section (section_id),
-    INDEX idx_status (status)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
--- --------------------------------------------------------
--- TABLE: attendance
--- --------------------------------------------------------
-CREATE TABLE IF NOT EXISTS attendance (
-    attendance_id INT AUTO_INCREMENT PRIMARY KEY,
-    enrollment_id INT NOT NULL,
-    attendance_date DATE NOT NULL,
-    status ENUM('present', 'absent', 'late', 'excused') NOT NULL,
-    notes TEXT,
-    recorded_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    FOREIGN KEY (enrollment_id) REFERENCES enrollments(enrollment_id) ON DELETE CASCADE,
-    UNIQUE KEY unique_attendance (enrollment_id, attendance_date),
-    INDEX idx_enrollment (enrollment_id),
-    INDEX idx_date (attendance_date)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
--- --------------------------------------------------------
--- TABLE: grades
--- --------------------------------------------------------
-CREATE TABLE IF NOT EXISTS grades (
-    grade_id INT AUTO_INCREMENT PRIMARY KEY,
-    enrollment_id INT NOT NULL,
-    grade_type ENUM('quiz', 'midterm', 'final', 'project', 'homework') NOT NULL,
-    score DECIMAL(5,2),
-    max_score DECIMAL(5,2) DEFAULT 100,
-    weight DECIMAL(5,2) DEFAULT 10,
-    comment TEXT,
-    recorded_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    FOREIGN KEY (enrollment_id) REFERENCES enrollments(enrollment_id) ON DELETE CASCADE,
-    INDEX idx_enrollment (enrollment_id),
-    INDEX idx_grade_type (grade_type)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
 -- TABLE: notifications

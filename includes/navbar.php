@@ -34,15 +34,7 @@ $role = $_SESSION['role'] ?? 'student';
         </a>
         <?php endif; ?>
 
-        <a href="../attendance/index.php" class="flex items-center gap-4 px-4 py-3 rounded-2xl transition-all text-on-surface-variant hover:text-primary">
-            <span class="material-symbols-outlined">event_available</span>
-            <span class="font-medium">Attendance</span>
-        </a>
 
-        <a href="../grades/index.php" class="flex items-center gap-4 px-4 py-3 rounded-2xl transition-all text-on-surface-variant hover:text-primary">
-            <span class="material-symbols-outlined">grade</span>
-            <span class="font-medium">Grades</span>
-        </a>
     </nav>
 
     <!-- User Section -->
