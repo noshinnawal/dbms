@@ -19,17 +19,22 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $password = $_POST['password'] ?? '';
 
     if ($identifier && $password) {
-        // Query users table for student role, joining with students table to check login_id
-        $query = "SELECT u.*, s.login_id 
+        // Expanded query to support Email, Student ID, Username, or Student Number
+        $query = "SELECT u.*, s.login_id, s.student_number 
                   FROM users u 
                   LEFT JOIN students s ON u.user_id = s.user_id 
-                  WHERE (u.email = :identifier OR s.login_id = :identifier) 
+                  WHERE (u.email = :id1 OR s.login_id = :id2 OR u.username = :id3 OR s.student_number = :id4) 
                   AND u.role = 'student' 
                   AND u.is_active = 1 
                   LIMIT 1";
         
         $stmt = $pdo->prepare($query);
-        $stmt->execute(['identifier' => $identifier]);
+        $stmt->execute([
+            'id1' => $identifier,
+            'id2' => $identifier,
+            'id3' => $identifier,
+            'id4' => $identifier
+        ]);
         $user = $stmt->fetch();
 
         if ($user && password_verify($password, $user['password'])) {
@@ -53,9 +58,39 @@ $pageTitle = "Student Login";
 require_once '../../includes/header.php';
 ?>
 
-<main class="min-h-screen flex items-center justify-center p-6 bg-surface-container">
+<style>
+    @keyframes fadeIn {
+        from { opacity: 0; transform: translateY(20px); }
+        to { opacity: 1; transform: translateY(0); }
+    }
+    
+    .animate-fade-in {
+        animation: fadeIn 0.6s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+    }
+
+    /* Refined Neomorphism */
+    .neo-input:focus-within {
+        box-shadow: inset 8px 8px 16px #dbe4eb, inset -8px -8px 16px #ffffff, 0 0 15px rgba(57, 101, 104, 0.1);
+    }
+    
+    .loading-spinner {
+        border: 2px solid rgba(255, 255, 255, 0.3);
+        border-radius: 50%;
+        border-top: 2px solid white;
+        width: 18px;
+        height: 18px;
+        animation: spin 1s linear infinite;
+    }
+    
+    @keyframes spin {
+        0% { transform: rotate(0deg); }
+        100% { transform: rotate(360deg); }
+    }
+</style>
+
+<main class="min-h-screen flex items-center justify-center p-6 bg-surface-container overflow-hidden">
     <!-- Neomorphic Login Card -->
-    <section class="w-full max-w-[420px] bg-surface-container rounded-[32px] p-10 md:p-12 shadow-[16px_16px_32px_#dbe4eb,-16px_-16px_32px_#ffffff] flex flex-col items-center border border-white/20">
+    <section class="animate-fade-in w-full max-w-[420px] bg-surface-container rounded-[40px] p-10 md:p-12 shadow-[20px_20px_40px_#dbe4eb,-20px_-20px_40px_#ffffff] flex flex-col items-center border border-white/40">
         <!-- Branding Header -->
         <header class="w-full flex flex-col items-center mb-10">
             <div class="w-16 h-16 rounded-full bg-surface-container flex items-center justify-center mb-6 shadow-[6px_6px_12px_#dbe4eb,-6px_-6px_12px_#ffffff]">
@@ -76,20 +111,23 @@ require_once '../../includes/header.php';
             <!-- Email/ID Input Group -->
             <div class="w-full">
                 <label class="text-sm font-medium text-on-surface-variant block mb-3 ml-2" for="identifier">Email or Student ID</label>
-                <div class="relative flex items-center">
-                    <span class="material-symbols-outlined absolute left-4 text-outline-variant select-none pointer-events-none">person</span>
-                    <input class="w-full bg-surface-container border-none rounded-2xl py-4 pl-12 pr-4 text-on-surface placeholder:text-outline-variant focus:outline-none focus:ring-1 focus:ring-primary/30 shadow-[inset_6px_6px_12px_#dbe4eb,inset_-6px_-6px_12px_#ffffff] transition-shadow duration-200" 
-                           id="identifier" name="identifier" placeholder="email@school.edu or ID" required type="text" value="<?php echo isset($_POST['identifier']) ? htmlspecialchars($_POST['identifier']) : ''; ?>"/>
+                <div class="relative flex items-center group neo-input rounded-2xl transition-all duration-300">
+                    <span class="material-symbols-outlined absolute left-4 text-outline-variant group-focus-within:text-primary transition-colors select-none pointer-events-none">person</span>
+                    <input class="w-full bg-surface-container border-none rounded-2xl py-4 pl-12 pr-4 text-on-surface placeholder:text-outline-variant focus:outline-none focus:ring-0 shadow-[inset_6px_6px_12px_#dbe4eb,inset_-6px_-6px_12px_#ffffff] transition-all duration-200" 
+                           id="identifier" name="identifier" placeholder="Email, ID or Username" required type="text" value="<?php echo isset($_POST['identifier']) ? htmlspecialchars($_POST['identifier']) : ''; ?>"/>
                 </div>
             </div>
 
             <!-- Password Input Group -->
             <div class="w-full">
                 <label class="text-sm font-medium text-on-surface-variant block mb-3 ml-2" for="password">Password</label>
-                <div class="relative flex items-center">
-                    <span class="material-symbols-outlined absolute left-4 text-outline-variant select-none pointer-events-none">lock</span>
-                    <input class="w-full bg-surface-container border-none rounded-2xl py-4 pl-12 pr-4 text-on-surface placeholder:text-outline-variant focus:outline-none focus:ring-1 focus:ring-primary/30 shadow-[inset_6px_6px_12px_#dbe4eb,inset_-6px_-6px_12px_#ffffff] transition-shadow duration-200" 
+                <div class="relative flex items-center group neo-input rounded-2xl transition-all duration-300">
+                    <span class="material-symbols-outlined absolute left-4 text-outline-variant group-focus-within:text-primary transition-colors select-none pointer-events-none">lock</span>
+                    <input class="w-full bg-surface-container border-none rounded-2xl py-4 pl-12 pr-12 text-on-surface placeholder:text-outline-variant focus:outline-none focus:ring-0 shadow-[inset_6px_6px_12px_#dbe4eb,inset_-6px_-6px_12px_#ffffff] transition-all duration-200" 
                            id="password" name="password" placeholder="••••••••" required type="password"/>
+                    <button type="button" onclick="togglePassword()" class="absolute right-4 text-outline-variant hover:text-primary transition-colors focus:outline-none">
+                        <span class="material-symbols-outlined select-none" id="password-icon">visibility</span>
+                    </button>
                 </div>
             </div>
 
@@ -103,9 +141,9 @@ require_once '../../includes/header.php';
             </div>
 
             <!-- Submit Button -->
-            <button class="w-full flex items-center justify-center gap-2 bg-primary text-on-primary rounded-2xl py-4 text-sm font-bold shadow-[8px_8px_16px_#dbe4eb,-8px_-8px_16px_#ffffff] hover:brightness-110 active:scale-[0.98] transition-all duration-300 ease-out" type="submit">
-                <span>Sign In</span>
-                <span class="material-symbols-outlined text-lg">login</span>
+            <button id="login-btn" class="w-full flex items-center justify-center gap-2 bg-primary text-on-primary rounded-2xl py-4 text-sm font-bold shadow-[8px_8px_16px_#dbe4eb,-8px_-8px_16px_#ffffff] hover:brightness-110 active:scale-[0.98] transition-all duration-300 ease-out" type="submit">
+                <span id="btn-text">Sign In</span>
+                <span id="btn-icon" class="material-symbols-outlined text-lg">login</span>
             </button>
 
             <!-- Contact Admin Message -->
@@ -124,5 +162,32 @@ require_once '../../includes/header.php';
         </form>
     </section>
 </main>
+
+<script>
+    function togglePassword() {
+        const passwordInput = document.getElementById('password');
+        const passwordIcon = document.getElementById('password-icon');
+        
+        if (passwordInput.type === 'password') {
+            passwordInput.type = 'text';
+            passwordIcon.textContent = 'visibility_off';
+        } else {
+            passwordInput.type = 'password';
+            passwordIcon.textContent = 'visibility';
+        }
+    }
+
+    // Handle form submission loading state
+    document.querySelector('form').addEventListener('submit', function(e) {
+        const btn = document.getElementById('login-btn');
+        const btnText = document.getElementById('btn-text');
+        const btnIcon = document.getElementById('btn-icon');
+        
+        btn.disabled = true;
+        btn.style.opacity = '0.8';
+        btnText.textContent = 'Authenticating...';
+        btnIcon.innerHTML = '<div class="loading-spinner"></div>';
+    });
+</script>
 
 <?php require_once '../../includes/footer.php'; ?>

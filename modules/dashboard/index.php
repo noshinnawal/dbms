@@ -20,6 +20,7 @@ try {
 }
 
 $pageTitle = "Dashboard";
+$role = $_SESSION['role'] ?? 'student';
 require_once '../../includes/header.php';
 require_once '../../includes/navbar.php';
 ?>
@@ -33,6 +34,7 @@ require_once '../../includes/navbar.php';
         </div>
     </header>
 
+    <?php if ($role === 'admin'): ?>
     <!-- Stats Grid -->
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-10">
         <!-- Stat Card: Students -->
@@ -52,9 +54,11 @@ require_once '../../includes/navbar.php';
             <div class="text-3xl font-bold text-on-surface"><?php echo number_format($stats['courses']); ?></div>
         </div>
     </div>
+    <?php endif; ?>
 
     <!-- Main Content Area -->
     <div class="grid grid-cols-1 gap-8">
+        <?php if ($role === 'admin'): ?>
         <!-- Quick Links -->
         <div class="bg-surface-container rounded-[32px] p-8 shadow-[12px_12px_24px_#dbe4eb,-12px_-12px_24px_#ffffff]">
             <h2 class="text-xl font-bold text-on-surface mb-6">Quick Actions</h2>
@@ -73,6 +77,16 @@ require_once '../../includes/navbar.php';
                 </a>
             </div>
         </div>
+        <?php else: ?>
+        <!-- Student Dashboard Placeholder -->
+        <div class="bg-surface-container rounded-[32px] p-10 shadow-[12px_12px_24px_#dbe4eb,-12px_-12px_24px_#ffffff] flex flex-col items-center justify-center text-center">
+            <div class="w-20 h-20 rounded-full bg-surface-container shadow-[6px_6px_12px_#dbe4eb,-6px_-6px_12px_#ffffff] flex items-center justify-center mb-6">
+                <span class="material-symbols-outlined text-primary text-4xl">account_balance</span>
+            </div>
+            <h2 class="text-2xl font-bold text-on-surface">Student Portal Active</h2>
+            <p class="text-on-surface-variant mt-2 max-w-md">Your academic records and courses will appear here shortly. Please use the sidebar to navigate your portal.</p>
+        </div>
+        <?php endif; ?>
     </div>
 </main>
 
