@@ -1,7 +1,7 @@
 <?php
 /**
  * Student Login Page
- * Handles student authentication via Email or Student ID.
+
  */
 require_once '../../config/database.php';
 session_start();
@@ -19,21 +19,17 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $password = $_POST['password'] ?? '';
 
     if ($identifier && $password) {
-        // Expanded query to support Email, Student ID, Username, or Student Number
-        $query = "SELECT u.*, s.login_id, s.student_number 
+        // Strictly check Username for students
+        $query = "SELECT u.* 
                   FROM users u 
-                  LEFT JOIN students s ON u.user_id = s.user_id 
-                  WHERE (u.email = :id1 OR s.login_id = :id2 OR u.username = :id3 OR s.student_number = :id4) 
+                  WHERE u.username = :username 
                   AND u.role = 'student' 
                   AND u.is_active = 1 
                   LIMIT 1";
         
         $stmt = $pdo->prepare($query);
         $stmt->execute([
-            'id1' => $identifier,
-            'id2' => $identifier,
-            'id3' => $identifier,
-            'id4' => $identifier
+            'username' => $identifier
         ]);
         $user = $stmt->fetch();
 
@@ -47,7 +43,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             header("Location: ../dashboard/index.php");
             exit;
         } else {
-            $error = 'Invalid credentials. Please check your email/ID and password.';
+            $error = 'Invalid credentials. Please check your username and password.';
         }
     } else {
         $error = 'Please fill in all fields.';
@@ -110,11 +106,11 @@ require_once '../../includes/header.php';
         <form action="login_student.php" class="w-full flex flex-col gap-6" method="POST">
             <!-- Email/ID Input Group -->
             <div class="w-full">
-                <label class="text-sm font-medium text-on-surface-variant block mb-3 ml-2" for="identifier">Email or Student ID</label>
+                <label class="text-sm font-medium text-on-surface-variant block mb-3 ml-2" for="identifier">Username</label>
                 <div class="relative flex items-center group neo-input rounded-2xl transition-all duration-300">
                     <span class="material-symbols-outlined absolute left-4 text-outline-variant group-focus-within:text-primary transition-colors select-none pointer-events-none">person</span>
                     <input class="w-full bg-surface-container border-none rounded-2xl py-4 pl-12 pr-4 text-on-surface placeholder:text-outline-variant focus:outline-none focus:ring-0 shadow-[inset_6px_6px_12px_#dbe4eb,inset_-6px_-6px_12px_#ffffff] transition-all duration-200" 
-                           id="identifier" name="identifier" placeholder="Email, ID or Username" required type="text" value="<?php echo isset($_POST['identifier']) ? htmlspecialchars($_POST['identifier']) : ''; ?>"/>
+                           id="identifier" name="identifier" placeholder="Username" required type="text" value="<?php echo isset($_POST['identifier']) ? htmlspecialchars($_POST['identifier']) : ''; ?>"/>
                 </div>
             </div>
 
