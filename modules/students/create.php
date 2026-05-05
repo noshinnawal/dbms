@@ -19,7 +19,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $last_name = trim($_POST['last_name']);
     
     $student_number = trim($_POST['student_number']);
-    $login_id = trim($_POST['login_id'] ?? '');
     $dob = $_POST['dob'];
     $phone = trim($_POST['phone']);
     $present_address = trim($_POST['present_address']);
@@ -39,8 +38,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $user_id = $pdo->lastInsertId();
 
         // 2. Insert into students table
-        $stmt = $pdo->prepare("INSERT INTO students (user_id, student_number, login_id, father_name, mother_name, father_occupation, mother_occupation, date_of_birth, phone, present_address, permanent_address, enrollment_date) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
-        $stmt->execute([$user_id, $student_number, $login_id, $father_name, $mother_name, $father_occupation, $mother_occupation, $dob, $phone, $present_address, $permanent_address, $enrollment_date]);
+        $stmt = $pdo->prepare("INSERT INTO students (user_id, student_number, father_name, mother_name, father_occupation, mother_occupation, date_of_birth, phone, present_address, permanent_address, enrollment_date) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
+        $stmt->execute([$user_id, $student_number, $father_name, $mother_name, $father_occupation, $mother_occupation, $dob, $phone, $present_address, $permanent_address, $enrollment_date]);
 
         $pdo->commit();
         $success = "Student created successfully!";
@@ -48,7 +47,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     } catch (PDOException $e) {
         $pdo->rollBack();
         if ($e->getCode() == 23000) { // Unique constraint violation
-            $error = "Error: Username, Email, or Student Number already exists.";
+            $error = "Error: Username, Email, or Student ID already exists.";
         } else {
             $error = "Database error: " . $e->getMessage();
         }
@@ -123,17 +122,10 @@ require_once '../../includes/navbar.php';
                 Student Profile
             </h2>
             <div class="flex flex-col gap-6">
-                <div class="grid grid-cols-2 gap-4">
-                    <div>
-                        <label class="text-sm font-medium text-on-surface-variant block mb-2 ml-2" for="student_number">Student ID</label>
-                        <input type="text" id="student_number" name="student_number" required placeholder="STU-2026-001"
-                               class="w-full bg-surface-container border-none rounded-2xl py-3 px-4 text-on-surface shadow-[inset_4px_4px_8px_#dbe4eb,inset_-4px_-4px_8px_#ffffff] outline-none focus:ring-1 focus:ring-primary/30">
-                    </div>
-                    <div>
-                        <label class="text-sm font-medium text-on-surface-variant block mb-2 ml-2" for="login_id">Student Login ID</label>
-                        <input type="text" id="login_id" name="login_id" placeholder="e.g. jdoe2026"
-                               class="w-full bg-surface-container border-none rounded-2xl py-3 px-4 text-on-surface shadow-[inset_4px_4px_8px_#dbe4eb,inset_-4px_-4px_8px_#ffffff] outline-none focus:ring-1 focus:ring-primary/30">
-                    </div>
+                <div>
+                    <label class="text-sm font-medium text-on-surface-variant block mb-2 ml-2" for="student_number">Student ID</label>
+                    <input type="text" id="student_number" name="student_number" required placeholder="STU-2026-001"
+                           class="w-full bg-surface-container border-none rounded-2xl py-3 px-4 text-on-surface shadow-[inset_4px_4px_8px_#dbe4eb,inset_-4px_-4px_8px_#ffffff] outline-none focus:ring-1 focus:ring-primary/30">
                 </div>
                 <div class="grid grid-cols-2 gap-4">
                     <div>
