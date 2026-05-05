@@ -39,7 +39,6 @@ CREATE TABLE IF NOT EXISTS users (
 CREATE TABLE IF NOT EXISTS students (
     student_id INT AUTO_INCREMENT PRIMARY KEY,
     user_id INT NOT NULL,
-    login_id VARCHAR(50) UNIQUE NULL,
     student_number VARCHAR(20) UNIQUE NOT NULL,
     father_name VARCHAR(100),
     mother_name VARCHAR(100),
@@ -53,7 +52,6 @@ CREATE TABLE IF NOT EXISTS students (
     status ENUM('active', 'inactive', 'graduated') DEFAULT 'active',
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     FOREIGN KEY (user_id) REFERENCES users(user_id) ON DELETE CASCADE,
-    INDEX idx_login_id (login_id),
     INDEX idx_student_number (student_number),
     INDEX idx_status (status)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
