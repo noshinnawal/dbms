@@ -25,7 +25,7 @@ if (isset($_SESSION['role']) && $_SESSION['role'] === 'student') {
     try {
         $stmt = $pdo->prepare("
             SELECT u.username, u.email, u.first_name, u.last_name, 
-                   s.student_number, s.login_id, s.date_of_birth, s.phone, s.present_address, s.permanent_address, 
+                   s.student_number, s.date_of_birth, s.phone, s.present_address, s.permanent_address, 
                    s.father_name, s.mother_name, s.father_occupation, s.mother_occupation,
                    s.enrollment_date, s.status
             FROM users u 

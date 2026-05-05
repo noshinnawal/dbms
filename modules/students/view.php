@@ -95,10 +95,7 @@ require_once '../../includes/navbar.php';
                 </h3>
                 
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-8">
-                    <div>
-                        <p class="text-xs font-bold text-on-surface-variant uppercase tracking-wider mb-1">Student Login ID</p>
-                        <p class="text-on-surface font-medium"><?php echo htmlspecialchars($student['login_id'] ?: 'N/A'); ?></p>
-                    </div>
+
                     <div>
                         <p class="text-xs font-bold text-on-surface-variant uppercase tracking-wider mb-1">Enrollment Date</p>
                         <p class="text-on-surface font-medium"><?php echo date('F d, Y', strtotime($student['enrollment_date'])); ?></p>

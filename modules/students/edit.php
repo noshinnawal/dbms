@@ -40,7 +40,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $last_name = trim($_POST['last_name']);
     
     $student_number = trim($_POST['student_number']);
-    $login_id = trim($_POST['login_id'] ?? '');
     $dob = $_POST['dob'];
     $phone = trim($_POST['phone']);
     $present_address = trim($_POST['present_address']);
@@ -68,8 +67,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         }
 
         // 2. Update students table
-        $stmt = $pdo->prepare("UPDATE students SET student_number = ?, login_id = ?, father_name = ?, mother_name = ?, father_occupation = ?, mother_occupation = ?, date_of_birth = ?, phone = ?, present_address = ?, permanent_address = ?, status = ?, enrollment_date = ? WHERE student_id = ?");
-        $stmt->execute([$student_number, $login_id, $father_name, $mother_name, $father_occupation, $mother_occupation, $dob, $phone, $present_address, $permanent_address, $status, $enrollment_date, $student_id]);
+        $stmt = $pdo->prepare("UPDATE students SET student_number = ?, father_name = ?, mother_name = ?, father_occupation = ?, mother_occupation = ?, date_of_birth = ?, phone = ?, present_address = ?, permanent_address = ?, status = ?, enrollment_date = ? WHERE student_id = ?");
+        $stmt->execute([$student_number, $father_name, $mother_name, $father_occupation, $mother_occupation, $dob, $phone, $present_address, $permanent_address, $status, $enrollment_date, $student_id]);
 
         $pdo->commit();
         $success = "Student updated successfully!";
@@ -79,7 +78,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $student['first_name'] = $first_name;
         $student['last_name'] = $last_name;
         $student['student_number'] = $student_number;
-        $student['login_id'] = $login_id;
         $student['father_name'] = $father_name;
         $student['mother_name'] = $mother_name;
         $student['father_occupation'] = $father_occupation;
